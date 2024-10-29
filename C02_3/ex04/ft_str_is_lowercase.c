@@ -1,36 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_str_is_lowercase.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmkrtumy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/24 17:34:55 by tmkrtumy          #+#    #+#             */
-/*   Updated: 2024/10/28 14:31:53 by tmkrtumy         ###   ########.fr       */
+/*   Created: 2024/10/24 13:40:55 by tmkrtumy          #+#    #+#             */
+/*   Updated: 2024/10/24 20:25:20 by tmkrtumy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdio.h>
-#include <string.h>
+#include <stdbool.h>
 
-int	ft_strcmp(char *s1, char *s2)
+int	ft_str_is_lowercase(char *str)
 {
-	int	i;
+	bool	is_low;
 
-	i = 0;
-	while (s1[i] == s2[i] && s1[i] && s2[i])
-		i++;
-	if (s1[i] == s2[i])
-		return (0);
-	else if (s1[i] > s2[i])
+	is_low = true;
+	if (str[0] == '\0')
 		return (1);
 	else
-		return (-1);
+	{
+		while (str[0])
+		{
+			if (str[0] > 'z' || str[0] < 'a')
+				is_low = false;
+			str++;
+		}
+	}
+	if (is_low)
+		return (1);
+	else
+		return (0);
 }
 
 /*int main(){
-	printf("%d\n", ft_strcmp("Thi", "ThiA is it"));
-	printf("%d\n", strcmp("Thi", "ThiA is it"));
-	return(0);
+	printf("%d\n", ft_str_is_lowercase(""));
+	return 0;
 }*/

@@ -1,46 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncat.c                                       :+:      :+:    :+:   */
+/*   ft_str_is_alpha.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmkrtumy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/28 14:13:35 by tmkrtumy          #+#    #+#             */
-/*   Updated: 2024/10/28 14:28:09 by tmkrtumy         ###   ########.fr       */
+/*   Created: 2024/10/23 18:56:01 by tmkrtumy          #+#    #+#             */
+/*   Updated: 2024/10/28 11:50:25 by tmkrtumy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdio.h>
-#include <string.h>
+#include <stdbool.h>
 
-char	*ft_strncat(char *dest, char *src, unsigned int nb)
+int	ft_str_is_alpha(char *str)
 {
-	unsigned int	i;
-	unsigned int	j;
-
-	i = 0;
-	while (dest[i] != '\0')
-		i++;
-	j = 0;
-	while (src[j] != '\0' && j < nb)
+	while (str[0])
 	{
-		dest[i] = src[j];
-		i++;
-		j++;
+		if (str[0] < 'A' || str[0] > 'z' || (str[0] > 'Z' && str[0] < 'a'))
+			return (0);
+		str++;
 	}
-	dest[i] = '\0';
-	return (dest);
+	return (1);
 }
 
 /*int main(){
-	char* src = " .-. ";
-	char dest[100] = "123";
-	
-	ft_strncat(dest, src, 4);
-	printf("%s\n", dest);
-	
-	strncat(dest, src, 4);
-	printf("%s\n", dest);
-	return (0);
+	printf("%d\n", ft_str_is_alpha("abcdezHAZMSDbjfrrpqolo@qwindm"));
+	return 0;
 }*/

@@ -1,41 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcat.c                                        :+:      :+:    :+:   */
+/*   ft_str_is_uppercase.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmkrtumy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/28 13:58:59 by tmkrtumy          #+#    #+#             */
-/*   Updated: 2024/10/28 14:09:31 by tmkrtumy         ###   ########.fr       */
+/*   Created: 2024/10/24 13:48:46 by tmkrtumy          #+#    #+#             */
+/*   Updated: 2024/10/24 14:01:16 by tmkrtumy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdio.h>
+#include <stdbool.h>
 
-char	*ft_strcat(char *dest, char *src)
+int	ft_str_is_uppercase(char *str)
 {
-	int	i;
-	int	j;
+	bool	is_up;
 
-	i = 0;
-	while (dest[i] != '\0')
-		i++;
-	j = 0;
-	while (src[j] != '\0')
+	is_up = true;
+	if (str[0] == '\0')
+		return (1);
+	else
 	{
-		dest[i] = src[j];
-		i++;
-		j++;
+		while (str[0])
+		{
+			if (str[0] > 'Z' || str[0] < 'A')
+				is_up = false;
+			str++;
+		}
 	}
-	dest[i] = '\0';
-	return (dest);
+	if (is_up)
+		return (1);
+	else
+		return (0);
 }
 
 /*int main(){
-	char* src = "123456789";
-	char dest[100] = "abcdefgh";
-	ft_strcat(dest, src);
-	printf("%s\n", dest);
-	return (0);
+	printf("%d\n", ft_str_is_uppercase("ABCDZa"));
+	return 0;
 }*/
