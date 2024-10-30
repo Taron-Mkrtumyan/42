@@ -6,27 +6,37 @@
 /*   By: tmkrtumy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 15:40:59 by tmkrtumy          #+#    #+#             */
-/*   Updated: 2024/10/30 13:17:16 by tmkrtumy         ###   ########.fr       */
+/*   Updated: 2024/10/30 15:56:45 by tmkrtumy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdio.h>
 
+void	special_cases(int nb)
+{
+	if (nb == 0)
+		write (1, "0", 1);
+	else
+		write (1, "-2147483648", 11);
+}
+
 void	ft_putnbr(int nb)
 {
 	int		k;
-	char	c;
 	char	num[20];
 	int		i;
 
+	if (nb == -2147483648 || nb == 0)
+	{
+		special_cases(nb);
+		return ;
+	}
 	if (nb < 0)
 	{
 		write(1, "-", 1);
-		nb = 0 - nb;
+		nb = -nb;
 	}
-	if (nb == 0)
-		write(1, "0", 1);
 	i = 0;
 	while (nb > 0)
 	{
@@ -40,7 +50,7 @@ void	ft_putnbr(int nb)
 }
 /*
 int main(){
-	int n = -214733647;
+	int n = -2147483649;
 	ft_putnbr(n);
 	return 0;
 }*/
