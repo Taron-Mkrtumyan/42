@@ -1,49 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmkrtumy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/26 16:44:59 by tmkrtumy          #+#    #+#             */
-/*   Updated: 2025/01/26 16:58:46 by tmkrtumy         ###   ########.fr       */
+/*   Created: 2025/01/22 13:31:02 by tmkrtumy          #+#    #+#             */
+/*   Updated: 2025/01/30 15:28:06 by tmkrtumy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	special_cases(int nb, int fd)
+char	*ft_strchr(const char *s, int c)
 {
-	if (nb == 0)
-		write (fd, "0", 1);
-	else
-		write (fd, "-2147483648", 11);
-}
+	char	*ptr;
 
-void	ft_putnbr_fd(int n, int fd)
-{
-	int		k;
-	char	num[20];
-	int		i;
-
-	if (n == -2147483648 || n == 0)
+	ptr = (char *)s;
+	while (*ptr)
 	{
-		special_cases(n, fd);
-		return ;
+		if (*ptr == (char)c)
+			return (ptr);
+		ptr++;
 	}
-	if (n < 0)
-	{
-		write(fd, "-", 1);
-		n = -n;
-	}
-	i = 0;
-	while (n > 0)
-	{
-		k = n % 10;
-		num[i] = (char)(k + '0');
-		i++;
-		n /= 10;
-	}
-	while (--i >= 0)
-		write(fd, &num[i], 1);
+	if ((char)c == '\0')
+		return (ptr);
+	return (NULL);
 }

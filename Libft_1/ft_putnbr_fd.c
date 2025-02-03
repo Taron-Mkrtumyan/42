@@ -1,42 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmkrtumy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/22 13:07:49 by tmkrtumy          #+#    #+#             */
-/*   Updated: 2025/01/24 12:42:45 by tmkrtumy         ###   ########.fr       */
+/*   Created: 2025/01/26 16:44:59 by tmkrtumy          #+#    #+#             */
+/*   Updated: 2025/02/03 15:47:46 by tmkrtumy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
+static void	special_cases(int nb, int fd)
 {
-	size_t		i;
-	char		*d;
-	const char	*s;
-
-	d = (char *)dst;
-	s = (const char *)src;
-	if (d >= s + len || d < s)
-	{
-		i = 0;
-		while (i < len)
-		{
-			d[i] = s[i];
-			i++;
-		}
-	}
+	if (nb == 0)
+		write (fd, "0", 1);
 	else
+		write (fd, "-2147483648", 11);
+}
+
+void	ft_putnbr_fd(int n, int fd)
+{
+	int		k;
+	char	num[20];
+	int		i;
+
+	if (n == -2147483648 || n == 0)
 	{
-		i = len;
-		while (i > 0)
-		{
-			d[i - 1] = s[i - 1];
-			i--;
-		}
+		special_cases(n, fd);
+		return ;
 	}
-	return (dst);
+	if (n < 0)
+	{
+		write(fd, "-", 1);
+		n = -n;
+	}
+	i = 0;
+	while (n > 0)
+	{
+		k = n % 10;
+		num[i] = (char)(k + '0');
+		i++;
+		n /= 10;
+	}
+	while (--i >= 0)
+		write(fd, &num[i], 1);
 }

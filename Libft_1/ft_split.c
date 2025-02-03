@@ -6,13 +6,13 @@
 /*   By: tmkrtumy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 13:59:55 by tmkrtumy          #+#    #+#             */
-/*   Updated: 2025/01/24 14:33:55 by tmkrtumy         ###   ########.fr       */
+/*   Updated: 2025/01/31 14:36:35 by tmkrtumy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	word_count(char const *s, char c)
+static int	word_count(char const *s, char c)
 {
 	int	i;
 	int	ctr;
@@ -23,69 +23,65 @@ int	word_count(char const *s, char c)
 	{
 		while (s[i] && s[i] == c)
 			i++;
-		if (s[i] == '\0')
-			break ;
-		ctr++;
+		if (s[i] != '\0')
+			ctr++;
 		while (s[i] && s[i] != c)
 			i++;
 	}
 	return (ctr);
 }
 
-int	add_word(char **words, const char *s, int l, int r)
+static int	add_word(char **words, const char *s, int i, int l)
 {
-	int	i;
 	int	ctr;
 
 	ctr = 0;
-	while (words[ctr] != 0)
+	while (words[ctr])
 		ctr++;
-	words[ctr] = (char *)malloc(sizeof(char) * (r - l + 1));
+	words[ctr] = ft_substr(s, i, l);
 	if (!words[ctr])
 	{
-		while (ctr)
-		{
+		while (ctr--)
 			free(words[ctr]);
-			ctr--;
-		}
 		free(words);
 		return (0);
 	}
+	return (1);
+}
+
+static int	solve(char **words, const char *s, char c)
+{
+	int	i;
+	int	l;
+
 	i = 0;
-	while (l + i < r)
+	while (s[i])
 	{
-		words[ctr][i] = s[l + i];
-		i++;
+		l = 0;
+		while (s[i] && s[i] == c)
+			i++;
+		while (s[i + l] && s[i + l] != c)
+			l++;
+		if (s[i])
+		{
+			if (!(add_word(words, s, i, l)))
+				return (0);
+			i += l;
+		}
 	}
-	words[ctr][i] = '\0';
 	return (1);
 }
 
 char	**ft_split(char const *s, char c)
 {
 	char	**words;
-	int		l;
-	int		r;
-	int		ctr;
 
-	words = (char **)malloc((word_count(s, c) + 1) * sizeof(char *));
+	if (!s)
+		return (NULL);
+	words = ft_calloc((word_count(s, c) + 1), sizeof(char *));
 	if (!words)
 		return (NULL);
-	l = 0;
-	ctr = 0;
-	while (s[l])
-	{
-		words[ctr++] = 0;
-		while (s[l] && s[l] == c)
-			l++;
-		r = l + 1;
-		while (s[r] && s[r] != c)
-			r++;
-		if (!s[l])
-			break ;
-		if (add_word(words, s, l, r) == 0)
-			return (NULL);
-		l = r;
-	}
+	if (!solve(words, s, c))
+		return (NULL);
 	return (words);
 }

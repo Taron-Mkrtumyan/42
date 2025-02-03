@@ -6,7 +6,7 @@
 /*   By: tmkrtumy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:21:35 by tmkrtumy          #+#    #+#             */
-/*   Updated: 2025/01/24 15:25:47 by tmkrtumy         ###   ########.fr       */
+/*   Updated: 2025/01/30 12:42:46 by tmkrtumy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ char	*ft_itoa(int n)
 
 	n_len = num_len(n);
 	res = (char *)malloc((n_len + 1 + (n < 0)) * sizeof(char));
+	if (!res)
+		return (NULL);
 	if (n == 0)
 		res[0] = '0';
 	if (n < 0)
