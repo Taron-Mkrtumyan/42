@@ -1,33 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstmap.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmkrtumy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/02 16:44:45 by tmkrtumy          #+#    #+#             */
-/*   Updated: 2025/02/02 18:04:35 by tmkrtumy         ###   ########.fr       */
+/*   Created: 2025/02/03 21:24:21 by tmkrtumy          #+#    #+#             */
+/*   Updated: 2025/02/13 18:29:14 by tmkrtumy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
+int	ft_putnbr_fd(int n, int fd)
 {
-	t_list	*new_lst;
-	t_list	*node;
+	int	count;
 
-	new_lst = NULL;
-	while (lst)
+	if (n == -2147483648)
+		return (write(fd, "-2147483648", 11));
+	if (n < 0)
 	{
-		node = ft_lstnew(f(lst -> content));
-		if (!node)
-		{
-			ft_lstclear(&new_lst, del);
-			return (NULL);
-		}
-		ft_lstadd_back(&new_lst, node);
-		lst = lst->next;
+		ft_putchar_fd('-', fd);
+		return (1 + ft_putnbr_fd(-n, fd));
 	}
-	return (new_lst);
+	if (n < 10)
+		return (ft_putchar_fd(n + '0', fd));
+	count = ft_putnbr_fd(n / 10, fd);
+	return (count + ft_putnbr_fd(n % 10, fd));
 }
