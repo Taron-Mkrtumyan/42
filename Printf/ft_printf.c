@@ -6,7 +6,7 @@
 /*   By: tmkrtumy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 20:05:50 by tmkrtumy          #+#    #+#             */
-/*   Updated: 2025/02/13 19:12:51 by tmkrtumy         ###   ########.fr       */
+/*   Updated: 2025/02/16 14:43:23 by tmkrtumy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,18 @@ int	ft_printf(const char *s, ...)
 	count = 0;
 	while (s[i])
 	{
-		if (s[i] == '%' && s[i + 1])
+		if (s[i] == '%' && s[i++ + 1])
 		{
-			res = put(s[i + 1], args);
-			if (res == -1)
-				return (-1);
-			else
-				count += res;
-			i += 2;
+			res = put(s[i++], args);
+			count += res;
 		}
 		else
-			count += ft_putchar_fd(s[i++], 1);
+		{
+			res = ft_putchar_fd(s[i++], 1);
+			count ++;
+		}
+		if (res == -1)
+			return (-1);
 	}
 	va_end (args);
 	return (count);

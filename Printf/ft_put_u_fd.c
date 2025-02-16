@@ -15,10 +15,19 @@
 int	ft_put_u_fd(unsigned int n, int fd)
 {
 	int	count;
+	int	res;
 
 	count = 0;
 	if (n >= 10)
-		count += ft_put_u_fd(n / 10, fd);
-	count += ft_putchar_fd((n % 10) + '0', fd);
+	{
+		res = ft_put_u_fd(n / 10, fd);
+		if (res == -1)
+			return (-1);
+		count += res;
+	}
+	res = ft_putchar_fd((n % 10) + '0', fd);
+	if (res == -1)
+		return (-1);
+	count += res;
 	return (count);
 }

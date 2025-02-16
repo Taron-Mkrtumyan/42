@@ -15,13 +15,28 @@
 int	ft_puthex_low_fd(unsigned long long n, int fd)
 {
 	int	count;
+	int	res;
 
 	count = 0;
 	if (n >= 16)
+	{
 		count += ft_puthex_low_fd(n / 16, fd);
+		if (count == -1)
+			return (-1);
+	}
 	if ((n % 16) < 10)
-		count += ft_putchar_fd((n % 16) + '0', fd);
+	{
+		res = ft_putchar_fd((n % 16) + '0', fd);
+		if (res == -1)
+			return (-1);
+		count += res;
+	}
 	else
-		count += ft_putchar_fd((n % 16) - 10 + 'a', fd);
+	{
+		res = ft_putchar_fd((n % 16) - 10 + 'a', fd);
+		if (res == -1)
+			return (-1);
+		count += res;
+	}
 	return (count);
 }
