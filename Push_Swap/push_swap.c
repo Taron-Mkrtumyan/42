@@ -55,43 +55,57 @@ static bool	is_ok(char *s)
 	return (strintcmp(s));
 }
 
+static int	hash(int key)
+{
+	if (key < 0)
+		key = -key;
+	return (key % TABLE_SIZE);
+}
+
 static bool	check_args(char **av)
 {
-	int	i;
+	int		table[TABLE_SIZE];
+	bool	occupied[TABLE_SIZE];
+	int		i;
+	int		val;
+	int		idx;
 
 	i = 0;
+	idx = 0;
+	while (idx < TABLE_SIZE)
+		occupied[idx++] = false;
 	while (av[i])
 	{
 		if (!is_ok(av[i]))
 			return (false);
-		i++;
+		val = ft_atoi(av[i++]);
+		idx = hash(val);
+		while (occupied[idx] && table[idx] != val)
+			idx = (idx + 1) % TABLE_SIZE;
+		if (occupied[idx])
+			return (false);
+		table[idx] = val;
+		occupied[idx] = true;
 	}
 	return (true);
-}
-
-static void	free_stack(t_stack **a)
-{
-	t_stack	*tmp;
-
-	while (*a)
-	{
-		tmp = (*a)->next;
-		free (*a);
-		*a = tmp;
-	}
 }
 
 int	main(int ac, char **av)
 {
 	t_stack	*a;
 	t_stack	*b;
+	bool	split_flag;
 
 	a = NULL;
 	b = NULL;
+	split_flag = false;
 	if (ac == 1 || (ac == 2 && !av[1][0]))
 		return (1);
 	if (ac == 2)
+	{
 		av = ft_split(av[1], ' ');
+		split_flag = true;
+	}
 	else
 		av++;
 	if (!check_args(av))
@@ -110,5 +124,7 @@ int	main(int ac, char **av)
 			merge_sort(&a, &b);
 	}*/
 	free_stack(&a);
+	if (split_flag)
+		free_split (av);
 	return (0);
 }

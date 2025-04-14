@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_sorted.c                                        :+:      :+:    :+:   */
+/*   free_split.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmkrtumy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/14 17:42:33 by tmkrtumy          #+#    #+#             */
-/*   Updated: 2025/04/14 19:03:21 by tmkrtumy         ###   ########.fr       */
+/*   Created: 2025/04/14 19:14:41 by tmkrtumy          #+#    #+#             */
+/*   Updated: 2025/04/14 19:16:34 by tmkrtumy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-bool	is_sorted(t_stack *a)
+void	free_split(char **split)
 {
-	while (a->next)
+	int	i;
+
+	i = 0;
+	while (split[i])
 	{
-		if (a->data > a->next->data)
-			return (false);
-		a = a->next;
+		free(split[i]);
+		i++;
 	}
-	return (true);
+	free(split);
 }
