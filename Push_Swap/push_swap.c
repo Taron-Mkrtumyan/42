@@ -6,7 +6,7 @@
 /*   By: tmkrtumy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 17:03:41 by tmkrtumy          #+#    #+#             */
-/*   Updated: 2025/04/13 15:25:56 by tmkrtumy         ###   ########.fr       */
+/*   Updated: 2025/04/14 16:33:40 by tmkrtumy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,25 @@ static bool	check_args(char **av)
 	return (true);
 }
 
+static void	free_stack(t_stack **a)
+{
+	t_stack	*tmp;
+
+	while (*a)
+	{
+		tmp = (*a)->next;
+		free (*a);
+		*a = tmp;
+	}
+}
+
 int	main(int ac, char **av)
 {
-	t_stack	a;
-	t_stack	b;
+	t_stack	*a;
+	t_stack	*b;
 
+	a = NULL;
+	b = NULL;
 	if (ac == 1 || (ac == 2 && !av[1][0]))
 		return (1);
 	if (ac == 2)
@@ -82,7 +96,10 @@ int	main(int ac, char **av)
 		av++;
 	if (!check_args(av))
 		ft_putendl_fd("Error", 2);
-	a_init(&a, av);
+	else if (!a_init(&a, av))
+		free_stack(&a);
+	else if (is_sorted (a))
+		printf("Is sorted\n");
 	/*else if (!is_sorted(a))
 	{
 		if (stack_len(a) == 2)
@@ -91,7 +108,7 @@ int	main(int ac, char **av)
 			sorty(&a);
 		else
 			merge_sort(&a, &b);
-	}
-	free_stack(&a);*/
+	}*/
+	free_stack(&a);
 	return (0);
 }

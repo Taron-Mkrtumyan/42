@@ -34,5 +34,7 @@ char	*ft_strdup(const char *s1);
 int		ft_atoi(const char *str);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
+void	*a_init(t_stack **a, char **av);
+bool    is_sorted(t_stack *a);
 
 #endif
