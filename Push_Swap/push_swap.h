@@ -6,7 +6,7 @@
 /*   By: tmkrtumy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:46 by tmkrtumy          #+#    #+#             */
-/*   Updated: 2025/04/08 20:00:01 by tmkrtumy         ###   ########.fr       */
+/*   Updated: 2025/04/27 17:40:41 by tmkrtumy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,19 @@ void	*a_init(t_stack **a, char **av);
 bool	is_sorted(t_stack *a);
 void	free_stack(t_stack **a);
 void	free_split(char **split);
-
+void	sorty3(t_stack **a);
+void	my_sort(t_stack **a);
+int		stack_len(t_stack *a);
+void	sa(t_stack **a);
+void	sb(t_stack **b);
+void	ss(t_stack **a, t_stack **b);
+void	ra(t_stack **a);
+void	rb(t_stack **b);
+void	rr(t_stack **a, t_stack **b);
+void	rra(t_stack **a);
+void	rrb(t_stack **b);
+void	rrr(t_stack **a, t_stack **b);
+void	pa(t_stack **a, t_stack **b);
+void	pb(t_stack **a, t_stack **b);
+void	sorty4(t_stack **a, t_stack **b);
 #endif
