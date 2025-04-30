@@ -1,46 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_sort.c                                          :+:      :+:    :+:   */
+/*   radix_sort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmkrtumy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/27 16:46:31 by tmkrtumy          #+#    #+#             */
-/*   Updated: 2025/04/27 20:07:21 by tmkrtumy         ###   ########.fr       */
+/*   Created: 2025/04/30 16:24:13 by tmkrtumy          #+#    #+#             */
+/*   Updated: 2025/04/30 16:40:05 by tmkrtumy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	stack_len(t_stack *a)
+static int	max_bits_len(int size)
 {
-	int	i;
+	int	bits;
 
-	i = 0;
-	while (a)
+	bits = 0;
+	while (size > 0)
 	{
-		i++;
-		a = a->next;
+		bits++;
+		size /= 2;
 	}
-	return (i);
+	return (bits);
 }
 
-void	my_sort(t_stack **a)
+void	radix_sort(t_stack **a, t_stack **b)
 {
-	t_stack	*b;
+	int	i;
+	int	j;
+	int	bits;
+	int	size;
 
-	b = NULL;
-	if (stack_len(*a) == 2)
-		sa(a);
-	else if (stack_len(*a) == 3)
-		sorty3(a);
-	else if (stack_len(*a) == 4)
-		sorty4(a, &b);
-	else if (stack_len(*a) == 5)
-		sorty5(a, &b);
-	else
+	i = 0;
+	size = stack_len(*a);
+	bits = max_bits_len(size - 1);
+	while (i < bits)
 	{
-		normalize_stack(*a);
-		radix_sort(a, &b);
+		j = 0;
+		while (j++ < size)
+		{
+			if (((*a)->index >> i) & 1)
+				ra(a);
+			else
+				pb(a, b);
+		}
+		while (*b)
+			pa(a, b);
+		i++;
 	}
 }

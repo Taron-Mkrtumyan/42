@@ -1,46 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_sort.c                                          :+:      :+:    :+:   */
+/*   sorty5.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmkrtumy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/27 16:46:31 by tmkrtumy          #+#    #+#             */
-/*   Updated: 2025/04/27 20:07:21 by tmkrtumy         ###   ########.fr       */
+/*   Created: 2025/04/30 15:57:35 by tmkrtumy          #+#    #+#             */
+/*   Updated: 2025/04/30 16:00:25 by tmkrtumy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	stack_len(t_stack *a)
+void	sorty5(t_stack **a, t_stack **b)
 {
-	int	i;
+	int	min;
 
-	i = 0;
-	while (a)
+	min = find_min(*a);
+	if ((*a)->next->next->next->next->data == min)
+		rra(a);
+	else if ((*a)->next->next->next->data == min)
 	{
-		i++;
-		a = a->next;
+		rra(a);
+		rra(a);
 	}
-	return (i);
-}
-
-void	my_sort(t_stack **a)
-{
-	t_stack	*b;
-
-	b = NULL;
-	if (stack_len(*a) == 2)
-		sa(a);
-	else if (stack_len(*a) == 3)
-		sorty3(a);
-	else if (stack_len(*a) == 4)
-		sorty4(a, &b);
-	else if (stack_len(*a) == 5)
-		sorty5(a, &b);
-	else
-	{
-		normalize_stack(*a);
-		radix_sort(a, &b);
-	}
+	while ((*a)->data != min)
+		ra(a);
+	if (is_sorted(*a))
+		return ;
+	pb(a, b);
+	sorty4(a, b);
+	pa(a, b);
 }

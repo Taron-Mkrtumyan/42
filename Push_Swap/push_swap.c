@@ -90,7 +90,7 @@ static bool	check_args(char **av)
 	return (true);
 }
 
-static void	print_stack(t_stack *a)
+/*static void	print_stack(t_stack *a)
 {
 	while (a)
 	{
@@ -98,7 +98,7 @@ static void	print_stack(t_stack *a)
 		a = a->next;
 	}
 	printf("\n");
-}
+}*/
 
 int	main(int ac, char **av)
 {
@@ -107,8 +107,8 @@ int	main(int ac, char **av)
 
 	a = NULL;
 	split_flag = false;
-	if (ac == 1 || (ac == 2 && !av[1][0]))
-		return (1);
+	if (ac == 1 || (ac == 2 && !(av[1][0])))
+		return (0);
 	if (ac == 2)
 	{
 		av = ft_split(av[1], ' ');
@@ -122,7 +122,6 @@ int	main(int ac, char **av)
 		free_stack(&a);
 	else if (!is_sorted(a))
 		my_sort(&a);
-	print_stack(a);
 	free_stack(&a);
 	if (split_flag)
 		free_split (av);

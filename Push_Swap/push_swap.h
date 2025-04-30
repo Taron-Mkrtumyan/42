@@ -55,4 +55,9 @@ void	rrr(t_stack **a, t_stack **b);
 void	pa(t_stack **a, t_stack **b);
 void	pb(t_stack **a, t_stack **b);
 void	sorty4(t_stack **a, t_stack **b);
+void	sorty5(t_stack **a, t_stack **b);
+int		find_min(t_stack *s);
+void	normalize_stack(t_stack *a);
+void	radix_sort(t_stack **a, t_stack **b);
+
 #endif
