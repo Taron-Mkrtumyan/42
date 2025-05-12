@@ -12,7 +12,7 @@
 
 #include "pipex.h"
 
-int	word_count(char const *s, char c)
+int	word_count(char const *s, const char c)
 {
 	int	i;
 	int	ctr;
@@ -41,8 +41,8 @@ static int	add_word(char **words, const char *s, int i, int l)
 	words[ctr] = ft_substr(s, i, l);
 	if (!words[ctr])
 	{
-		while (ctr--)
-			free(words[ctr]);
+		while (ctr)
+			free(words[ctr--]);
 		free(words);
 		return (0);
 	}

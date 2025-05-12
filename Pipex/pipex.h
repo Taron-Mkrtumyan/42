@@ -37,6 +37,7 @@ size_t	ft_strlen(const char *str);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
 int		word_count(char const *s, char c);
-int		cmds_init(t_cmds *cmds, char **av);
+char	cmds_init(t_cmds *cmds, char **av);
+void	free_split(char **w);
 
 #endif
