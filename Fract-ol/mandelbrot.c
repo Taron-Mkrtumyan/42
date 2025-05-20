@@ -1,0 +1,52 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mandelbrot.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tmkrtumy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/19 15:01:42 by tmkrtumy          #+#    #+#             */
+/*   Updated: 2025/05/19 15:10:59 by tmkrtumy         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "fractol.h"
+
+void	f_mandelbrot(int x, int y, t_fractal *vars)
+{
+	int		i;
+	t_cplx	z;
+	t_cplx	c;
+	double	tmp;
+
+	z.re = 0.0;
+	z.im = 0.0;
+	c.re = scale(-2, 2, SIZE, x);
+	c.im = scale(2, -2, SIZE, y);
+	i = -1;
+	while (++i < 2000)
+	{
+		tmp = z.re;
+		z.re = (z.re * z.re) - (z.im * z.im) + c.re;
+		z.im = 2 * tmp * z.im + c.im;
+		if ((z.im * z.im + z.re * z.re) > 4)
+		{
+			vars->color = scale(YELLOW, BLACK, 2000, i);
+			my_pixel_put(x, y, vars);
+			return ;
+		}
+	}
+	my_pixel_put(x, y, vars);
+}
+/*
+int main()
+{
+	t_cplx z, c;
+	z.r = 0;
+	z.i = 0;
+	c.r = -0.8;
+	c.i = 0.156;
+	if (is_mandelbrot(&z, c))
+		printf("is Mandelbrot\n");
+	return (0);
+}*/
