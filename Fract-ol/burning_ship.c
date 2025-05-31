@@ -12,7 +12,7 @@
 
 #include "fractol.h"
 
-void	f_mandelbrot(int x, int y, t_fractal *vars)
+void	f_burning_ship(int x, int y, t_fractal *vars)
 {
 	int		i;
 	t_cplx	z;
@@ -27,11 +27,11 @@ void	f_mandelbrot(int x, int y, t_fractal *vars)
 	while (++i < vars->quality)
 	{
 		tmp = z.re;
-		z.re = (z.re * z.re) - (z.im * z.im) + c.re;
+		z.re = fabs(z.re * z.re - z.im * z.im) + c.re;
 		z.im = 2 * tmp * z.im + c.im;
 		if ((z.im * z.im + z.re * z.re) > 4)
 		{
-			vars->color = scale(BLACK, WHITE, vars->quality, i);
+			vars->color = scale(RED, BLACK, vars->quality, i);
 			my_pixel_put(x, y, vars);
 			return ;
 		}

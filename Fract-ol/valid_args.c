@@ -40,7 +40,7 @@ static bool	is_double(const char *str)
 	return (true);
 }
 
-static bool	is_mandelbrot(const char *s)
+static bool	is_mandelbrot(const char *s, t_fractal *vars)
 {
 	int		i;
 	char	*type;
@@ -53,15 +53,17 @@ static bool	is_mandelbrot(const char *s)
 			return (false);
 		i++;
 	}
+	vars->type = MANDELBROT;
+	vars->name = "MandelBrot :)";
 	return (true);
 }
 
-static bool	is_sierpinski(const char *s)
+static bool	is_ship(const char *s, t_fractal *vars)
 {
 	int		i;
 	char	*type;
 
-	type = "sierpinski";
+	type = "burning_ship";
 	i = 0;
 	while (s[i])
 	{
@@ -69,10 +71,12 @@ static bool	is_sierpinski(const char *s)
 			return (false);
 		i++;
 	}
+	vars->type = BURNING_SHIP;
+	vars->name = "Burning Ship .-.";
 	return (true);
 }
 
-static bool	is_julia(const char *s)
+static bool	is_julia(const char *s, t_fractal *vars)
 {
 	int		i;
 	char	*type;
@@ -85,33 +89,24 @@ static bool	is_julia(const char *s)
 			return (false);
 		i++;
 	}
+	vars->type = JULIA;
+	vars->name = "So I Sing a Song of Love, Julia";
 	return (true);
 }
 
-bool	valid_args(int ac, char **av, t_fractal *v)
+bool	valid_args(int ac, char **av, t_fractal *vars)
 {
 	if (ac == 1 || ac > 4)
 		return (false);
-	if (ac == 2 && (!is_mandelbrot(av[1]) && !is_sierpinski(av[1])))
+	if (ac == 2 && (!is_mandelbrot(av[1], vars) && !is_ship(av[1], vars)))
 		return (false);
 	if (ac == 2)
-	{
-		if (is_mandelbrot(av[1]))
-		{
-			v->type = MANDELBROT;
-			v->name = "MandelBrot :)";
-		}
-		else
-		{
-			v->type = SIERPINSKI;
-			v->name = "SierPinsky .-.";
-		}
 		return (true);
-	}
-	if (is_julia(av[1]) && ac != 4)
+	if (is_julia(av[1], vars) && ac != 4)
 		return (false);
-	if (!is_double(av[3]) && !is_double(av[4]))
+	if (!is_double(av[2]) && !is_double(av[3]))
 		return (false);
-	v->type = JULIA;
+	vars->re = atod(av[2]);
+	vars->im = atod(av[3]);
 	return (true);
 }

@@ -21,6 +21,12 @@ int	main(int ac, char	**av)
 		ft_putstr(INVALID_INPUT);
 		return (1);
 	}
+	vars.color = BLACK;
+	vars.quality = QUALITY;
+	vars.shift_x = 0.0;
+	vars.shift_y = 0.0;
+	vars.zoom = 1.0;
+	vars.a = M_PI;
 	vars_init(&vars);
 	return (0);
 }

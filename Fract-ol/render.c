@@ -16,12 +16,18 @@ static void	handle_pixel(int x, int y, t_fractal *vars)
 {
 	if (vars->type == MANDELBROT)
 	{
-		vars->color = RED;
+		vars->color = BLACK;
 		f_mandelbrot(x, y, vars);
 	}
-	else if (vars->type == SIERPINSKI)
+	else if (vars->type == BURNING_SHIP)
 	{
-		return ;
+		vars->color = BLACK;
+		f_burning_ship(x, y, vars);
+	}
+	else if (vars->type == JULIA)
+	{
+		vars->color = CYAN;
+		f_julia(x, y, vars);
 	}
 }
 
