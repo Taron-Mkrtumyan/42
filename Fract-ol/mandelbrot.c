@@ -31,7 +31,7 @@ void	f_mandelbrot(int x, int y, t_fractal *vars)
 		z.im = 2 * tmp * z.im + c.im;
 		if ((z.im * z.im + z.re * z.re) > 4)
 		{
-			vars->color = scale(BLACK, WHITE, vars->quality, i);
+			vars->color = scale(BLACK, CYAN, vars->quality, i);
 			my_pixel_put(x, y, vars);
 			return ;
 		}

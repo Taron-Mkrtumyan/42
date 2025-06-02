@@ -65,7 +65,11 @@
 # define LIGHT_GRAY	0xD3D3D3
 # define DARK_GRAY	0x404040
 
-# define INVALID_INPUT "Invalid args!\n\tTry mandelbrot or julia <real> <i>\n"
+# define INVALID_INPUT " Invalid args!\n\n\
+ Try:\n\
+\t mandelbrot\n\
+\t julia <real> <i>\n\
+\t burning_ship\n\n"
 
 enum e_fractal_type
 {

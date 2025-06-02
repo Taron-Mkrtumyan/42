@@ -35,9 +35,9 @@ static int	handle_key(int keycode, t_fractal *vars)
 		vars->shift_y += SMOOTH * vars->zoom;
 	else if (keycode == XK_Down || keycode == XK_s)
 		vars->shift_y -= SMOOTH * vars->zoom;
-	else if (keycode == NP_PLUS)
+	else if (keycode == NP_PLUS || keycode == XK_equal)
 		vars->zoom /= 1.1;
-	else if (keycode == NP_MINUS)
+	else if (keycode == NP_MINUS || keycode == XK_minus)
 		vars->zoom *= 1.1;
 	else if (keycode == XK_j)
 	{

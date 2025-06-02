@@ -31,7 +31,7 @@ void	f_burning_ship(int x, int y, t_fractal *vars)
 		z.im = 2 * tmp * z.im + c.im;
 		if ((z.im * z.im + z.re * z.re) > 4)
 		{
-			vars->color = scale(RED, BLACK, vars->quality, i);
+			vars->color = scale(BLACK, RED, vars->quality, i);
 			my_pixel_put(x, y, vars);
 			return ;
 		}
