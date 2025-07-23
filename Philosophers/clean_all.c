@@ -1,40 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   clean_all.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmkrtumy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/22 13:50:22 by tmkrtumy          #+#    #+#             */
-/*   Updated: 2025/07/21 18:34:09 by tmkrtumy         ###   ########.fr       */
+/*   Created: 2025/07/10 18:48:48 by tmkrtumy          #+#    #+#             */
+/*   Updated: 2025/07/10 18:52:37 by tmkrtumy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "filo.h"
 
-int	ft_atoi(const char *str)
+void	clean_all(t_data *data)
 {
-	int	i;
-	int	neg;
-	int	res;
+	unsigned int	i;
 
+	ft_sleep((data->die_time + data-> eat_time + data->sleep_time), data);
 	i = 0;
-	neg = 1;
-	while (str[i] && (str[i] == ' ' || str[i] == '\n' || str[i] == '\t'
-			|| str[i] == '\v' || str[i] == '\f' || str[i] == '\r'))
-		i++;
-	if (str[i] == '-')
+	while (i < data->phil_num)
 	{
-		neg = -1;
+		mutex_op(&data->forks[i].fork, DESTROY);
+		mutex_op(&data->philos[i].philo_mutex, DESTROY);
 		i++;
 	}
-	else if (str[i] == '+')
-		i++;
-	res = 0;
-	while (str[i] && (str[i] >= '0' && str[i] <= '9'))
-	{
-		res = res * 10 + (str[i] - '0');
-		i++;
-	}
-	return (res * neg);
+	mutex_op(&data->data_mutex, DESTROY);
+	mutex_op(&data->write_mutex, DESTROY);
+	free(data->forks);
+	free(data->philos);
+	free(data);
+	data = NULL;
 }
