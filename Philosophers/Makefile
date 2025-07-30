@@ -1,6 +1,6 @@
 NAME = philo
 
-FLAGS = -Wall -Wextra -Werror -pthread 
+FLAGS = -Wall -Wextra -Werror -fsanitize=thread -g3
 
 SRCS =	clean_all.c\
 		data_init.c\

@@ -36,7 +36,8 @@ void	*monitor_dinner_full(void *info)
 		i = 0;
 		while (i < data->phil_num || sim_ended(data))
 		{
-			if (data->philos[i].meals_eaten < (int)data->no_spaghetti)
+			if (get_uint(&data->philos[i].philo_mutex,
+					&data->philos[i].meals_eaten) < data->no_spaghetti)
 				break ;
 			i++;
 		}
@@ -67,7 +68,7 @@ void	*monitor_dinner_die(void *info)
 			if (philo_died(data->philos + i))
 			{
 				set_res(data, FAIL);
-				ft_sleep(1000, data);
+				ft_sleep(10000, data);
 				write_status(DIED, data->philos + i);
 			}
 			i++;

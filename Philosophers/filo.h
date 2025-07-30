@@ -95,7 +95,7 @@ typedef struct s_philo
 	t_data			*data;
 	unsigned int	last_meal_time;
 	int				id;
-	int				meals_eaten;
+	unsigned int	meals_eaten;
 }	t_philo;
 
 typedef enum a_time_type

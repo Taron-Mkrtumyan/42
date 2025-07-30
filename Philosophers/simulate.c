@@ -52,7 +52,9 @@ static void	eat(t_philo *philo)
 		ft_get_time(MILISECOND));
 	write_status(EATING, philo);
 	ft_sleep(philo->data->eat_time, philo->data);
+	mutex_op(&philo->philo_mutex, LOCK);
 	philo->meals_eaten++;
+	mutex_op(&philo->philo_mutex, UNLOCK);
 	mutex_op(&philo->first_fork->fork, UNLOCK);
 	mutex_op(&philo->second_fork->fork, UNLOCK);
 }
