@@ -15,12 +15,9 @@
 bool	data_init(t_data *data, int ac, char **av, char **env)
 {
 	if (ac != 1 && ac != 3)
-		ft_exit(BR"Usage:\t./minishell\tOR\t./minishell -c \"command\"\n"RE);
+		ft_exit(WRONG_INPUT);
 	if (ac == 3 && ft_strncmp("-c", av[1], 2) != 0)
-		ft_exit(BR"Interactive mode:\t./minishell -c \"command\"\n"RE);
-	data = malloc(sizeof(t_data));
-	if (!data)
-		ft_exit("Data malloc failed ⛔");
+		ft_exit(WRONG_INPUT2);
 	data->env = env;
 	if (ac == 1)
 		data->interactive = false;
