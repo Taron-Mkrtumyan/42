@@ -29,6 +29,8 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "libft.h"
+# include <signal.h>
+# include <wait.h>
 
 # define RE		"\033[0m"
 # define R		"\033[31m"
@@ -47,6 +49,9 @@
 # define BM		"\033[1;35m"
 # define BC		"\033[1;36m"
 # define BW		"\033[1;37m"
+
+# define WRONG_INPUT "Usage:\t./minishell\tOR\t./minishell -c \"command\"\n"
+# define WRONG_INPUT2 "Get command:\t./minishell -c \"command\"\n"
 
 typedef struct s_token
 {

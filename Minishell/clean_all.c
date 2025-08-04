@@ -12,7 +12,17 @@
 
 #include "minishell.h"
 
+static void	free_ptr(void *ptr)
+{
+	if (ptr != NULL)
+	{
+		free(ptr);
+		ptr = NULL;
+	}
+}
+
 void	clean_all(t_data *data)
 {
-	free(data);
+	(void)data;
+	(void)free_ptr;
 }
