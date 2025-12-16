@@ -1,6 +1,7 @@
 NAME = minishell
 
 CC = gcc -g
+
 CFLAGS = -Wall -Wextra -Werror -I includes/ -I libft/
 LIBS = -lreadline
 RM = rm -rf

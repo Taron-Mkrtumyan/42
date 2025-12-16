@@ -6,7 +6,7 @@
 /*   By: gkankia <gkankia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 17:56:22 by gkankia           #+#    #+#             */
-/*   Updated: 2025/10/03 17:30:23 by gkankia          ###   ########.fr       */
+/*   Updated: 2025/10/04 20:37:39 by gkankia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # define RED  "\001\033[1;31m\002"
 # define CYAN   "\001\033[1;36m\002"
 
-extern volatile sig_atomic_t g_received_signal;
+extern volatile sig_atomic_t	g_received_signal;
 
 typedef struct s_subprocess_data
 {
@@ -75,7 +75,7 @@ void	setup_signals(void);
 void	check_signal(t_minishell *sh);
 void	execute_command(t_minishell *sh);
 void	free_minishell(t_minishell *sh);
-int	here_doc(char *delimiter, t_minishell *sh);
+int		here_doc(char *delimiter, t_minishell *sh);
 int		has_pipe(char **args);
 int		execute_builtin(t_minishell *sh);
 void	handle_child_fds(t_minishell *sh, int pipe_fd[2], int has_pipe);

@@ -6,7 +6,7 @@
 /*   By: gkankia <gkankia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 14:50:36 by gkankia           #+#    #+#             */
-/*   Updated: 2025/09/15 19:38:26 by gkankia          ###   ########.fr       */
+/*   Updated: 2025/10/04 20:24:44 by gkankia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,26 +59,18 @@ void	restore_fds(t_minishell *sh, int saved_stdin, int saved_stdout)
 
 int	prepare_builtin_execution(t_builtin_exec *exec)
 {
-    exec->saved_stdin = dup(STDIN_FILENO);
-    exec->saved_stdout = dup(STDOUT_FILENO);
-    exec->cmd_argv = build_argv(exec->sh->args, exec->start, exec->end);
-    if (!exec->cmd_argv || !exec->cmd_argv[0])
-        return (1);
-    if (handle_redirections(exec->sh, exec->start, exec->end))
-        return (1);
-    if (exec->sh->in_fd != STDIN_FILENO)
-    {
-        dup2(exec->sh->in_fd, STDIN_FILENO);
-        close(exec->sh->in_fd);           // <-- ADD THIS LINE
-        exec->sh->in_fd = STDIN_FILENO;   // <-- AND THIS LINE
-    }
-    if (exec->sh->out_fd != STDOUT_FILENO)
-    {
-        dup2(exec->sh->out_fd, STDOUT_FILENO);
-        close(exec->sh->out_fd);
-        exec->sh->out_fd = STDOUT_FILENO;
-    }
-    return (0);
+	exec->saved_stdin = dup(STDIN_FILENO);
+	exec->saved_stdout = dup(STDOUT_FILENO);
+	exec->cmd_argv = build_argv(exec->sh->args, exec->start, exec->end);
+	if (!exec->cmd_argv || !exec->cmd_argv[0])
+		return (1);
+	if (handle_redirections(exec->sh, exec->start, exec->end))
+		return (1);
+	if (exec->sh->in_fd != STDIN_FILENO)
+		dup2(exec->sh->in_fd, STDIN_FILENO);
+	if (exec->sh->out_fd != STDOUT_FILENO)
+		dup2(exec->sh->out_fd, STDOUT_FILENO);
+	return (0);
 }
 
 void	execute_builtin_in_parent(t_minishell *sh, int start, int end)
