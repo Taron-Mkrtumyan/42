@@ -1,42 +1,38 @@
 NAME = miniRT
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I libft/
+CFLAGS = -Wall -Wextra -Werror 
 RM = rm -rf
 
-SRCS =	Srcs/main.c
+SRCS =	src/main.c \
+	$(wildcard src/libft/*.c)
 
 OBJS = ${SRCS:.c=.o}
 
 MLX_DIR = ./minilibx-linux
 MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
+MLX_INC = -I$(MLX_DIR)
 
-
-LIBFT_DIR = ./Libft
-LIBFT = $(LIBFT_DIR)/libft.a
+INCLUDES = -I src -I src/libft
 
 VLGRND = valgrind 
 VFLAGS = --leak-check=full --show-leak-kinds=all --track-origins=yes
 
-all: $(NAME)
+all: mlx $(NAME)
 
-$(LIBFT):
-	make -C $(LIBFT_DIR)
 
-$(NAME): $(OBJS) $(LIBFT) mlx
-	$(CC) $(CFLAGS) $(MLX_FLAGS) $(OBJS) $(LIBFT) -o $(NAME) $(LIBS)
+$(NAME): $(OBJS) $(LIBFT)
+	$(CC) $(CFLAGS) $(OBJS) $(MLX_FLAGS) -o $(NAME)
 
 mlx:
-	make -C$(MLX_DIR) --silent
+	make -C $(MLX_DIR) --silent
 
 clean:
-	$(MAKE) clean -C $(LIBFT_DIR)
 	$(RM) $(OBJS)
 
 fclean: clean
-	$(MAKE) fclean -C $(LIBFT_DIR)
 	$(RM) $(NAME)
 
 re: fclean all
 
-.PHONY: re all clean fclean
+.PHONY: re all clean fclean mlx
