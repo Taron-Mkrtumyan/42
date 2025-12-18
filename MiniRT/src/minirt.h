@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmkrtumy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gkankia <gkankia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 19:35:51 by tmkrtumy          #+#    #+#             */
-/*   Updated: 2025/12/16 19:36:54 by tmkrtumy         ###   ########.fr       */
+/*   Updated: 2025/12/18 16:20:50 by gkankia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,6 @@
 # define MINIRT_H
 
 # include <unistd.h>
+# include <stdio.h>
 
 #endif
