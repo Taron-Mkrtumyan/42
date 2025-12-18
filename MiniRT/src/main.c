@@ -15,7 +15,6 @@
 int	main(int ac, char **av)
 {
 	t_minirt	minirt;
-	t_window		window;	
 
 	if (!valid_args(ac, av))
 		return (1);

@@ -31,7 +31,7 @@
 
 typedef struct a_window		t_window;
 typedef struct a_vector		t_vector;
-typedef struct a_RGB		t_RGB;
+typedef struct a_rgb		t_rgb;
 typedef struct a_obj		t_obj;
 typedef struct a_sphere		t_sphere;
 typedef struct a_cylinder	t_cylinder;
@@ -40,15 +40,15 @@ typedef struct a_plane		t_plane;
 typedef struct a_amb_light
 {
 	float		ratio;
-	t_RGB		color;
+	t_rgb		color;
 }	t_amb_light;
 
-typedef struct a_lights
+typedef struct a_light
 {
 	t_vector	position;
 	float		brightness;
-	t_RGB		color;
-}	t_lights;
+	t_rgb		color;
+}	t_light;
 
 typedef struct a_camera
 {
@@ -60,8 +60,8 @@ typedef struct a_camera
 typedef struct a_minirt
 {
 	t_window	*window;
-	t_camera	*cameras;
-	t_lights	*lights;
+	t_camera	*camera;
+	t_light		*light;
 	t_obj		**objects;
 	t_amb_light	*amb_light;
 }	t_minirt;
@@ -92,12 +92,12 @@ typedef struct a_obj
 	void	*data;	
 }	t_obj;
 
-typedef struct a_RGB
+typedef struct a_rgb
 {
 	unsigned char	r;
 	unsigned char	g;
 	unsigned char	b;
-}	t_RGB;
+}	t_rgb;
 
 typedef struct a_vector
 {
@@ -111,7 +111,7 @@ typedef struct a_sphere
 	float		radius;
 	float		diameter;
 	t_vector	center;
-	t_RGB		color;
+	t_rgb		color;
 }	t_sphere;
 
 typedef struct a_cylinder
@@ -121,14 +121,14 @@ typedef struct a_cylinder
 	float		height;
 	t_vector	center;
 	t_vector	normal;
-	t_RGB		color;
+	t_rgb		color;
 }	t_cylinder;
 
 typedef struct a_plane
 {
 	t_vector	center;
 	t_vector	normal;
-	t_RGB		color;
+	t_rgb		color;
 }	t_plane;
 
 #endif
