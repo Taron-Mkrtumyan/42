@@ -21,6 +21,8 @@
 # include <X11/keysym.h>
 # include "minilibx-linux/mlx.h"
 # include <string.h>
+# include <math.h>
+# include <stdlib.h>
 
 # define SIZE		2000
 # define QUALITY	0
@@ -72,11 +74,12 @@ typedef struct s_window
 	void		*win;
 	void		*img;
 	char		*addr;
-	int			bits_per_pixel;
-	int			line_length;
+	int			bpp;
+	int			line_len;
 	int			endian;
 	int			width;
 	int			height;
+	t_minirt	*minirt;
 }	t_window;
 
 typedef enum e_shape
@@ -130,5 +133,11 @@ typedef struct a_plane
 	t_vector	normal;
 	t_rgb		color;
 }	t_plane;
+
+void	init_window(t_window *w);
+bool	init_minirt(t_minirt *minirt, char *filename);
+bool	valid_args(int ac, char **av);
+bool	init_scene(t_minirt *minirt, char *filename);
+bool	render_scene(t_minirt *minirt);
 
 #endif
