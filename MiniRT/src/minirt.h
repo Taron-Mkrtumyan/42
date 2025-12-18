@@ -6,7 +6,7 @@
 /*   By: gkankia <gkankia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 19:35:51 by tmkrtumy          #+#    #+#             */
-/*   Updated: 2025/12/18 17:27:35 by tmkrtumy         ###   ########.fr       */
+/*   Updated: 2025/12/18 17:39:35 by gkankia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include "minilibx-linux/mlx.h"
+# include <string.h>
 
 # define SIZE		2000
 # define QUALITY	0
