@@ -14,8 +14,12 @@
 
 int	main(int ac, char **av)
 {
-	(void) ac;
-	(void) av;
-	write(1, "\n{1}\n\n", 6);
+	t_minirt	minirt;
+	t_window		window;	
+
+	if (!valid_args(ac, av))
+		return (1);
+	if (!init_minirt(&minirt, av[1]))
+		return (2);
 	return (0);
 }
