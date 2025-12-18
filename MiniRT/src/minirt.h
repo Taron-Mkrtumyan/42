@@ -45,22 +45,61 @@
 # define LIGHT_GRAY	0xD3D3D3
 # define DARK_GRAY	0x404040
 
+typedef struct a_window		t_window;
+typedef struct a_vector		t_vector;
+typedef struct a_RGB		t_RGB;
+typedef struct a_obj		t_obj;
+typedef struct a_sphere		t_sphere;
+typedef struct a_cylinder	t_cylinder;
+typedef struct a_plane		t_plane;
+
+typedef struct a_amb_light
+{
+	float		ratio;
+	t_RGB		color;
+}	t_amb_light;
+
+typedef struct a_lights
+{
+	t_vector	position;
+	float		brightness;
+	t_RGB		color;
+}	t_lights;
+
+typedef struct a_camera
+{
+	t_vector	position;
+	t_vector	orientation;
+	float		fov;
+}	t_camera;
+
+typedef struct a_minirt
+{
+	t_window	*window;
+	t_camera	*cameras;
+	t_lights	*lights;
+	t_obj		**objects;
+	t_amb_light	*amb_light;
+}	t_minirt;
+
 typedef struct s_window
 {
 	void		*mlx;
 	void		*win;
 	void		*img;
 	char		*addr;
-	a_camera	*camera;
-	a_light		*light;
-	a_amb_light	*amb_light;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
+	int			width;
+	int			height;
 }	t_window;
 
 typedef enum e_shape
 {
-	SPHERE;
-	CYLINDER;
-	PLANE;
+	SPHERE,
+	CYLINDER,
+	PLANE,
 }	t_shape;
 
 typedef struct a_obj
@@ -107,17 +146,5 @@ typedef struct a_plane
 	t_vector	normal;
 	t_RGB		color;
 }	t_plane;
-
-void	render_fractal(t_fractal *vars);
-void	render_fractal(t_fractal *vars);
-bool	valid_args(int ac, char **av, t_fractal *v);
-void	vars_init(t_fractal *vars);
-void	ft_putstr(char *s);
-void	f_mandelbrot(int x, int y, t_fractal *vars);
-void	f_julia(int x, int y, t_fractal *vars);
-void	f_burning_ship(int x, int y, t_fractal *vars);
-void	my_pixel_put(int x, int y, t_fractal *vars);
-double	scale(double n1, double n2, double o, double i);
-double	atod(char *s);
 
 #endif
