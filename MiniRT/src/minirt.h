@@ -47,9 +47,11 @@ typedef struct s_amb_light
 
 typedef struct s_light
 {
-	t_vector	*position;
-	t_rgb		*color;
-	float		brightness;
+	float			brightness;
+	t_vector		*position;
+	t_rgb			*color;
+	struct s_light	*next;
+	struct s_light	*first;
 }	t_light;
 
 typedef struct s_camera
@@ -63,7 +65,7 @@ typedef struct s_minirt
 {
 	t_window	*window;
 	t_camera	*camera;
-	t_light		*light;
+	t_light		**lights;
 	t_obj		**objects;
 	t_amb_light	*amb_light;
 }	t_minirt;
