@@ -7,7 +7,9 @@ RM = rm -f
 SRCS =	src/main.c \
 	src/parse/init_minirt.c \
 	src/parse/init_window.c \
-	src/validation/validation.c
+	src/validation/validation.c \
+	src/cleanup/free_minirt.c \
+	src/cleanup/free_window.c
 
 OBJS = ${SRCS:.c=.o}
 
@@ -41,5 +43,8 @@ fclean: clean
 	$(RM) $(NAME)
 
 re: fclean all
+
+v: $(NAME)
+	$(VLGRND) $(VFLAGS) ./$(NAME)
 
 .PHONY: re all clean fclean mlx libft

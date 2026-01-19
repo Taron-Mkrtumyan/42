@@ -6,7 +6,7 @@
 /*   By: gkankia <gkankia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 19:35:51 by tmkrtumy          #+#    #+#             */
-/*   Updated: 2025/12/18 17:39:35 by gkankia          ###   ########.fr       */
+/*   Updated: 2026/01/19 17:45:10 by tmkrtumy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,5 +141,7 @@ bool	init_minirt(t_minirt *minirt, char *filename);
 bool	valid_args(int ac, char **av);
 bool	init_scene(t_minirt *minirt, char *filename);
 bool	render_scene(t_minirt *minirt);
+void	free_minirt(t_minirt *minirt);
+void	free_window(t_window *w);
 
 #endif
