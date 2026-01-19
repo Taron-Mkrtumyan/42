@@ -6,7 +6,7 @@
 /*   By: tmkrtumy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 19:20:34 by tmkrtumy          #+#    #+#             */
-/*   Updated: 2025/12/18 19:20:37 by tmkrtumy         ###   ########.fr       */
+/*   Updated: 2026/01/19 18:57:55 by tmkrtumy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,24 +40,22 @@ static void	events_init(t_window *w)
 
 void	init_window(t_window *w)
 {
-    w->mlx = mlx_init();
-    if (!w->mlx)
-        return (free(w));
-    w->win = mlx_new_window(w->mlx, SIZE, SIZE, "MiniRT");
-    if (!w->win)
-        return (mlx_destroy_display(w->mlx), free(w->mlx));
-    mlx_key_hook(w->win, handle_key, &w->mlx);
-    w->img = mlx_new_image(w->mlx, SIZE, SIZE);
-    if (!w->img)
-        return (mlx_destroy_window(w->mlx, w->win), \
-                mlx_destroy_display(w->mlx), free(w->mlx));
-    w->addr = mlx_get_data_addr(w->img, &w->bpp, &w->line_len, &w->endian);
-    events_init(w);
-    //render_fractal(w);
-    mlx_loop(w->mlx);
-    mlx_destroy_image(w->mlx, w->img);
-    mlx_destroy_window(w->mlx, w->win);
-    return (mlx_destroy_display(w->mlx), free(w->mlx));
+	w->mlx = mlx_init();
+	if (!w->mlx)
+		return (free(w));
+	w->win = mlx_new_window(w->mlx, SIZE, SIZE, "MiniRT");
+	if (!w->win)
+		return (mlx_destroy_display(w->mlx), free(w->mlx));
+	mlx_key_hook(w->win, handle_key, &w->mlx);
+	w->img = mlx_new_image(w->mlx, SIZE, SIZE);
+	if (!w->img)
+		return (mlx_destroy_window(w->mlx, w->win), \
+mlx_destroy_display(w->mlx), free(w->mlx));
+	w->addr = mlx_get_data_addr(w->img, &w->bpp, &w->line_len, &w->endian);
+	events_init(w);
+	//render_fractal(w);
+	mlx_loop(w->mlx);
+	mlx_destroy_image(w->mlx, w->img);
+	mlx_destroy_window(w->mlx, w->win);
+	return (mlx_destroy_display(w->mlx), free(w->mlx));
 }
-
-

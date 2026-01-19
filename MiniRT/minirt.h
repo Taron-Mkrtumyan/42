@@ -13,16 +13,18 @@
 #ifndef MINIRT_H
 # define MINIRT_H
 
+# include "libft.h"
+# include "minilibx-linux/mlx.h"
 # include <stdio.h>
 # include <unistd.h>
 # include <limits.h>
 # include <stdbool.h>
 # include <X11/X.h>
 # include <X11/keysym.h>
-# include "../minilibx-linux/mlx.h"
 # include <string.h>
 # include <math.h>
 # include <stdlib.h>
+# include <fcntl.h>
 
 # define SIZE		1000
 # define QUALITY	0
@@ -30,6 +32,10 @@
 
 # define NP_PLUS	65451
 # define NP_MINUS	65453
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
 
 typedef struct s_window		t_window;
 typedef struct s_vector		t_vector;
@@ -79,8 +85,8 @@ typedef struct s_window
 	int			bpp;
 	int			line_len;
 	int			endian;
-	int			width;
-	int			height;
+	float		width;
+	float		height;
 	t_minirt	*minirt;
 }	t_window;
 
@@ -93,8 +99,9 @@ typedef enum e_shape
 
 typedef struct s_obj
 {
-	t_shape	shape;
-	void	*data;	
+	t_shape			shape;
+	void			*data;
+	struct s_obj	*next;
 }	t_obj;
 
 typedef struct s_rgb
@@ -136,12 +143,39 @@ typedef struct s_plane
 	t_rgb		*color;
 }	t_plane;
 
-void	init_window(t_window *w);
-bool	init_minirt(t_minirt *minirt, char *filename);
-bool	valid_args(int ac, char **av);
-bool	init_scene(t_minirt *minirt, char *filename);
-bool	render_scene(t_minirt *minirt);
-void	free_minirt(t_minirt *minirt);
-void	free_window(t_window *w);
+void		init_window(t_window *w);
+bool		init_minirt(t_minirt *minirt, char *filename);
+bool		valid_args(t_minirt *rt, char *path);
+bool		init_scene(t_minirt *minirt, char *filename);
+bool		render_scene(t_minirt *minirt);
+void		free_minirt(t_minirt *minirt);
+void		free_window(t_window *w);
+void		free_arr(char *arr[]);
+bool		parse_params(t_minirt *rt, char *line);
+int			is_invalid_file(t_minirt *rt);
+t_vector	*normalize(t_vector *v);
+void		push_light(t_light *new_light, t_light **lights);
+t_light		*create_light(t_minirt *rt);
+void		push_object(t_obj *obj, t_obj **objs);
+int			is_ulong(char *str);
+float		str_to_float(char *str);
+int			is_float(char *str);
+int			arr_len(char *arr[]);
+int			str_to_int_color(char *str);
+int			parse_vector(char *str, t_vector *vec);
+int			parse_colors(char *str, t_rgb *color, t_rgb *color2);
+int			parse_color(char *str, t_rgb *color);
+int			parse_float(char *str, float *num);
+float		vec_len(t_vector *vec);
+char		*sub(char const *s, unsigned int start, size_t len);
+char		*get_next_line(int fd);
+int			parse_shape(t_minirt *rt, char *line, t_shape type, int nb_params);
+int			parse_light(t_minirt *rt, char *line);
+int			parse_ambient(t_minirt *rt, char *line);
+bool		parse_resolution(t_minirt *rt, char *line);
+int			parse_camera(t_minirt *rt, char *line, int i);
+int			parse_plane(char **params, t_obj *obj);
+int			parse_sphere(char **params, t_obj *obj);
+int			parse_cylinder(char **params, t_obj *obj);
 
 #endif
