@@ -6,7 +6,7 @@
 /*   By: gkankia <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 19:03:12 by gkankia           #+#    #+#             */
-/*   Updated: 2025/12/18 19:03:16 by gkankia          ###   ########.fr       */
+/*   Updated: 2026/01/19 18:56:00 by tmkrtumy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 bool	init_minirt(t_minirt *minirt, char *filename)
 {
-    (void) filename;
-    minirt->window = malloc(sizeof(t_window));
-    if (!minirt->window)
-        return (false);
-    //if (!init_scene(minirt, filename))
-    //    return (false);
-    init_window(minirt->window);
-    //if (!render_scene(minirt))
-    //    return (false);
-    return (true);
+	(void) filename;
+	minirt->window = malloc(sizeof(t_window));
+	if (!minirt->window)
+		return (false);
+	//if (!init_scene(minirt, filename))
+	//	return (false);
+	init_window(minirt->window);
+	//if (!render_scene(minirt))
+	//	return (false);
+	return (true);
 }
