@@ -17,7 +17,7 @@ static int	handle_close(t_window *w)
 	mlx_destroy_image(w->mlx, w->img);
 	mlx_destroy_window(w->mlx, w->win);
 	mlx_destroy_display(w->mlx);
-	free(w->mlx);
+	free_window(w);
 	exit(EXIT_SUCCESS);
 }
 
@@ -40,9 +40,6 @@ static void	events_init(t_window *w)
 
 void	init_window(t_window *w)
 {
-    w = malloc(sizeof(t_window));
-    if (!w)
-        return ;
     w->mlx = mlx_init();
     if (!w->mlx)
         return (free(w));
