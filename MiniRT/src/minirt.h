@@ -24,7 +24,7 @@
 # include <math.h>
 # include <stdlib.h>
 
-# define SIZE		2000
+# define SIZE		1000
 # define QUALITY	0
 # define SMOOTH		0.2
 

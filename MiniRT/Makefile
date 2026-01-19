@@ -5,7 +5,9 @@ CFLAGS = -Wall -Wextra -Werror
 RM = rm -rf
 
 SRCS =	src/main.c \
-	$(wildcard src/libft/*.c)
+	src/parse/init_minirt.c \
+	src/parse/init_window.c \
+	src/validation/validation.c
 
 OBJS = ${SRCS:.c=.o}
 

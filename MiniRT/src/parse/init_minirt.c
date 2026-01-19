@@ -10,20 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "../minirt.h"
 
 bool	init_minirt(t_minirt *minirt, char *filename)
 {
-    t_window    *window;
-
+    (void) filename;
     minirt->window = malloc(sizeof(t_window));
     if (!minirt->window)
         return (false);
-    window = minirt->window;
-    if (!init_scene(minirt, filename))
-        return (false);
+    //if (!init_scene(minirt, filename))
+    //    return (false);
     init_window(minirt->window);
-    if (!render_scene(minirt))
-        return (false);
+    //if (!render_scene(minirt))
+    //    return (false);
     return (true);
 }

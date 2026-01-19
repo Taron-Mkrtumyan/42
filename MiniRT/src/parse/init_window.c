@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "../minirt.h"
 
 static int	handle_close(t_window *w)
 {
@@ -29,12 +29,12 @@ static int	handle_key(int keycode, t_window *w)
 	return (0);
 }
 
-static int	handle_mouse(int button, int x, int y, t_window *w);
+//static int	handle_mouse(int button, int x, int y, t_window *w);
 
 static void	events_init(t_window *w)
 {
 	mlx_key_hook(w->win, handle_key, w);
-	mlx_hook(w->win, ButtonPress, ButtonPressMask, handle_mouse, w);
+	//mlx_hook(w->win, ButtonPress, ButtonPressMask, handle_mouse, w);
 	mlx_hook(w->win, DestroyNotify, StructureNotifyMask, handle_close, w);
 }
 
@@ -56,7 +56,7 @@ void	init_window(t_window *w)
                 mlx_destroy_display(w->mlx), free(w->mlx));
     w->addr = mlx_get_data_addr(w->img, &w->bpp, &w->line_len, &w->endian);
     events_init(w);
-    render_fractal(w);
+    //render_fractal(w);
     mlx_loop(w->mlx);
     mlx_destroy_image(w->mlx, w->img);
     mlx_destroy_window(w->mlx, w->win);
