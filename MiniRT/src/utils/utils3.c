@@ -12,17 +12,6 @@
 
 #include "minirt.h"
 
-t_vector	*normalize(t_vector *v)
-{
-	float	norm;
-
-	norm = 1 / vec_len(v);
-	v->x *= norm;
-	v->y *= norm;
-	v->z *= norm;
-	return (v);
-}
-
 void	push_light(t_light *new_light, t_light **lights)
 {
 	t_light	*tmp;

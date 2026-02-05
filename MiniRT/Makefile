@@ -13,12 +13,14 @@ SRCS =	src/main.c \
 	src/utils/utils1.c \
 	src/utils/utils2.c \
 	src/utils/utils3.c \
+	src/utils/utils4.c \
 	src/utils/gnl.c \
+	src/utils/is_double.c\
 	src/utils/gnl_utils.c \
 	src/validation/validation1.c \
 	src/validation/validation2.c \
 	src/validation/validation3.c \
-	src/math/vector_length.c
+	src/math/vectors.c
 
 OBJS = ${SRCS:.c=.o}
 
@@ -56,4 +58,4 @@ re: fclean all
 v: $(NAME)
 	$(VLGRND) $(VFLAGS) ./$(NAME)
 
-.PHONY: re all clean fclean mlx libft
+.PHONY: re all clean fclean mlx libft v

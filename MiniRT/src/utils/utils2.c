@@ -36,19 +36,19 @@ int	is_ulong(char *str)
 	return (1);
 }
 
-float	str_to_float(char *str)
+double	str_to_double(char *str)
 {
-	float	sum;
-	float	prec;
-	float	div;
-	float	sign;
+	double	sum;
+	double	prec;
+	double	div;
+	double	sign;
 
 	prec = 0.0;
 	div = 1.0;
 	sign = 1.0;
 	if (str && str[0] == '-')
 		sign *= -1.0;
-	sum = (float)ft_atoi(str);
+	sum = (double)ft_atoi(str);
 	while (*str && *str != '.')
 		str++;
 	if (*str++ == '.')
@@ -62,20 +62,6 @@ float	str_to_float(char *str)
 		sum += prec * sign;
 	}
 	return (sum);
-}
-
-int	is_float(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] && str[i])
-	{
-		if (ft_isdigit(str[i]) != 1 && str[i] != '-' && str[i] != '.')
-			return (0);
-		i++;
-	}
-	return (1);
 }
 
 int	arr_len(char *arr[])
