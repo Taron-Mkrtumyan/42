@@ -10,9 +10,54 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+// hypot (x, y) = sqrt(x*x + y*y)
+// vec_len = sqrt(x^2 + y^2 + z^2)
+
 #include "minirt.h"
 
-float	vec_len(t_vector *vec)
+double	vec_len(const t_vector *vec)
 {
-	return (sqrt(vec->x * vec->x + vec->y * vec->y + vec->z * vec->z));
+	return (hypot(hypot(vec->x, vec->y), vec->z));
+}
+
+void	vector_normalize(t_vector *v)
+{
+	double		len;
+
+	len = vec_len(v);
+	if (len < VEC_EPSILON)
+		return ;
+	v->x /= len;
+	v->y /= len;
+	v->z /= len;
+}
+
+t_vector	vector_add(const t_vector *v1, const t_vector *v2)
+{
+	t_vector	vec;
+
+	vec.x = v1->x + v2->x;
+	vec.y = v1->y + v2->y;
+	vec.z = v1->z + v2->z;
+	return (vec);
+}
+
+t_vector	vector_sub(const t_vector *v1, const t_vector *v2)
+{
+	t_vector	vec;
+
+	vec.x = v1->x - v2->x;
+	vec.y = v1->y - v2->y;
+	vec.z = v1->z - v2->z;
+	return (vec);
+}
+
+t_vector	vector_multi(const t_vector *v, double f)
+{
+	t_vector	vec;
+
+	vec.x = v->x * f;
+	vec.y = v->y * f;
+	vec.z = v->z * f;
+	return (vec);
 }

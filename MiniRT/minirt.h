@@ -15,16 +15,17 @@
 
 # include "libft.h"
 # include "minilibx-linux/mlx.h"
-# include <stdio.h>
-# include <unistd.h>
-# include <limits.h>
-# include <stdbool.h>
 # include <X11/X.h>
 # include <X11/keysym.h>
-# include <string.h>
-# include <math.h>
+# include <stdio.h>
+# include <unistd.h>
 # include <stdlib.h>
+# include <limits.h>
+# include <stdbool.h>
+# include <string.h>
 # include <fcntl.h>
+# include <float.h>
+# include <math.h>
 
 # define SIZE		1000
 # define QUALITY	0
@@ -32,6 +33,8 @@
 
 # define NP_PLUS	65451
 # define NP_MINUS	65453
+
+# define VEC_EPSILON 1e-14
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
@@ -47,13 +50,13 @@ typedef struct s_plane		t_plane;
 
 typedef struct s_amb_light
 {
-	float		ratio;
+	double		ratio;
 	t_rgb		*color;
 }	t_amb_light;
 
 typedef struct s_light
 {
-	float			brightness;
+	double			brightness;
 	t_vector		*position;
 	t_rgb			*color;
 	struct s_light	*next;
@@ -64,7 +67,7 @@ typedef struct s_camera
 {
 	t_vector	*position;
 	t_vector	*orientation;
-	float		fov;
+	double		fov;
 }	t_camera;
 
 typedef struct s_minirt
@@ -85,8 +88,8 @@ typedef struct s_window
 	int			bpp;
 	int			line_len;
 	int			endian;
-	float		width;
-	float		height;
+	double		width;
+	double		height;
 	t_minirt	*minirt;
 }	t_window;
 
@@ -113,24 +116,24 @@ typedef struct s_rgb
 
 typedef struct s_vector
 {
-	float	x;
-	float	y;
-	float	z;
+	double	x;
+	double	y;
+	double	z;
 }	t_vector;
 
 typedef struct s_sphere
 {
-	float		radius;
-	float		diameter;
+	double		radius;
+	double		diameter;
 	t_vector	*center;
 	t_rgb		*color;
 }	t_sphere;
 
 typedef struct s_cylinder
 {
-	float		radius;
-	float		diameter;
-	float		height;
+	double		radius;
+	double		diameter;
+	double		height;
 	t_vector	*center;
 	t_vector	*normal;
 	t_rgb		*color;
@@ -153,29 +156,36 @@ void		free_window(t_window *w);
 void		free_arr(char *arr[]);
 bool		parse_params(t_minirt *rt, char *line);
 int			is_invalid_file(t_minirt *rt);
-t_vector	*normalize(t_vector *v);
 void		push_light(t_light *new_light, t_light **lights);
 t_light		*create_light(t_minirt *rt);
 void		push_object(t_obj *obj, t_obj **objs);
 int			is_ulong(char *str);
-float		str_to_float(char *str);
-int			is_float(char *str);
+double		str_to_double(char *str);
 int			arr_len(char *arr[]);
 int			str_to_int_color(char *str);
 int			parse_vector(char *str, t_vector *vec);
 int			parse_colors(char *str, t_rgb *color, t_rgb *color2);
 int			parse_color(char *str, t_rgb *color);
-int			parse_float(char *str, float *num);
-float		vec_len(t_vector *vec);
+int			parse_double(char *str, double *num);
+double		vec_len(const t_vector *vec);
 char		*sub(char const *s, unsigned int start, size_t len);
 char		*get_next_line(int fd);
 int			parse_shape(t_minirt *rt, char *line, t_shape type, int nb_params);
 int			parse_light(t_minirt *rt, char *line);
 int			parse_ambient(t_minirt *rt, char *line);
 bool		parse_resolution(t_minirt *rt, char *line);
-int			parse_camera(t_minirt *rt, char *line, int i);
+int			parse_camera(t_minirt *rt, char *line);
 int			parse_plane(char **params, t_obj *obj);
 int			parse_sphere(char **params, t_obj *obj);
 int			parse_cylinder(char **params, t_obj *obj);
+bool		is_double(char *str);
+void		vector_normalize(t_vector *v);
+t_vector	vector_add(const t_vector *v1, const t_vector *v2);
+t_vector	vector_sub(const t_vector *v1, const t_vector *v2);
+t_vector	vector_multi(const t_vector *v, double f);
+int			parse_shape(t_minirt *rt, char *line, t_shape type, int nb_params);
+int			parse_error_ptr(char *msg, void *ptr, char **params);
+int			parse_error(char *msg, char **params);
+int			error_msg(char *msg);
 
 #endif
