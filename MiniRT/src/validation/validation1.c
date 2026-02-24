@@ -90,7 +90,7 @@ bool	valid_args(t_minirt *rt, char *path)
 	rt->window = ft_calloc(sizeof(t_window), 1);
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
-		return (0);
+		return (free(rt->window), 0);
 	len = ft_strlen(path);
 	if (len < 3 || ft_strncmp(path + len - 3, ".rt", 3) != 0)
 	{
