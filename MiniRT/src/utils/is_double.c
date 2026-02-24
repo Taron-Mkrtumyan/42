@@ -10,12 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "../../minirt.h"
 
-static int	double_length(double num)
+int	double_length(double num)
 {
 	int	ctr;
 
+	if (fabs(num) < 1)
+		return (1);
 	ctr = 0;
 	while (num >= 1.0)
 	{
@@ -23,13 +25,6 @@ static int	double_length(double num)
 		num /= 10.0;
 	}
 	return (ctr);
-}
-
-static bool	compare_digits(char *s)
-{
-	if (ft_strncmp(s, "1797693134862315708145274237317043567980705", 42) > 0)
-		return (false);
-	return (true);
 }
 
 static bool	is_in_double_range(char *s)
@@ -41,11 +36,9 @@ static bool	is_in_double_range(char *s)
 		i++;
 	while (ft_isdigit(s[i]))
 		i++;
-	if (i < double_length(DBL_MAX))
-		return (true);
-	if (i > double_length(DBL_MAX))
+	if (i >= double_length(DBL_MAX))
 		return (false);
-	return (compare_digits(s));
+	return (true);
 }
 
 bool	is_double(char *str)
@@ -75,11 +68,3 @@ bool	is_double(char *str)
 		return (false);
 	return (is_in_double_range(str));
 }
-
-/*
-int main ()
-{
-	printf("%d\n", is_double("17976931348623157081452742"));
-	return (0);
-}
-*/

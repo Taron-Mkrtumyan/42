@@ -46,11 +46,18 @@ double	str_to_double(char *str)
 	prec = 0.0;
 	div = 1.0;
 	sign = 1.0;
-	if (str && str[0] == '-')
+	if (!str || !str[0])
+		return (0.0);
+	if (str[0] == '-')
 		sign *= -1.0;
 	sum = (double)ft_atoi(str);
+	printf("\nstr:\t%s\tsum:\t%f\n", str, sum);
 	while (*str && *str != '.')
 		str++;
+	write(2, "{1}\n", 4);
+	if (!(*str))
+		return (sum);
+	write(2, "{2}\n", 4);
 	if (*str++ == '.')
 	{
 		while (*str >= '0' && *str <= '9')
@@ -59,9 +66,8 @@ double	str_to_double(char *str)
 			prec += (*str - '0') / div;
 			str++;
 		}
-		sum += prec * sign;
 	}
-	return (sum);
+	return ((sum + prec) * sign);
 }
 
 int	arr_len(char *arr[])

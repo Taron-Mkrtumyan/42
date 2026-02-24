@@ -1,6 +1,13 @@
-NAME = libft.a
-FLAGS = -Wall -Wextra -Werror
-SRCS =	ft_isprint.c \
+NAME    := libft.a
+CC      := cc
+CFLAGS  := -Wall -Wextra -Werror
+AR      := ar rcs
+RM      := rm -f
+
+# ------------------ MANDATORY ------------------
+
+SRCS := \
+	ft_isprint.c \
 	ft_putendl_fd.c \
 	ft_strlcat.c \
 	ft_substr.c \
@@ -35,27 +42,44 @@ SRCS =	ft_isprint.c \
 	ft_strjoin.c \
 	ft_strtrim.c
 
-OBJS = $(SRCS:.c=.o)
-BONS = ft_lstnew.c	ft_lstadd_front.c	ft_lstsize.c	ft_lstlast.c	ft_lstadd_back.c	ft_lstdelone.c	ft_lstclear.c	ft_lstiter.c	ft_lstmap.c
-OBONS = $(BONS:.c=.o)
+OBJS := $(SRCS:.c=.o)
 
-all: $(NAME) 
+# ------------------ BONUS ------------------
+
+BNSRCS := \
+	ft_lstnew.c \
+	ft_lstadd_front.c \
+	ft_lstsize.c \
+	ft_lstlast.c \
+	ft_lstadd_back.c \
+	ft_lstdelone.c \
+	ft_lstclear.c \
+	ft_lstiter.c \
+	ft_lstmap.c
+
+BNOBJS := $(BNSRCS:.c=.o)
+
+# ------------------ RULES ------------------
+
+all: $(NAME)
 
 $(NAME): $(OBJS)
-	 ar rcs $(NAME) $(OBJS)
-	
-bonus: $(OBONS) $(OBJS)
-	ar rcs $(NAME) $(OBJS) $(OBONS)
+	@$(AR) $(NAME) $(OBJS)
+	@echo "\033[1;32m✔ libft compiled\033[0m"
+
+bonus: $(OBJS) $(BNOBJS)
+	@$(AR) $(NAME) $(OBJS) $(BNOBJS)
+	@echo "\033[1;32m✔ libft bonus compiled\033[0m"
 
 %.o: %.c
-	cc $(FLAGS) -c $< -o $@
-	
+	@$(CC) $(CFLAGS) -c $< -o $@
+
 clean:
-	rm -f $(OBJS) $(OBONS)
+	@$(RM) $(OBJS) $(BNOBJS)
 
 fclean: clean
-	rm -f $(NAME)
+	@$(RM) $(NAME)
 
 re: fclean all
 
-.PHONY: all, clean, fclean, re
+.PHONY: all clean fclean re bonus
