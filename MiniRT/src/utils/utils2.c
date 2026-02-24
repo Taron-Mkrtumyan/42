@@ -69,13 +69,3 @@ double	str_to_double(char *str)
 	}
 	return ((sum + prec) * sign);
 }
-
-int	arr_len(char *arr[])
-{
-	int	i;
-
-	i = 0;
-	while (arr && arr[i])
-		i++;
-	return (i);
-}

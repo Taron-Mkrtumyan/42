@@ -41,7 +41,8 @@ VALID   := validation1.c \
            validation2.c \
            validation3.c
 
-MATH    := vectors.c
+MATH    := vectors1.c \
+           vectors2.c
 
 # Full paths (no wildcards used)
 SRCS := \
