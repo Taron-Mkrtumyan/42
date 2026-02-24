@@ -36,6 +36,7 @@ int	is_ulong(char *str)
 	return (1);
 }
 
+/*
 double	str_to_double(char *str)
 {
 	double	sum;
@@ -69,3 +70,4 @@ double	str_to_double(char *str)
 	}
 	return ((sum + prec) * sign);
 }
+*/

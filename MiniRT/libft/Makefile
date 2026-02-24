@@ -41,7 +41,8 @@ SRCS := \
 	ft_putchar_fd.c \
 	ft_strjoin.c \
 	ft_strtrim.c \
-	ft_arrlen.c
+	ft_arrlen.c \
+	ft_strtod.c
 
 OBJS := $(SRCS:.c=.o)
 

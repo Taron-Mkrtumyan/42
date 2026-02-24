@@ -214,7 +214,6 @@ char		*get_next_line(int fd);
 int			double_length(double num);
 bool		is_double(char *str);
 int			is_ulong(char *str);
-double		str_to_double(char *str);
 int			str_to_int_color(char *str);
 
 double		vec_len(const t_vector *vec);
