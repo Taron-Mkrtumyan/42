@@ -16,12 +16,20 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdbool.h>
 
 typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
 }					t_list;
+
+static inline bool	ft_isspace(char c)
+{
+	return (c == '\v' || c == '\n'
+		|| c == '\t' || c == '\r'
+		|| c == '\f' || c == ' ');
+}
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
@@ -74,5 +82,6 @@ int		ft_lstsize(t_list *lst);
 int		ft_abs(int n);
 int		num_len(int n);
 int		ft_arrlen(char *arr[]);
+double	ft_strtod(const char *s);
 
 #endif

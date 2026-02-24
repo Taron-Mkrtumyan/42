@@ -40,9 +40,9 @@ int	parse_vector(char *str, t_vector *vec)
 		ret = 1;
 	else
 	{
-		vec->x = str_to_double(nbrs[0]);
-		vec->y = str_to_double(nbrs[1]);
-		vec->z = str_to_double(nbrs[2]);
+		vec->x = ft_strtod(nbrs[0]);
+		vec->y = ft_strtod(nbrs[1]);
+		vec->z = ft_strtod(nbrs[2]);
 	}
 	free_arr(nbrs);
 	return (ret);
@@ -98,6 +98,6 @@ int	parse_double(char *str, double *num)
 {
 	if (!is_double(str))
 		return (1);
-	*num = str_to_double(str);
+	*num = ft_strtod(str);
 	return (0);
 }

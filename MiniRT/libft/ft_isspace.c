@@ -1,27 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmkrtumy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/16 19:32:39 by tmkrtumy          #+#    #+#             */
-/*   Updated: 2025/12/16 19:55:52 by tmkrtumy         ###   ########.fr       */
+/*   Created: 2026/02/24 20:30:29 by tmkrtumy          #+#    #+#             */
+/*   Updated: 2026/02/24 20:36:41 by tmkrtumy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "libft.h"
 
-int	main(int ac, char **av)
-{
-	t_minirt	minirt;
-
-	(void)ac;
-	if (!valid_args(&minirt, av[1]))
-		return (1);
-	if (!init_minirt(&minirt, av[1]))
-		return (2);
-	return (0);
-}
-
-//printf("%f\n", DBL_MAX);
