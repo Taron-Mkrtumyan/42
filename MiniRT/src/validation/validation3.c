@@ -53,7 +53,7 @@ int	parse_sphere(char **params, t_obj *obj)
 		if (i == 3 && parse_color(params[i], sphere->color))
 			return (parse_error_ptr("Invalid sphere color", sphere, NULL));
 	}
-	sphere->radius = sphere->diameter / 2.0f;
+	sphere->radius = sphere->diameter / 2.0;
 	obj->data = sphere;
 	return (0);
 }
@@ -81,7 +81,7 @@ int	parse_cylinder(char **params, t_obj *obj)
 			return (parse_error_ptr("Invalid cylinder color", cylinder, NULL));
 	}
 	vector_normalize(cylinder->normal);
-	cylinder->radius = cylinder->diameter / 2.0f;
+	cylinder->radius = cylinder->diameter / 2.0;
 	obj->data = cylinder;
 	return (0);
 }

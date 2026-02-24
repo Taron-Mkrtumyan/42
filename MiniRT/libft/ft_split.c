@@ -3,85 +3,94 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmkrtumy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gkankia <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/24 13:59:55 by tmkrtumy          #+#    #+#             */
-/*   Updated: 2025/01/31 14:36:35 by tmkrtumy         ###   ########.fr       */
+/*   Created: 2025/01/23 17:32:34 by gkankia           #+#    #+#             */
+/*   Updated: 2025/01/25 15:28:56 by gkankia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
-static int	word_count(char const *s, char c)
+static int	words_count(const char *s, char c)
 {
-	int	i;
-	int	ctr;
-
-	ctr = 0;
-	i = 0;
-	while (s[i])
-	{
-		while (s[i] && s[i] == c)
-			i++;
-		if (s[i] != '\0')
-			ctr++;
-		while (s[i] && s[i] != c)
-			i++;
-	}
-	return (ctr);
-}
-
-static int	add_word(char **words, const char *s, int i, int l)
-{
-	int	ctr;
-
-	ctr = 0;
-	while (words[ctr])
-		ctr++;
-	words[ctr] = ft_substr(s, i, l);
-	if (!words[ctr])
-	{
-		while (ctr--)
-			free(words[ctr]);
-		free(words);
-		return (0);
-	}
-	return (1);
-}
-
-static int	solve(char **words, const char *s, char c)
-{
-	int	i;
-	int	l;
+	size_t	count;
+	int		in_word;
+	int		i;
 
 	i = 0;
+	in_word = 0;
+	count = 0;
 	while (s[i])
 	{
-		l = 0;
-		while (s[i] && s[i] == c)
-			i++;
-		while (s[i + l] && s[i + l] != c)
-			l++;
-		if (s[i])
+		if (s[i] != c && in_word == 0)
 		{
-			if (!(add_word(words, s, i, l)))
-				return (0);
-			i += l;
+			in_word = 1;
+			count++;
 		}
+		else if (s[i] == c)
+			in_word = 0;
+		i++;
 	}
-	return (1);
+	return (count);
+}
+
+static char	*ft_strndup(const char *src, int n)
+{
+	int		i;
+	char	*str_copy;
+
+	str_copy = (char *)malloc(sizeof(char) * (n + 1));
+	if (!str_copy)
+		return (0);
+	i = 0;
+	while (i < n)
+	{
+		str_copy[i] = src[i];
+		i++;
+	}
+	str_copy[n] = '\0';
+	return (str_copy);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char	**words;
+	char		**res;
+	size_t		count_words;
+	size_t		i;
+	const char	*start;
 
-	if (!s)
+	count_words = words_count(s, c);
+	res = malloc(sizeof(char *) * (count_words + 1));
+	if (!res)
 		return (NULL);
-	words = ft_calloc((word_count(s, c) + 1), sizeof(char *));
-	if (!words)
-		return (NULL);
-	if (!solve(words, s, c))
-		return (NULL);
-	return (words);
+	i = 0;
+	while (*s)
+	{
+		if (*s != c)
+		{
+			start = s;
+			while (*s && *s != c)
+				s++;
+			res[i] = ft_strndup(start, s - start);
+			i++;
+		}
+		else
+			s++;
+	}
+	res[i] = NULL;
+	return (res);
 }
+
+/*#include <stdio.h>
+int	main()
+{
+	char *str = "Hello World, hihi";
+	char c = ' ';
+	char **words = ft_split(str, c);
+
+	for (int i = 0; i < 3; i++)
+	{
+		printf("{%s}\n", words[i]);
+	}
+	return (0);
+}*/

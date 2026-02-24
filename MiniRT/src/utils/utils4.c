@@ -50,7 +50,7 @@ int	parse_shape(t_minirt *rt, char *line, t_shape type, int nb_params)
 	params = ft_split(line, ' ');
 	if (!params)
 		return (free(obj), error_msg("Memory allocation failed"), 1);
-	if (arr_len(params) < nb_params)
+	if (ft_arrlen(params) < nb_params)
 		return (free(obj), parse_error("Invalid shape parameters", params));
 	if (type == PLANE && parse_plane(params, obj))
 		return (free(obj), parse_error("Invalid plane parameters", params));

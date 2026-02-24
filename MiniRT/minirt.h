@@ -215,10 +215,10 @@ int			double_length(double num);
 bool		is_double(char *str);
 int			is_ulong(char *str);
 double		str_to_double(char *str);
-int			arr_len(char *arr[]);
 int			str_to_int_color(char *str);
 
 double		vec_len(const t_vector *vec);
+double		vec_dot(const t_vector *v1, const t_vector *v2);
 void		vector_normalize(t_vector *v);
 t_vector	vector_add(const t_vector *v1, const t_vector *v2);
 t_vector	vector_sub(const t_vector *v1, const t_vector *v2);

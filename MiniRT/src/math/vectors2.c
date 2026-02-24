@@ -10,15 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-// hypot (x, y) = sqrt(x*x + y*y)
-// vec_len = sqrt(x^2 + y^2 + z^2)
-
 #include "minirt.h"
-
-double	vec_len(const t_vector *vec)
-{
-	return (hypot(hypot(vec->x, vec->y), vec->z));
-}
 
 void	vector_normalize(t_vector *v)
 {

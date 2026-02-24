@@ -36,7 +36,7 @@ int	parse_vector(char *str, t_vector *vec)
 	while (nbrs && nbrs[++i])
 		if (!is_double(nbrs[i]))
 			ret = 1;
-	if (arr_len(nbrs) != 3)
+	if (ft_arrlen(nbrs) != 3)
 		ret = 1;
 	else
 	{
@@ -57,7 +57,7 @@ int	parse_colors(char *str, t_rgb *color1, t_rgb *color2)
 	i = -1;
 	ret = 0;
 	colors = ft_split(str, ';');
-	if (arr_len(colors) < 1)
+	if (ft_arrlen(colors) < 1)
 		ret = 1;
 	while (colors && colors[++i])
 	{
@@ -82,7 +82,7 @@ int	parse_color(char *str, t_rgb *color)
 	while (rgb && rgb[++i])
 		if (!is_ulong(rgb[i]))
 			ret = 1;
-	if (arr_len(rgb) != 3)
+	if (ft_arrlen(rgb) != 3)
 		ret = 1;
 	else
 	{

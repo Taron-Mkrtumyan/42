@@ -38,7 +38,7 @@ int	parse_camera(t_minirt *rt, char *line)
 		return (error_msg("Memory allocation failed"), 1);
 	if (rt->camera)
 		return (parse_error("Camera already defined", params));
-	if (arr_len(params) != 4)
+	if (ft_arrlen(params) != 4)
 		return (parse_error("Invalid camera parameters", params));
 	rt->camera = ft_calloc(sizeof(t_camera), 1);
 	if (!rt->camera)
@@ -60,7 +60,7 @@ bool	parse_resolution(t_minirt *rt, char *line)
 	params = ft_split(line, ' ');
 	if (!params)
 		return (error_msg("Memory allocation failed"), 1);
-	if (arr_len(params) != 3)
+	if (ft_arrlen(params) != 3)
 		return (parse_error("Invalid resolution parameters", params));
 	while (params[++i])
 	{
@@ -84,7 +84,7 @@ int	parse_ambient(t_minirt *rt, char *line)
 		return (error_msg("Memory allocation failed"), 1);
 	if (rt->amb_light)
 		return (parse_error("Ambient light already defined", params));
-	if (arr_len(params) != 3)
+	if (ft_arrlen(params) != 3)
 		return (parse_error("Invalid ambient light parameters", params));
 	rt->amb_light = ft_calloc(sizeof(t_amb_light), 1);
 	if (!rt->amb_light)
@@ -112,7 +112,7 @@ int	parse_light(t_minirt *rt, char *line)
 	params = ft_split(line, ' ');
 	if (!params)
 		return (error_msg("Memory allocation failed"), 1);
-	if (arr_len(params) != 4)
+	if (ft_arrlen(params) != 4)
 		return (parse_error("Invalid light parameters", params));
 	light = create_light(rt);
 	if (!light)
