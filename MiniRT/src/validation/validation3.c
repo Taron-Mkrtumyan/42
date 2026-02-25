@@ -23,14 +23,14 @@ int	parse_plane(char **params, t_obj *obj)
 		return (parse_error_ptr("Memory allocation failed", plane, NULL));
 	while (params && params[++i])
 	{
-		if (i == 1 && parse_vector(params[i], plane->center))
+		if (i == 1 && parse_vector(params[i], &plane->center))
 			return (parse_error_ptr("Invalid plane center", plane, NULL));
-		if (i == 2 && parse_vector(params[i], plane->normal))
+		if (i == 2 && parse_vector(params[i], &plane->normal))
 			return (parse_error_ptr("Invalid plane normal", plane, NULL));
-		if (i == 3 && parse_color(params[i], plane->color))
+		if (i == 3 && parse_color(params[i], &plane->color))
 			return (parse_error_ptr("Invalid plane color", plane, NULL));
 	}
-	vector_normalize(plane->normal);
+	vector_normalize(&plane->normal);
 	obj->data = plane;
 	return (0);
 }
@@ -46,11 +46,11 @@ int	parse_sphere(char **params, t_obj *obj)
 		return (parse_error_ptr("Memory allocation failed", sphere, NULL));
 	while (params && params[++i])
 	{
-		if (i == 1 && parse_vector(params[i], sphere->center))
+		if (i == 1 && parse_vector(params[i], &sphere->center))
 			return (parse_error_ptr("Invalid sphere center", sphere, NULL));
 		if (i == 2 && parse_double(params[i], &sphere->diameter))
 			return (parse_error_ptr("Invalid sphere diameter", sphere, NULL));
-		if (i == 3 && parse_color(params[i], sphere->color))
+		if (i == 3 && parse_color(params[i], &sphere->color))
 			return (parse_error_ptr("Invalid sphere color", sphere, NULL));
 	}
 	sphere->radius = sphere->diameter / 2.0;
@@ -69,18 +69,18 @@ int	parse_cylinder(char **params, t_obj *obj)
 		return (parse_error_ptr("Memory allocation failed", cylinder, NULL));
 	while (params && params[++i])
 	{
-		if (i == 1 && parse_vector(params[i], cylinder->center))
+		if (i == 1 && parse_vector(params[i], &cylinder->center))
 			return (parse_error_ptr("Invalid cylinder center", cylinder, NULL));
-		if (i == 2 && parse_vector(params[i], cylinder->normal))
+		if (i == 2 && parse_vector(params[i], &cylinder->normal))
 			return (parse_error_ptr("Invalid cylinder normal", cylinder, NULL));
 		if (i == 3 && parse_double(params[i], &cylinder->diameter))
 			return (parse_error_ptr("Invalid cylinder diam", cylinder, NULL));
 		if (i == 4 && parse_double(params[i], &cylinder->height))
 			return (parse_error_ptr("Invalid cylinder height", cylinder, NULL));
-		if (i == 5 && parse_color(params[i], cylinder->color))
+		if (i == 5 && parse_color(params[i], &cylinder->color))
 			return (parse_error_ptr("Invalid cylinder color", cylinder, NULL));
 	}
-	vector_normalize(cylinder->normal);
+	vector_normalize(&cylinder->normal);
 	cylinder->radius = cylinder->diameter / 2.0;
 	obj->data = cylinder;
 	return (0);

@@ -19,9 +19,9 @@ int	parse_camera_params(char **params, t_camera *cam)
 	i = 0;
 	while (params[++i])
 	{
-		if (i == 1 && parse_vector(params[i], cam->position))
+		if (i == 1 && parse_vector(params[i], &cam->position))
 			return (1);
-		if (i == 2 && parse_vector(params[i], cam->orientation))
+		if (i == 2 && parse_vector(params[i], &cam->orientation))
 			return (1);
 		if (i == 3 && parse_double(params[i], &cam->fov))
 			return (1);
@@ -46,7 +46,7 @@ int	parse_camera(t_minirt *rt, char *line)
 	if (parse_camera_params(params, rt->camera))
 		return (parse_error_ptr("Invalid camera parameters",
 				rt->camera, params));
-	vector_normalize(rt->camera->orientation);
+	vector_normalize(&rt->camera->orientation);
 	free_arr(params);
 	return (0);
 }
@@ -94,7 +94,7 @@ int	parse_ambient(t_minirt *rt, char *line)
 		if (i == 1 && parse_double(params[i], &rt->amb_light->ratio))
 			return (parse_error_ptr("Invalid ambient ratio",
 					rt->amb_light, params));
-		if (i == 2 && parse_color(params[i], rt->amb_light->color))
+		if (i == 2 && parse_color(params[i], &rt->amb_light->color))
 			return (parse_error_ptr("Invalid ambient color",
 					rt->amb_light, params));
 	}
@@ -119,11 +119,11 @@ int	parse_light(t_minirt *rt, char *line)
 		return (parse_error("Memory allocation failed", params));
 	while (params[++i])
 	{
-		if (i == 1 && parse_vector(params[i], light->position))
+		if (i == 1 && parse_vector(params[i], &light->position))
 			return (parse_error_ptr("Invalid light position", light, params));
 		if (i == 2 && parse_double(params[i], &light->brightness))
 			return (parse_error_ptr("Invalid light brightness", light, params));
-		if (i == 3 && parse_color(params[i], light->color))
+		if (i == 3 && parse_color(params[i], &light->color))
 			return (parse_error_ptr("Invalid light color", light, params));
 	}
 	free_arr(params);

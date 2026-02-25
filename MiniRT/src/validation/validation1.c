@@ -22,8 +22,10 @@ bool	parse_params(t_minirt *rt, char *line)
 		return (parse_camera(rt, line));
 	if (ft_strncmp(line, "L", 1) == 0)
 		return (parse_light(rt, line));
+	write(2, "{1}\n", 4);
 	if (ft_strncmp(line, "sp", 2) == 0)
 		return (parse_shape(rt, line, SPHERE, 4));
+	write(2, "{2}\n", 4);
 	if (ft_strncmp(line, "pl", 2) == 0)
 		return (parse_shape(rt, line, PLANE, 4));
 	if (ft_strncmp(line, "cy", 2) == 0)
@@ -82,11 +84,13 @@ int	read_file(t_minirt *rt, int fd)
 	return (ret);
 }
 
-bool	valid_args(t_minirt *rt, char *path)
+bool	valid_args(t_minirt *rt, char *path, int ac)
 {
 	int	fd;
 	int	len;
 
+	if (ac != 2)
+		return (error_msg("Wrong number of arguments"), false);
 	rt->window = ft_calloc(sizeof(t_window), 1);
 	fd = open(path, O_RDONLY);
 	if (fd == -1)

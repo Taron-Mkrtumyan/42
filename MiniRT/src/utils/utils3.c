@@ -46,9 +46,13 @@ void	push_object(t_obj *obj, t_obj **objs)
 		*objs = obj;
 	else
 	{
+		printf("vec addr: %p\n", (*objs)->next);
+		fflush(stdout);
 		tmp = *objs;
+		write(2, "{5}\n", 4);
 		while (tmp->next)
 			tmp = tmp->next;
+	write(2, "{6}\n", 4);
 		tmp->next = obj;
 	}
 }
