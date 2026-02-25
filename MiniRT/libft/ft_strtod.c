@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-int	integer_part(char *tmp)
+static int	integer_part(char *tmp)
 {
 	int	res;
 
@@ -27,7 +27,7 @@ int	integer_part(char *tmp)
 	return (res);
 }
 
-double	decimal_part(char *tmp)
+static double	decimal_part(char *tmp)
 {
 	double	res;
 	double	div;
@@ -61,11 +61,11 @@ double	ft_strtod_next(char *tmp)
 double	ft_strtod(const char *s)
 {
 	double	res;
-	double	sign;
+	char	sign;
 	char	*tmp;
 
 	res = 0.0;
-	sign = 1.0;
+	sign = 1;
 	if (!s || !s[0])
 		return (0.0);
 	tmp = (char *)s;
@@ -74,9 +74,11 @@ double	ft_strtod(const char *s)
 	if (*tmp == '\0')
 		return (0.0);
 	if (*tmp == '-')
-		sign = -1.0;
+		sign = -1;
 	tmp += (*tmp == '-' || *tmp == '+');
 	if (*tmp == '\0')
 		return (0.0);
-	return (ft_strtod_next(tmp) * sign);
+	res = ft_strtod_next(tmp) * sign;
+	printf("\nstr:\t%s\tsum:\t%f\n", s, res);
+	return (res);
 }

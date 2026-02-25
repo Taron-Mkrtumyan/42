@@ -16,8 +16,7 @@ int	main(int ac, char **av)
 {
 	t_minirt	minirt;
 
-	(void)ac;
-	if (!valid_args(&minirt, av[1]))
+	if (!valid_args(&minirt, av[1], ac))
 		return (1);
 	if (!init_minirt(&minirt, av[1]))
 		return (2);

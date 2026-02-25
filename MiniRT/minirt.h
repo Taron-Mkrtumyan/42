@@ -43,6 +43,7 @@
 # define GREEN		0x00FF00
 # define BLUE		0x0000FF
 # define RED		0xFF0000
+# define RESET		0xFFFFFF
 
 # define ERR_MALLOC			"Error\nMemory allocation failed\n"
 # define ERR_ARGS			"Error\nWrong number of arguments\n"
@@ -70,34 +71,81 @@
 #define ERROR_MALLOC "Error\nMemory allocation failed\n"
 
 typedef struct s_window		t_window;
-typedef struct s_vector		t_vector;
-typedef struct s_rgb		t_rgb;
-typedef struct s_obj		t_obj;
-typedef struct s_sphere		t_sphere;
-typedef struct s_cylinder	t_cylinder;
-typedef struct s_plane		t_plane;
+
+typedef struct s_vector
+{
+	double	x;
+	double	y;
+	double	z;
+}	t_vector;
+
+typedef struct s_rgb
+{
+	unsigned char	r;
+	unsigned char	g;
+	unsigned char	b;
+}	t_rgb;
 
 typedef struct s_amb_light
 {
 	double		ratio;
-	t_rgb		*color;
+	t_rgb		color;
 }	t_amb_light;
 
 typedef struct s_light
 {
 	double			brightness;
-	t_vector		*position;
-	t_rgb			*color;
+	t_vector		position;
+	t_rgb			color;
 	struct s_light	*next;
 	struct s_light	*first;
 }	t_light;
 
 typedef struct s_camera
 {
-	t_vector	*position;
-	t_vector	*orientation;
+	t_vector	position;
+	t_vector	orientation;
 	double		fov;
 }	t_camera;
+
+typedef enum e_shape
+{
+	SPHERE,
+	CYLINDER,
+	PLANE,
+}	t_shape;
+
+typedef struct s_obj
+{
+	t_shape			shape;
+	void			*data;
+	struct s_obj	*next;
+}	t_obj;
+
+typedef struct s_sphere
+{
+	double		radius;
+	double		diameter;
+	t_vector	center;
+	t_rgb		color;
+}	t_sphere;
+
+typedef struct s_cylinder
+{
+	double		radius;
+	double		diameter;
+	double		height;
+	t_vector	center;
+	t_vector	normal;
+	t_rgb		color;
+}	t_cylinder;
+
+typedef struct s_plane
+{
+	t_vector	center;
+	t_vector	normal;
+	t_rgb		color;
+}	t_plane;
 
 typedef struct s_minirt
 {
@@ -122,60 +170,7 @@ typedef struct s_window
 	t_minirt	*minirt;
 }	t_window;
 
-typedef enum e_shape
-{
-	SPHERE,
-	CYLINDER,
-	PLANE,
-}	t_shape;
-
-typedef struct s_obj
-{
-	t_shape			shape;
-	void			*data;
-	struct s_obj	*next;
-}	t_obj;
-
-typedef struct s_rgb
-{
-	unsigned char	r;
-	unsigned char	g;
-	unsigned char	b;
-}	t_rgb;
-
-typedef struct s_vector
-{
-	double	x;
-	double	y;
-	double	z;
-}	t_vector;
-
-typedef struct s_sphere
-{
-	double		radius;
-	double		diameter;
-	t_vector	*center;
-	t_rgb		*color;
-}	t_sphere;
-
-typedef struct s_cylinder
-{
-	double		radius;
-	double		diameter;
-	double		height;
-	t_vector	*center;
-	t_vector	*normal;
-	t_rgb		*color;
-}	t_cylinder;
-
-typedef struct s_plane
-{
-	t_vector	*center;
-	t_vector	*normal;
-	t_rgb		*color;
-}	t_plane;
-
-bool		valid_args(t_minirt *rt, char *path);
+bool		valid_args(t_minirt *rt, char *path, int ac);
 int			is_invalid_file(t_minirt *rt);
 
 void		init_window(t_window *w);

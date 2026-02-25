@@ -33,6 +33,7 @@ int	parse_error_ptr(char *msg, void *ptr, char **params)
 
 int	error_msg(char *msg)
 {
+	ft_putstr_fd("\033[1;31mError\n\033[0m", 2);
 	ft_putstr_fd(msg, 2);
 	ft_putstr_fd("\n", 2);
 	return (1);
@@ -47,6 +48,7 @@ int	parse_shape(t_minirt *rt, char *line, t_shape type, int nb_params)
 	if (!obj)
 		return (error_msg("Memory allocation failed"), 1);
 	obj->shape = type;
+	obj->next = NULL;
 	params = ft_split(line, ' ');
 	if (!params)
 		return (free(obj), error_msg("Memory allocation failed"), 1);
@@ -58,7 +60,9 @@ int	parse_shape(t_minirt *rt, char *line, t_shape type, int nb_params)
 		return (free(obj), parse_error("Invalid sphere parameters", params));
 	if (type == CYLINDER && parse_cylinder(params, obj))
 		return (free(obj), parse_error("Invalid cylinder parameters", params));
+	write(2, "{3}\n", 4);
 	push_object(obj, rt->objects);
+	write(2, "{4}\n", 4);
 	free_arr(params);
 	return (0);
 }
