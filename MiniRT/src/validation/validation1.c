@@ -91,7 +91,6 @@ bool	valid_args(t_minirt *rt, char *path, int ac)
 
 	if (ac != 2)
 		return (error_msg("Wrong number of arguments"), false);
-	rt->window = ft_calloc(sizeof(t_window), 1);
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
 		return (free(rt->window), 0);
