@@ -70,8 +70,6 @@
 
 #define ERROR_MALLOC "Error\nMemory allocation failed\n"
 
-typedef struct s_window		t_window;
-
 typedef struct s_vector
 {
 	double	x;
@@ -88,8 +86,8 @@ typedef struct s_rgb
 
 typedef struct s_amb_light
 {
-	double		ratio;
-	t_rgb		color;
+	double	ratio;
+	t_rgb	color;
 }	t_amb_light;
 
 typedef struct s_light
@@ -106,6 +104,7 @@ typedef struct s_camera
 	t_vector	position;
 	t_vector	orientation;
 	double		fov;
+	bool		exists;
 }	t_camera;
 
 typedef enum e_shape
@@ -147,12 +146,14 @@ typedef struct s_plane
 	t_rgb		color;
 }	t_plane;
 
+typedef struct s_window		t_window;
+
 typedef struct s_minirt
 {
 	t_window	*window;
 	t_camera	*camera;
-	t_light		**lights;
-	t_obj		**objects;
+	t_light		*light;
+	t_obj		*objects;
 	t_amb_light	*amb_light;
 }	t_minirt;
 
@@ -210,6 +211,7 @@ int			double_length(double num);
 bool		is_double(char *str);
 int			is_ulong(char *str);
 int			str_to_int_color(char *str);
+void		print_minirt(t_minirt *rt);
 
 double		vec_len(const t_vector *vec);
 double		vec_dot(const t_vector *v1, const t_vector *v2);

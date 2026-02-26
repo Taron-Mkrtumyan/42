@@ -60,9 +60,7 @@ int	parse_shape(t_minirt *rt, char *line, t_shape type, int nb_params)
 		return (free(obj), parse_error("Invalid sphere parameters", params));
 	if (type == CYLINDER && parse_cylinder(params, obj))
 		return (free(obj), parse_error("Invalid cylinder parameters", params));
-	write(2, "{3}\n", 4);
-	push_object(obj, rt->objects);
-	write(2, "{4}\n", 4);
+	push_object(obj, &rt->objects);
 	free_arr(params);
 	return (0);
 }

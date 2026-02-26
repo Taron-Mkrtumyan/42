@@ -23,7 +23,7 @@ void	print_camera(t_camera *cam)
 	print_vector("  position", cam->position);
 	print_vector("  orientation", cam->orientation);
 	printf("  fov: %.2f\n", cam->fov);
-	printf("  is_exist: %d\n", cam->is_exist);
+	printf("  is_exist: %d\n", cam->exists);
 }
 
 void	print_ambient(t_amb_light *amb)

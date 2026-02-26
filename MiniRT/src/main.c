@@ -14,13 +14,20 @@
 
 int	main(int ac, char **av)
 {
-	t_minirt	minirt;
+	t_minirt	*minirt;
 
-	if (!valid_args(&minirt, av[1], ac))
+	minirt = ft_calloc(sizeof(t_minirt), 1);
+	if (!valid_args(minirt, av[1], ac))
+	{
+		free_minirt(minirt);
 		return (1);
-	if (!init_minirt(&minirt, av[1]))
+	}
+	print_minirt(minirt);
+	if (!init_minirt(minirt, av[1]))
 		return (2);
+	free_minirt(minirt);
 	return (0);
 }
+
 
 //printf("%f\n", DBL_MAX);

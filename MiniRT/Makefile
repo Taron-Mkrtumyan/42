@@ -1,7 +1,7 @@
 NAME        := miniRT
 
 CC          := cc
-CFLAGS      := -Wall -Wextra -Werror
+CFLAGS      := -Wall -Wextra -Werror -g3
 INCLUDES    := -I./ -I./libft -I./minilibx-linux
 RM          := rm -f
 
@@ -35,7 +35,8 @@ UTILS   := utils1.c \
            utils4.c \
            gnl.c \
            gnl_utils.c \
-           is_double.c
+           is_double.c \
+		   print_objs.c
 
 VALID   := validation1.c \
            validation2.c \
