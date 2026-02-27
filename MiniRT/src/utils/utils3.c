@@ -34,7 +34,7 @@ t_light	*create_light(t_minirt *minirt)
 	new_light = ft_calloc(sizeof(t_light), 1);
 	if (!new_light)
 		return (0);
-	push_light(new_light, minirt->lights);
+	push_light(new_light, &minirt->light);
 	return (new_light);
 }
 
@@ -46,8 +46,6 @@ void	push_object(t_obj *obj, t_obj **objs)
 		*objs = obj;
 	else
 	{
-		printf("vec addr: %p\n", (*objs)->next);
-		fflush(stdout);
 		tmp = *objs;
 		write(2, "{5}\n", 4);
 		while (tmp->next)
