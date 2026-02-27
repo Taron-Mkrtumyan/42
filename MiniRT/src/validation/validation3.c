@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validation3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmkrtumy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gkankia <gkankia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 18:34:07 by tmkrtumy          #+#    #+#             */
-/*   Updated: 2026/01/19 18:34:09 by tmkrtumy         ###   ########.fr       */
+/*   Updated: 2026/02/27 17:55:16 by gkankia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ bool	parse_sphere(char **params, t_obj *obj)
 	i = 0;
 	sphere = ft_calloc(sizeof(t_sphere), 1);
 	if (!sphere)
-		return (parse_error_ptr("Sphere memory allocation failed", sphere, NULL));
+		return (parse_error_ptr("Sphere memory allocation failed", \
+sphere, NULL));
 	while (params && params[++i])
 	{
 		if (i == 1 && !parse_vector(params[i], &sphere->center))

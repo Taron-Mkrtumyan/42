@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmkrtumy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gkankia <gkankia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 18:34:47 by tmkrtumy          #+#    #+#             */
-/*   Updated: 2026/01/19 18:40:24 by tmkrtumy         ###   ########.fr       */
+/*   Updated: 2026/02/27 17:52:29 by gkankia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ bool	is_ulong(char *str)
 	return (true);
 }
 
-bool	is_valid_obj_name (char *line)
+bool	is_valid_obj_name(char *line)
 {
 	if (line[0] && line[0] >= 'A' && line[0] <= 'Z')
 	{

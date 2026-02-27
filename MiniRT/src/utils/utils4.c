@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils4.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmkrtumy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gkankia <gkankia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 19:34:36 by tmkrtumy          #+#    #+#             */
-/*   Updated: 2026/02/05 19:34:59 by tmkrtumy         ###   ########.fr       */
+/*   Updated: 2026/02/27 17:53:12 by gkankia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ bool	parse_shape(t_minirt *rt, char *line, t_shape type, int nb_params)
 	if (!params)
 		return (free(obj), error_msg("Shape split failed"), false);
 	if (ft_arrlen(params) < nb_params)
-		return (free(obj), parse_error("Wrong number of shape parameters: ", params), printf("%s\n", line), false);
+		return (free(obj), parse_error("Wrong number of shape parameters: ", \
+params), printf("%s\n", line), false);
 	if (type == PLANE && !parse_plane(params, obj))
 		return (free(obj), free_arr(params), false);
 	if (type == SPHERE && !parse_sphere(params, obj))

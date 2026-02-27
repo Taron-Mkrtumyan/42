@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validation1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmkrtumy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gkankia <gkankia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 18:33:19 by tmkrtumy          #+#    #+#             */
-/*   Updated: 2026/01/19 18:33:39 by tmkrtumy         ###   ########.fr       */
+/*   Updated: 2026/02/27 17:55:02 by gkankia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ bool	parse_params(t_minirt *rt, char *line)
 	if (ft_strncmp(line, "", 1) == 0)
 		return (true);
 	if (!is_valid_obj_name(line))
-		return (error_msg("Invalid object name: "), printf("%s\n", line),false);
+		return (error_msg("Invalid object name: "), \
+printf("%s\n", line), false);
 	if (ft_strncmp(line, "R", 1) == 0)
 		return (parse_resolution(rt, line));
 	if (ft_strncmp(line, "A", 1) == 0)
@@ -80,7 +81,6 @@ static bool	read_file(t_minirt *rt, int fd)
 			ret = false;
 		free(line);
 	}
-
 	if (ret && !is_valid_file(rt))
 	{
 		error_msg("Invalid file");

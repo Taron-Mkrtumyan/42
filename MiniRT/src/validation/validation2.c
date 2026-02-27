@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validation2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmkrtumy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gkankia <gkankia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 18:33:56 by tmkrtumy          #+#    #+#             */
-/*   Updated: 2026/01/19 18:34:00 by tmkrtumy         ###   ########.fr       */
+/*   Updated: 2026/02/27 17:55:33 by gkankia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,20 @@
 
 bool	parse_camera_params(char **params, t_camera *cam)
 {
-    int	i;
+	int	i;
 
-    i = 0;
-    while (params[++i])
-    {
-        if (i == 1 && !parse_vector(params[i], &cam->position))
-            return (false);
-        if (i == 2 && !parse_vector(params[i], &cam->orientation))
-            return (false);
-        if (i == 3 && !(ft_atoi(params[i]) <= 0  || ft_atoi(params[i]) > 180 || parse_double(params[i], &cam->fov)))
-            return (printf("Invalid FOV: %d\n", ft_atoi(params[i])), false);
-    }
-    return (true);
+	i = 0;
+	while (params[++i])
+	{
+		if (i == 1 && !parse_vector(params[i], &cam->position))
+			return (false);
+		if (i == 2 && !parse_vector(params[i], &cam->orientation))
+			return (false);
+		if (i == 3 && !(ft_atoi(params[i]) <= 0 || ft_atoi(params[i]) > 180 || \
+parse_double(params[i], &cam->fov)))
+			return (printf("Invalid FOV: %d\n", ft_atoi(params[i])), false);
+	}
+	return (true);
 }
 
 bool	parse_camera(t_minirt *rt, char *line)
@@ -85,7 +86,8 @@ bool	parse_ambient(t_minirt *rt, char *line)
 	if (rt->amb_light)
 		return (parse_error("Ambient light already defined", params));
 	if (ft_arrlen(params) != 3)
-		return (parse_error("Wrong number of ambient light parameters", params));
+		return (parse_error("Wrong number of ambient light parameters", \
+params));
 	rt->amb_light = ft_calloc(sizeof(t_amb_light), 1);
 	if (!rt->amb_light)
 		return (parse_error("Memory allocation failed", params));
