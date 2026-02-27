@@ -14,19 +14,23 @@
 
 bool	parse_params(t_minirt *rt, char *line)
 {
-	if (ft_strncmp(line, "R ", 2) == 0)
+	if (ft_strncmp(line, "", 1) == 0)
+		return (true);
+	if (!is_valid_obj_name(line))
+		return (error_msg("Invalid object name: "), printf("%s\n", line),false);
+	if (ft_strncmp(line, "R", 1) == 0)
 		return (parse_resolution(rt, line));
-	if (ft_strncmp(line, "A ", 2) == 0)
+	if (ft_strncmp(line, "A", 1) == 0)
 		return (parse_ambient(rt, line));
-	if (ft_strncmp(line, "C ", 2) == 0)
+	if (ft_strncmp(line, "C", 1) == 0)
 		return (parse_camera(rt, line));
-	if (ft_strncmp(line, "L ", 2) == 0)
+	if (ft_strncmp(line, "L", 1) == 0)
 		return (parse_light(rt, line));
-	if (ft_strncmp(line, "sp ", 3) == 0)
+	if (ft_strncmp(line, "sp", 2) == 0)
 		return (parse_shape(rt, line, SPHERE, 4));
-	if (ft_strncmp(line, "pl ", 3) == 0)
+	if (ft_strncmp(line, "pl", 2) == 0)
 		return (parse_shape(rt, line, PLANE, 4));
-	if (ft_strncmp(line, "cy ", 3) == 0)
+	if (ft_strncmp(line, "cy", 2) == 0)
 		return (parse_shape(rt, line, CYLINDER, 6));
 	return (error_msg("Invalid parameter"), false);
 }

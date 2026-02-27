@@ -46,20 +46,20 @@ bool	parse_shape(t_minirt *rt, char *line, t_shape type, int nb_params)
 
 	obj = ft_calloc(sizeof(t_obj), 1);
 	if (!obj)
-		return (error_msg("Memory allocation failed"), false);
+		return (error_msg("Shape memory allocation failed"), false);
 	obj->shape = type;
 	obj->next = NULL;
 	params = ft_split(line, ' ');
 	if (!params)
-		return (free(obj), error_msg("Memory allocation failed"), false);
+		return (free(obj), error_msg("Shape split failed"), false);
 	if (ft_arrlen(params) < nb_params)
-		return (free(obj), parse_error("Invalid shape parameters", params));
+		return (free(obj), parse_error("Wrong number of shape parameters: ", params), printf("%s\n", line), false);
 	if (type == PLANE && !parse_plane(params, obj))
-		return (free(obj), parse_error("Invalid plane parameters", params));
+		return (free(obj), free_arr(params), false);
 	if (type == SPHERE && !parse_sphere(params, obj))
-		return (free(obj), parse_error("Invalid sphere parameters", params));
+		return (free(obj), free_arr(params), false);
 	if (type == CYLINDER && !parse_cylinder(params, obj))
-		return (free(obj), parse_error("Invalid cylinder parameters", params));
+		return (free(obj), free_arr(params), false);
 	push_object(obj, &rt->objects);
 	free_arr(params);
 	return (true);

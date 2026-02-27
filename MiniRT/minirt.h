@@ -210,6 +210,7 @@ bool		is_double(char *str);
 bool		is_ulong(char *str);
 int			str_to_int_color(char *str);
 void		print_minirt(t_minirt *rt);
+bool		is_valid_obj_name (char *line);
 
 double		vec_len(const t_vector *vec);
 double		vec_dot(const t_vector *v1, const t_vector *v2);
