@@ -172,7 +172,7 @@ typedef struct s_window
 }	t_window;
 
 bool		valid_args(t_minirt *rt, char *path, int ac);
-int			is_invalid_file(t_minirt *rt);
+bool		is_valid_file(t_minirt *rt);
 
 void		init_window(t_window *w);
 bool		init_minirt(t_minirt *minirt, char *filename);
@@ -180,21 +180,19 @@ bool		init_scene(t_minirt *minirt, char *filename);
 bool		render_scene(t_minirt *minirt);
 
 bool		parse_params(t_minirt *rt, char *line);
-int			parse_vector(char *str, t_vector *vec);
-int			parse_colors(char *str, t_rgb *color, t_rgb *color2);
-int			parse_color(char *str, t_rgb *color);
-int			parse_double(char *str, double *num);
-int			parse_shape(t_minirt *rt, char *line, t_shape type, int nb_params);
-int			parse_light(t_minirt *rt, char *line);
-int			parse_ambient(t_minirt *rt, char *line);
+bool		parse_vector(char *str, t_vector *vec);
+bool		parse_color(char *str, t_rgb *color);
+bool		parse_double(char *str, double *num);
+bool		parse_shape(t_minirt *rt, char *line, t_shape type, int nb_params);
+bool		parse_light(t_minirt *rt, char *line);
+bool		parse_ambient(t_minirt *rt, char *line);
 bool		parse_resolution(t_minirt *rt, char *line);
-int			parse_camera(t_minirt *rt, char *line);
-int			parse_plane(char **params, t_obj *obj);
-int			parse_sphere(char **params, t_obj *obj);
-int			parse_cylinder(char **params, t_obj *obj);
-int			parse_shape(t_minirt *rt, char *line, t_shape type, int nb_params);
-int			parse_error_ptr(char *msg, void *ptr, char **params);
-int			parse_error(char *msg, char **params);
+bool		parse_camera(t_minirt *rt, char *line);
+bool		parse_plane(char **params, t_obj *obj);
+bool		parse_sphere(char **params, t_obj *obj);
+bool		parse_cylinder(char **params, t_obj *obj);
+bool		parse_error_ptr(char *msg, void *ptr, char **params);
+bool		parse_error(char *msg, char **params);
 
 void		push_object(t_obj *obj, t_obj **objs);
 void		push_light(t_light *new_light, t_light **lights);
@@ -209,7 +207,7 @@ char		*get_next_line(int fd);
 
 int			double_length(double num);
 bool		is_double(char *str);
-int			is_ulong(char *str);
+bool		is_ulong(char *str);
 int			str_to_int_color(char *str);
 void		print_minirt(t_minirt *rt);
 
@@ -220,6 +218,6 @@ t_vector	vector_add(const t_vector *v1, const t_vector *v2);
 t_vector	vector_sub(const t_vector *v1, const t_vector *v2);
 t_vector	vector_multi(const t_vector *v, double f);
 
-int			error_msg(char *msg);
+bool		error_msg(char *msg);
 
 #endif

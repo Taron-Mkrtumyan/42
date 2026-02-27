@@ -24,20 +24,20 @@ int	str_to_int_color(char *str)
 	return (c);
 }
 
-int	parse_vector(char *str, t_vector *vec)
+bool	parse_vector(char *str, t_vector *vec)
 {
 	int		i;
-	int		ret;
+	bool	ret;
 	char	**nbrs;
 
 	i = -1;
-	ret = 0;
+	ret = true;
 	nbrs = ft_split(str, ',');
 	while (nbrs && nbrs[++i])
 		if (!is_double(nbrs[i]))
-			ret = 1;
+			ret = false;
 	if (ft_arrlen(nbrs) != 3)
-		ret = 1;
+		ret = false;
 	else
 	{
 		vec->x = ft_strtod(nbrs[0]);
@@ -48,7 +48,7 @@ int	parse_vector(char *str, t_vector *vec)
 	return (ret);
 }
 
-int	parse_color(char *str, t_rgb *color)
+bool	parse_color(char *str, t_rgb *color)
 {
 	char	**rgb;
 	int		r;
@@ -57,25 +57,25 @@ int	parse_color(char *str, t_rgb *color)
 
 	rgb = ft_split(str, ',');
 	if (!rgb || ft_arrlen(rgb) != 3)
-		return (free_arr(rgb), 1);
+		return (free_arr(rgb), false);
 	if (!is_ulong(rgb[0]) || !is_ulong(rgb[1]) || !is_ulong(rgb[2]))
-		return (free_arr(rgb), 1);
+		return (free_arr(rgb), false);
 	r = str_to_int_color(rgb[0]);
 	g = str_to_int_color(rgb[1]);
 	b = str_to_int_color(rgb[2]);
 	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
-		return (free_arr(rgb), 1);
+		return (free_arr(rgb), false);
 	color->r = r;
 	color->g = g;
 	color->b = b;
 	free_arr(rgb);
-	return (0);
+	return (true);
 }
 
-int	parse_double(char *str, double *num)
+bool	parse_double(char *str, double *num)
 {
 	if (!is_double(str))
-		return (1);
+		return (false);
 	*num = ft_strtod(str);
-	return (0);
+	return (true);
 }

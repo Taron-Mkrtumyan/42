@@ -95,6 +95,6 @@ fclean: clean
 re: fclean all
 
 v: $(NAME)
-	$(VLGRND) $(VFLAGS) ./$(NAME)
+	$(VLGRND) $(VFLAGS) ./$(NAME) test_scene.rt
 
 .PHONY: all clean fclean re 

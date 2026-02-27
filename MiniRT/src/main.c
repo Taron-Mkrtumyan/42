@@ -17,6 +17,8 @@ int	main(int ac, char **av)
 	t_minirt	*minirt;
 
 	minirt = ft_calloc(sizeof(t_minirt), 1);
+	if (!minirt)
+		return (error_msg("Failed to allocate memory for minirt"), 1);
 	if (!valid_args(minirt, av[1], ac))
 	{
 		free_minirt(minirt);
@@ -24,10 +26,12 @@ int	main(int ac, char **av)
 	}
 	print_minirt(minirt);
 	if (!init_minirt(minirt, av[1]))
+	{
+		free_minirt(minirt);
 		return (2);
+	}
 	free_minirt(minirt);
 	return (0);
 }
-
 
 //printf("%f\n", DBL_MAX);

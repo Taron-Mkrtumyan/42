@@ -12,43 +12,43 @@
 
 #include "minirt.h"
 
-int	parse_camera_params(char **params, t_camera *cam)
+bool	parse_camera_params(char **params, t_camera *cam)
 {
-	int	i;
+    int	i;
 
-	i = 0;
-	while (params[++i])
-	{
-		if (i == 1 && parse_vector(params[i], &cam->position))
-			return (1);
-		if (i == 2 && parse_vector(params[i], &cam->orientation))
-			return (1);
-		if (i == 3 && parse_double(params[i], &cam->fov))
-			return (1);
-	}
-	return (0);
+    i = 0;
+    while (params[++i])
+    {
+        if (i == 1 && !parse_vector(params[i], &cam->position))
+            return (false);
+        if (i == 2 && !parse_vector(params[i], &cam->orientation))
+            return (false);
+        if (i == 3 && !(ft_atoi(params[i]) <= 0  || ft_atoi(params[i]) > 180 || parse_double(params[i], &cam->fov)))
+            return (printf("Invalid FOV: %d\n", ft_atoi(params[i])), false);
+    }
+    return (true);
 }
 
-int	parse_camera(t_minirt *rt, char *line)
+bool	parse_camera(t_minirt *rt, char *line)
 {
 	char	**params;
 
 	params = ft_split(line, ' ');
 	if (!params)
-		return (error_msg("Memory allocation failed"), 1);
+		return (error_msg("Camera split failed"), 1);
 	if (rt->camera)
 		return (parse_error("Camera already defined", params));
 	if (ft_arrlen(params) != 4)
-		return (parse_error("Invalid camera parameters", params));
+		return (parse_error("Wrong number of camera parameters", params));
 	rt->camera = ft_calloc(sizeof(t_camera), 1);
 	if (!rt->camera)
-		return (parse_error("Memory allocation failed", params));
-	if (parse_camera_params(params, rt->camera))
+		return (parse_error("Camera memory allocation failed", params));
+	if (!parse_camera_params(params, rt->camera))
 		return (parse_error_ptr("Invalid camera parameters",
 				rt->camera, params));
 	vector_normalize(&rt->camera->orientation);
 	free_arr(params);
-	return (0);
+	return (true);
 }
 
 bool	parse_resolution(t_minirt *rt, char *line)
@@ -59,21 +59,21 @@ bool	parse_resolution(t_minirt *rt, char *line)
 	i = 0;
 	params = ft_split(line, ' ');
 	if (!params)
-		return (error_msg("Memory allocation failed"), 1);
+		return (error_msg("Resolution memory allocation failed"), 1);
 	if (ft_arrlen(params) != 3)
 		return (parse_error("Invalid resolution parameters", params));
 	while (params[++i])
 	{
-		if (i == 1 && parse_double(params[i], &rt->window->width))
+		if (i == 1 && !parse_double(params[i], &rt->window->width))
 			return (parse_error("Invalid width", params));
-		if (i == 2 && parse_double(params[i], &rt->window->height))
+		if (i == 2 && !parse_double(params[i], &rt->window->height))
 			return (parse_error("Invalid height", params));
 	}
 	free_arr(params);
-	return (0);
+	return (true);
 }
 
-int	parse_ambient(t_minirt *rt, char *line)
+bool	parse_ambient(t_minirt *rt, char *line)
 {
 	int		i;
 	char	**params;
@@ -81,28 +81,28 @@ int	parse_ambient(t_minirt *rt, char *line)
 	i = 0;
 	params = ft_split(line, ' ');
 	if (!params)
-		return (error_msg("Memory allocation failed"), 1);
+		return (error_msg("Ambient split failed"), 1);
 	if (rt->amb_light)
 		return (parse_error("Ambient light already defined", params));
 	if (ft_arrlen(params) != 3)
-		return (parse_error("Invalid ambient light parameters", params));
+		return (parse_error("Wrong number of ambient light parameters", params));
 	rt->amb_light = ft_calloc(sizeof(t_amb_light), 1);
 	if (!rt->amb_light)
 		return (parse_error("Memory allocation failed", params));
 	while (params[++i])
 	{
-		if (i == 1 && parse_double(params[i], &rt->amb_light->ratio))
+		if (i == 1 && !parse_double(params[i], &rt->amb_light->ratio))
 			return (parse_error_ptr("Invalid ambient ratio",
 					rt->amb_light, params));
-		if (i == 2 && parse_color(params[i], &rt->amb_light->color))
+		if (i == 2 && !parse_color(params[i], &rt->amb_light->color))
 			return (parse_error_ptr("Invalid ambient color",
 					rt->amb_light, params));
 	}
 	free_arr(params);
-	return (0);
+	return (true);
 }
 
-int	parse_light(t_minirt *rt, char *line)
+bool	parse_light(t_minirt *rt, char *line)
 {
 	int		i;
 	char	**params;
@@ -111,21 +111,21 @@ int	parse_light(t_minirt *rt, char *line)
 	i = 0;
 	params = ft_split(line, ' ');
 	if (!params)
-		return (error_msg("Memory allocation failed"), 1);
+		return (error_msg("Light split allocation failed"), 1);
 	if (ft_arrlen(params) != 4)
 		return (parse_error("Invalid light parameters", params));
 	light = create_light(rt);
 	if (!light)
-		return (parse_error("Memory allocation failed", params));
+		return (parse_error("Light memory allocation failed", params));
 	while (params[++i])
 	{
-		if (i == 1 && parse_vector(params[i], &light->position))
+		if (i == 1 && !parse_vector(params[i], &light->position))
 			return (parse_error_ptr("Invalid light position", light, params));
-		if (i == 2 && parse_double(params[i], &light->brightness))
+		if (i == 2 && !parse_double(params[i], &light->brightness))
 			return (parse_error_ptr("Invalid light brightness", light, params));
-		if (i == 3 && parse_color(params[i], &light->color))
+		if (i == 3 && !parse_color(params[i], &light->color))
 			return (parse_error_ptr("Invalid light color", light, params));
 	}
 	free_arr(params);
-	return (0);
+	return (true);
 }
