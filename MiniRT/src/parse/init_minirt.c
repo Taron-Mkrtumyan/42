@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minirt.h"
+#include "minirt.h"
 
 bool	init_minirt(t_minirt *minirt, char *filename)
 {

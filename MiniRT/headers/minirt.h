@@ -13,19 +13,10 @@
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# include "libft/libft.h"
-# include "minilibx-linux/mlx.h"
-# include <X11/X.h>
-# include <X11/keysym.h>
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <limits.h>
-# include <stdbool.h>
-# include <string.h>
-# include <fcntl.h>
-# include <float.h>
-# include <math.h>
+# include "includes.h"
+# include "structs.h" 
+# include "vector_operations.h"
+# include "color_operations.h"
 
 # define SIZE		1000
 # define QUALITY	0
@@ -56,120 +47,19 @@
 # define ERR_WIN			"Error\nWindow initiation failed\n"
 # define ERR_IMG			"Error\nError on image initiation\n"
 
-#define SUCCES 0
-#define ERROR_FILE_OPEN 1
+# define SUCCES 0
+# define ERROR_FILE_OPEN 1
 
-#define ERROR_MALLOC_LINE 2
-#define ERROR_MALLOC_AMBIENT 3
-#define ERROR_MALLOC_CAMERA 4
-#define ERROR_MALLOC_CAMERA_ORIGIN 5
-#define ERROR_MALLOC_CAMERA_DIRECTION 6
-#define ERROR_MALLOC_LIGHT 7
-#define ERROR_MALLOC_LIGHT_ORIGIN 8
-#define ERROR_MALLOC_OBJECTS_LIST 9
+# define ERROR_MALLOC_LINE 2
+# define ERROR_MALLOC_AMBIENT 3
+# define ERROR_MALLOC_CAMERA 4
+# define ERROR_MALLOC_CAMERA_ORIGIN 5
+# define ERROR_MALLOC_CAMERA_DIRECTION 6
+# define ERROR_MALLOC_LIGHT 7
+# define ERROR_MALLOC_LIGHT_ORIGIN 8
+# define ERROR_MALLOC_OBJECTS_LIST 9
 
-#define ERROR_MALLOC "Error\nMemory allocation failed\n"
-
-typedef struct s_vector
-{
-	double	x;
-	double	y;
-	double	z;
-}	t_vector;
-
-typedef struct s_rgb
-{
-	unsigned char	r;
-	unsigned char	g;
-	unsigned char	b;
-}	t_rgb;
-
-typedef struct s_amb_light
-{
-	double	ratio;
-	t_rgb	color;
-}	t_amb_light;
-
-typedef struct s_light
-{
-	double			brightness;
-	t_vector		position;
-	t_rgb			color;
-	struct s_light	*next;
-	struct s_light	*first;
-}	t_light;
-
-typedef struct s_camera
-{
-	t_vector	position;
-	t_vector	orientation;
-	double		fov;
-	bool		exists;
-}	t_camera;
-
-typedef enum e_shape
-{
-	SPHERE,
-	CYLINDER,
-	PLANE,
-}	t_shape;
-
-typedef struct s_obj
-{
-	t_shape			shape;
-	void			*data;
-	struct s_obj	*next;
-}	t_obj;
-
-typedef struct s_sphere
-{
-	double		radius;
-	double		diameter;
-	t_vector	center;
-	t_rgb		color;
-}	t_sphere;
-
-typedef struct s_cylinder
-{
-	double		radius;
-	double		diameter;
-	double		height;
-	t_vector	center;
-	t_vector	normal;
-	t_rgb		color;
-}	t_cylinder;
-
-typedef struct s_plane
-{
-	t_vector	center;
-	t_vector	normal;
-	t_rgb		color;
-}	t_plane;
-
-typedef struct s_window		t_window;
-
-typedef struct s_minirt
-{
-	t_window	*window;
-	t_camera	*camera;
-	t_light		*light;
-	t_obj		*objects;
-	t_amb_light	*amb_light;
-}	t_minirt;
-
-typedef struct s_window
-{
-	void		*mlx;
-	void		*win;
-	void		*img;
-	char		*addr;
-	int			bpp;
-	int			line_len;
-	int			endian;
-	double		width;
-	double		height;
-	t_minirt	*minirt;
-}	t_window;
+# define ERROR_MALLOC "Error\nMemory allocation failed\n"
 
 bool		valid_args(t_minirt *rt, char *path, int ac);
 bool		is_valid_file(t_minirt *rt);
@@ -180,7 +70,7 @@ bool		init_scene(t_minirt *minirt, char *filename);
 bool		render_scene(t_minirt *minirt);
 
 bool		parse_params(t_minirt *rt, char *line);
-bool		parse_vector(char *str, t_vector *vec);
+bool		parse_vector(char *str, t_vec *vec);
 bool		parse_color(char *str, t_rgb *color);
 bool		parse_double(char *str, double *num);
 bool		parse_shape(t_minirt *rt, char *line, t_shape type, int nb_params);
@@ -210,14 +100,9 @@ bool		is_double(char *str);
 bool		is_ulong(char *str);
 int			str_to_int_color(char *str);
 void		print_minirt(t_minirt *rt);
-bool		is_valid_obj_name (char *line);
+bool		is_valid_obj_name(char *line);
 
-double		vec_len(const t_vector *vec);
-double		vec_dot(const t_vector *v1, const t_vector *v2);
-void		vector_normalize(t_vector *v);
-t_vector	vector_add(const t_vector *v1, const t_vector *v2);
-t_vector	vector_sub(const t_vector *v1, const t_vector *v2);
-t_vector	vector_multi(const t_vector *v, double f);
+t_vec		vec_normalize(t_vec v);
 
 bool		error_msg(char *msg);
 

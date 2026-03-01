@@ -24,7 +24,7 @@ int	str_to_int_color(char *str)
 	return (c);
 }
 
-bool	parse_vector(char *str, t_vector *vec)
+bool	parse_vector(char *str, t_vec *vec)
 {
 	int		i;
 	bool	ret;

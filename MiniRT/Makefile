@@ -1,12 +1,8 @@
 NAME        := miniRT
 
-CC          := cc
-CFLAGS      := -Wall -Wextra -Werror -g3
-INCLUDES    := -I./ -I./libft -I./minilibx-linux
-RM          := rm -f
-
 SRC_DIR     := src
 OBJ_DIR     := obj
+HEADER_DIR  := headers
 
 LIBFT_DIR   := libft
 LIBFT_LIB   := $(LIBFT_DIR)/libft.a
@@ -17,6 +13,11 @@ MLX_FLAGS   := -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 
 VLGRND      := valgrind 
 VFLAGS      := --leak-check=full --show-leak-kinds=all --track-origins=yes
+
+CC          := cc
+CFLAGS      := -Wall -Wextra -Werror -g3
+INCLUDES    := -I./ -I./$(HEADER_DIR) -I./$(LIBFT_DIR) -I./$(MLX_DIR)
+RM          := rm -f
 
 # -------------------- SOURCES --------------------
 
@@ -42,8 +43,9 @@ VALID   := validation1.c \
            validation2.c \
            validation3.c
 
-MATH    := vectors1.c \
-           vectors2.c
+MATH    := vec_normalize.c \
+           pixel_color.c \
+
 
 # Full paths (no wildcards used)
 SRCS := \
@@ -97,4 +99,4 @@ re: fclean all
 v: $(NAME)
 	$(VLGRND) $(VFLAGS) ./$(NAME) test_scene.rt
 
-.PHONY: all clean fclean re 
+.PHONY: all clean fclean re v

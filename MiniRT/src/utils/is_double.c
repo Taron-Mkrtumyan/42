@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minirt.h"
+#include "minirt.h"
 
 int	double_length(double num)
 {

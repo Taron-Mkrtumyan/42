@@ -30,7 +30,7 @@ bool	parse_plane(char **params, t_obj *obj)
 		if (i == 3 && !parse_color(params[i], &plane->color))
 			return (parse_error_ptr("Invalid plane color", plane, NULL));
 	}
-	vector_normalize(&plane->normal);
+	plane->normal = vec_normalize(plane->normal);
 	obj->data = plane;
 	return (true);
 }
@@ -81,7 +81,7 @@ bool	parse_cylinder(char **params, t_obj *obj)
 		if (i == 5 && !parse_color(params[i], &cylinder->color))
 			return (parse_error_ptr("Invalid cylinder color", cylinder, NULL));
 	}
-	vector_normalize(&cylinder->normal);
+	cylinder->normal = vec_normalize(cylinder->normal);
 	cylinder->radius = cylinder->diameter / 2.0;
 	obj->data = cylinder;
 	return (true);
