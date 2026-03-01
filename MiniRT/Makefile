@@ -35,7 +35,6 @@ UTILS   := utils1.c \
            utils3.c \
            utils4.c \
            gnl.c \
-           gnl_utils.c \
            is_double.c \
 		   print_objs.c
 
