@@ -79,6 +79,5 @@ double	ft_strtod(const char *s)
 	if (*tmp == '\0')
 		return (0.0);
 	res = ft_strtod_next(tmp) * sign;
-	printf("\nstr:\t%s\tsum:\t%f\n", s, res);
 	return (res);
 }

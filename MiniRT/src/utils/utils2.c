@@ -3,71 +3,59 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmkrtumy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gkankia <gkankia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 18:34:47 by tmkrtumy          #+#    #+#             */
-/*   Updated: 2026/01/19 18:40:24 by tmkrtumy         ###   ########.fr       */
+/*   Updated: 2026/02/27 17:52:29 by gkankia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	is_ulong(char *str)
+bool	is_ulong(char *str)
 {
 	unsigned long	res;
 	unsigned long	limit;
 	int				i;
 
 	if (!str || !str[0])
-		return (0);
+		return (false);
 	i = 0;
 	res = 0;
 	limit = ULONG_MAX / 10;
 	while (str[i])
 	{
 		if (str[i] < '0' || str[i] > '9')
-			return (0);
+			return (false);
 		if (res > limit || (res == limit && (unsigned long)(str[i] - \
 '0') > ULONG_MAX % 10))
-			return (0);
+			return (false);
 		res = res * 10 + (str[i] - '0');
 		i++;
 	}
-	return (1);
+	return (true);
 }
 
-/*
-double	str_to_double(char *str)
+bool	is_valid_obj_name(char *line)
 {
-	double	sum;
-	double	prec;
-	double	div;
-	double	sign;
-
-	prec = 0.0;
-	div = 1.0;
-	sign = 1.0;
-	if (!str || !str[0])
-		return (0.0);
-	if (str[0] == '-')
-		sign *= -1.0;
-	sum = (double)ft_atoi(str);
-	printf("\nstr:\t%s\tsum:\t%f\n", str, sum);
-	while (*str && *str != '.')
-		str++;
-	write(2, "{1}\n", 4);
-	if (!(*str))
-		return (sum);
-	write(2, "{2}\n", 4);
-	if (*str++ == '.')
+	if (line[0] && line[0] >= 'A' && line[0] <= 'Z')
 	{
-		while (*str >= '0' && *str <= '9')
-		{
-			div *= 10.0;
-			prec += (*str - '0') / div;
-			str++;
-		}
+		if (line[1] && ft_isspace(line[1]))
+			return (true);
+		else
+			return (false);
 	}
-	return ((sum + prec) * sign);
+	else if (line[0] && line[0] >= 'a' && line[0] <= 'z')
+	{
+		if (line[1] && line[1] >= 'a' && line[1] <= 'z')
+		{
+			if (line[2] && ft_isspace(line[2]))
+				return (true);
+			else
+				return (false);
+		}
+		else
+			return (false);
+	}
+	return (true);
 }
-*/

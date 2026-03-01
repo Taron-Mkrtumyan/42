@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vectors2.c                                         :+:      :+:    :+:   */
+/*   includes.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmkrtumy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/24 19:33:04 by tmkrtumy          #+#    #+#             */
-/*   Updated: 2026/02/24 19:34:17 by tmkrtumy         ###   ########.fr       */
+/*   Created: 2026/03/01 16:24:52 by tmkrtumy          #+#    #+#             */
+/*   Updated: 2026/03/01 16:25:24 by tmkrtumy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#ifndef INCLUDES_H
+# define INCLUDES_H
 
-double	vec_len(const t_vector *vec)
-{
-	return (hypot(hypot(vec->x, vec->y), vec->z));
-}
+# include "libft/libft.h"
+# include "minilibx-linux/mlx.h"
+# include <X11/X.h>
+# include <X11/keysym.h>
+# include <stdio.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <limits.h>
+# include <stdbool.h>
+# include <string.h>
+# include <fcntl.h>
+# include <float.h>
+# include <math.h>
 
-double	vec_dot(const t_vector *v1, const t_vector *v2)
-{
-	return (v1->x * v2->x + v1->y * v2->y + v1->z * v2->z);
-}
-
-// hypot (x, y) = sqrt(x*x + y*y)
-// vec_len = sqrt(x^2 + y^2 + z^2)
+#endif

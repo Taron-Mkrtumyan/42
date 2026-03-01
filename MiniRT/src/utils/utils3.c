@@ -33,7 +33,7 @@ t_light	*create_light(t_minirt *minirt)
 
 	new_light = ft_calloc(sizeof(t_light), 1);
 	if (!new_light)
-		return (0);
+		return (NULL);
 	push_light(new_light, &minirt->light);
 	return (new_light);
 }
@@ -47,10 +47,8 @@ void	push_object(t_obj *obj, t_obj **objs)
 	else
 	{
 		tmp = *objs;
-		write(2, "{5}\n", 4);
 		while (tmp->next)
 			tmp = tmp->next;
-	write(2, "{6}\n", 4);
 		tmp->next = obj;
 	}
 }

@@ -1,13 +1,23 @@
-#include "minirt.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_objs.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tmkrtumy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/27 15:26:00 by tmkrtumy          #+#    #+#             */
+/*   Updated: 2026/02/27 15:26:25 by tmkrtumy         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include <stdio.h>
+#include "minirt.h"
 
 void	print_rgb(t_rgb c)
 {
 	printf("RGB: (%u, %u, %u)\n", c.r, c.g, c.b);
 }
 
-void	print_vector(char *name, t_vector v)
+void	print_vec(char *name, t_vec v)
 {
 	printf("%s: (%.3f, %.3f, %.3f)\n", name, v.x, v.y, v.z);
 }
@@ -20,8 +30,8 @@ void	print_camera(t_camera *cam)
 		return ;
 	}
 	printf("Camera:\n");
-	print_vector("  position", cam->position);
-	print_vector("  orientation", cam->orientation);
+	print_vec("  position", cam->position);
+	print_vec("  orientation", cam->orientation);
 	printf("  fov: %.2f\n", cam->fov);
 	printf("  is_exist: %d\n", cam->exists);
 }
@@ -51,7 +61,7 @@ void	print_lights(t_light *light)
 	while (light)
 	{
 		printf("Light #%d:\n", i++);
-		print_vector("  position", light->position);
+		print_vec("  position", light->position);
 		printf("  brightness: %.2f\n", light->brightness);
 		print_rgb(light->color);
 		light = light->next;
@@ -61,7 +71,7 @@ void	print_lights(t_light *light)
 void	print_sphere(t_sphere *s)
 {
 	printf("  Sphere:\n");
-	print_vector("    center", s->center);
+	print_vec("    center", s->center);
 	printf("    radius: %.2f\n", s->radius);
 	printf("    diameter: %.2f\n", s->diameter);
 	print_rgb(s->color);
@@ -70,16 +80,16 @@ void	print_sphere(t_sphere *s)
 void	print_plane(t_plane *p)
 {
 	printf("  Plane:\n");
-	print_vector("    center", p->center);
-	print_vector("    normal", p->normal);
+	print_vec("    center", p->center);
+	print_vec("    normal", p->normal);
 	print_rgb(p->color);
 }
 
 void	print_cylinder(t_cylinder *c)
 {
 	printf("  Cylinder:\n");
-	print_vector("    center", c->center);
-	print_vector("    normal", c->normal);
+	print_vec("    center", c->center);
+	print_vec("    normal", c->normal);
 	printf("    radius: %.2f\n", c->radius);
 	printf("    diameter: %.2f\n", c->diameter);
 	printf("    height: %.2f\n", c->height);

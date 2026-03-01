@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validation1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmkrtumy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gkankia <gkankia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 18:33:19 by tmkrtumy          #+#    #+#             */
-/*   Updated: 2026/01/19 18:33:39 by tmkrtumy         ###   ########.fr       */
+/*   Updated: 2026/02/27 17:55:02 by gkankia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,37 +14,40 @@
 
 bool	parse_params(t_minirt *rt, char *line)
 {
-	if (ft_strncmp(line, "R ", 2) == 0)
+	if (ft_strncmp(line, "", 1) == 0)
+		return (true);
+	if (!is_valid_obj_name(line))
+		return (error_msg("Invalid object name: "), \
+printf("%s\n", line), false);
+	if (ft_strncmp(line, "R", 1) == 0)
 		return (parse_resolution(rt, line));
-	if (ft_strncmp(line, "A ", 2) == 0)
+	if (ft_strncmp(line, "A", 1) == 0)
 		return (parse_ambient(rt, line));
-	if (ft_strncmp(line, "C ", 2) == 0)
+	if (ft_strncmp(line, "C", 1) == 0)
 		return (parse_camera(rt, line));
-	if (ft_strncmp(line, "L ", 2) == 0)
+	if (ft_strncmp(line, "L", 1) == 0)
 		return (parse_light(rt, line));
-	write(2, "{1}\n", 4);
-	if (ft_strncmp(line, "sp ", 3) == 0)
+	if (ft_strncmp(line, "sp", 2) == 0)
 		return (parse_shape(rt, line, SPHERE, 4));
-	write(2, "{2}\n", 4);
-	if (ft_strncmp(line, "pl ", 3) == 0)
+	if (ft_strncmp(line, "pl", 2) == 0)
 		return (parse_shape(rt, line, PLANE, 4));
-	if (ft_strncmp(line, "cy ", 3) == 0)
+	if (ft_strncmp(line, "cy", 2) == 0)
 		return (parse_shape(rt, line, CYLINDER, 6));
-	return (0);
+	return (error_msg("Invalid parameter"), false);
 }
 
-int	is_invalid_file(t_minirt *rt)
+bool	is_valid_file(t_minirt *rt)
 {
 	if (!rt->camera)
-		return (error_msg("No camera defined"), 1);
+		return (error_msg("No camera defined"), false);
 	if (!rt->light)
-		return (error_msg("No light defined"), 1);
+		return (error_msg("No light defined"), false);
 	if (!rt->amb_light)
-		return (error_msg("No ambient light defined"), 1);
-	return (0);
+		return (error_msg("No ambient light defined"), false);
+	return (true);
 }
 
-char	*clear_line(char *line)
+static char	*clear_line(char *line)
 {
 	int		i;
 	char	*tmp;
@@ -59,27 +62,30 @@ char	*clear_line(char *line)
 	return (line);
 }
 
-int	read_file(t_minirt *rt, int fd)
+static bool	read_file(t_minirt *rt, int fd)
 {
 	int		num;
-	int		ret;
+	bool	ret;
 	char	*line;
 
 	num = 0;
-	ret = 0;
-	while (ret != 1)
+	ret = true;
+	while (ret != false)
 	{
 		num++;
 		line = get_next_line(fd);
 		if (!line)
 			break ;
 		line = clear_line(line);
-		if (parse_params(rt, line))
-			ret = 1;
+		if (!parse_params(rt, line))
+			ret = false;
 		free(line);
 	}
-	if (!ret && is_invalid_file(rt))
-		ret = 1;
+	if (ret && !is_valid_file(rt))
+	{
+		error_msg("Invalid file");
+		ret = false;
+	}
 	close(fd);
 	return (ret);
 }
@@ -93,14 +99,14 @@ bool	valid_args(t_minirt *rt, char *path, int ac)
 		return (error_msg("Wrong number of arguments"), false);
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
-		return (free(rt->window), 0);
+		return (error_msg("Failed to open file"), false);
 	len = ft_strlen(path);
-	if (len < 3 || ft_strncmp(path + len - 3, ".rt", 3) != 0)
+	if (len <= 3 || ft_strncmp(path + len - 3, ".rt", 3) != 0)
 	{
 		close(fd);
-		return (0);
+		return (error_msg("Invalid file extension"), false);
 	}
-	if (read_file(rt, fd))
-		return (0);
-	return (1);
+	if (!read_file(rt, fd))
+		return (false);
+	return (true);
 }

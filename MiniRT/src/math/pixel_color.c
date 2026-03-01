@@ -1,37 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   pixel_color.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmkrtumy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/16 19:32:39 by tmkrtumy          #+#    #+#             */
-/*   Updated: 2025/12/16 19:55:52 by tmkrtumy         ###   ########.fr       */
+/*   Created: 2026/03/01 14:52:09 by tmkrtumy          #+#    #+#             */
+/*   Updated: 2026/03/01 15:01:11 by tmkrtumy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	main(int ac, char **av)
+// I = (k_a*I_a) + (k_d * I_L * (v_N * v_L)) + (k_s * I_L * (v_R * v_V)^n_S)
+
+t_rgb	pixel_color(t_amb_light *amb, t_obj *obj, t_light *light)
 {
-	t_minirt	*minirt;
+	t_rgb	res;
 
-	minirt = ft_calloc(sizeof(t_minirt), 1);
-	if (!minirt)
-		return (error_msg("Failed to allocate memory for minirt"), 1);
-	if (!valid_args(minirt, av[1], ac))
+	(void)obj;
+	res = color_multi(amb->color, amb->ratio);
+	while (light)
 	{
-		free_minirt(minirt);
-		return (1);
+		res = color_add(res, color_multi(light->color, light->brightness));
+		light = light->next;
 	}
-	print_minirt(minirt);
-	if (!init_minirt(minirt, av[1]))
-	{
-		free_minirt(minirt);
-		return (2);
-	}
-	free_minirt(minirt);
-	return (0);
+	return (res);
 }
-
-//printf("%f\n", DBL_MAX);
