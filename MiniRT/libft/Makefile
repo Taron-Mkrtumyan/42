@@ -1,6 +1,6 @@
 NAME    := libft.a
 CC      := cc
-CFLAGS  := -Wall -Wextra -Werror
+CFLAGS  := -Wall -Wextra -Werror -fPIC
 AR      := ar rcs
 RM      := rm -f
 
@@ -67,11 +67,11 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@$(AR) $(NAME) $(OBJS)
-	@echo "\033[1;32m✔ libft compiled\033[0m"
+	@printf "\033[1;32m✔ libft compiled\033[0m\n"
 
 bonus: $(OBJS) $(BNOBJS)
 	@$(AR) $(NAME) $(OBJS) $(BNOBJS)
-	@echo "\033[1;32m✔ libft bonus compiled\033[0m"
+	@printf "\033[1;32m✔ libft bonus compiled\033[0m\n"
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
