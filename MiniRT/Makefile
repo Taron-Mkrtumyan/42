@@ -69,25 +69,25 @@ all: $(NAME)
 
 $(NAME): $(MLX_LIB) $(LIBFT_LIB) $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT_LIB) $(MLX_FLAGS) -o $(NAME)
-	@echo "$(GREEN)✔ miniRT compiled$(RESET)"
+	@printf "$(GREEN)✔ miniRT compiled$(RESET)\n"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
-	@echo "$(BLUE)Compiling$(RESET) $<"
+	@printf "$(BLUE)Compiling$(RESET) $<\n"
 
 $(LIBFT_LIB):
 	@$(MAKE) -C $(LIBFT_DIR) --silent
 
 $(MLX_LIB):
 	@$(MAKE) -C $(MLX_DIR) --silent
-	@echo "$(GREEN)✔ minilibx compiled$(RESET)"
+	@printf "$(GREEN)✔ minilibx compiled$(RESET)\n"
 
 
 clean:
 	@$(MAKE) clean -C $(LIBFT_DIR) --silent
 	@$(RM) -r $(OBJ_DIR)
-	@echo "$(GREEN)✔ miniRT cleaned$(RESET)"
+	@printf "$(GREEN)✔ miniRT cleaned$(RESET)\n"
 
 fclean: clean
 	@$(MAKE) fclean -C $(LIBFT_DIR) --silent
