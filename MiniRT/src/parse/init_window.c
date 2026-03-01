@@ -14,10 +14,7 @@
 
 static int	handle_close(t_window *w)
 {
-	mlx_destroy_image(w->mlx, w->img);
-	mlx_destroy_window(w->mlx, w->win);
-	mlx_destroy_display(w->mlx);
-	free_window(w);
+	free_minirt(w->minirt);
 	exit(EXIT_SUCCESS);
 }
 

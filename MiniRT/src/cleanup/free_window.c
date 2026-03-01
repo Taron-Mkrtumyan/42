@@ -12,8 +12,8 @@
 
 #include "minirt.h"
 
-void	free_window(t_window *w)
-{
-	free(w->mlx);
-	free(w);
-}
+// void	free_window(t_window *w)
+// {
+// 	free(w->mlx);
+// 	free(w);
+// }
