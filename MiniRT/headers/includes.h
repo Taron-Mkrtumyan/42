@@ -13,8 +13,8 @@
 #ifndef INCLUDES_H
 # define INCLUDES_H
 
-# include "libft/libft.h"
-# include "minilibx-linux/mlx.h"
+# include "libft.h"
+# include "mlx.h"
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include <stdio.h>

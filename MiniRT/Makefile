@@ -16,7 +16,7 @@ VFLAGS      := --leak-check=full --show-leak-kinds=all --track-origins=yes
 
 CC          := cc
 CFLAGS      := -Wall -Wextra -Werror -g3
-INCLUDES    := -I./ -I./$(HEADER_DIR) -I./$(LIBFT_DIR) -I./$(MLX_DIR)
+INCLUDES    := -I./$(HEADER_DIR) -I./$(LIBFT_DIR) -I./$(MLX_DIR)
 RM          := rm -f
 
 # -------------------- SOURCES --------------------
@@ -45,8 +45,6 @@ VALID   := validation1.c \
 MATH    := vec_normalize.c \
            pixel_color.c \
 
-
-# Full paths (no wildcards used)
 SRCS := \
 	$(addprefix $(SRC_DIR)/, $(MAIN)) \
 	$(addprefix $(SRC_DIR)/parse/, $(PARSE)) \
