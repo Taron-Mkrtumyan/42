@@ -131,7 +131,7 @@ void	print_minirt(t_minirt *rt)
 	printf("===== MINI RT DATA =====\n");
 	print_camera(rt->camera);
 	print_ambient(rt->amb_light);
-	print_lights(rt->light);
+	print_lights(rt->lights);
 	print_objects(rt->objects);
 	printf("========================\n");
 }

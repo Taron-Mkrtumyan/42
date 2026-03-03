@@ -106,7 +106,7 @@ typedef struct s_minirt
 {
 	t_window	*window;
 	t_camera	*camera;
-	t_light		*light;
+	t_light		*lights;
 	t_obj		*objects;
 	t_amb_light	*amb_light;
 }	t_minirt;
