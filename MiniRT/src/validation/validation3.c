@@ -6,11 +6,20 @@
 /*   By: gkankia <gkankia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 18:34:07 by tmkrtumy          #+#    #+#             */
-/*   Updated: 2026/02/27 17:55:16 by gkankia          ###   ########.fr       */
+/*   Updated: 2026/03/03 16:46:57 by gkankia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+bool	parse_shininess(char *str, double *shininess)
+{
+	if (!parse_double(str, shininess))
+		return (false);
+	if (shininess <= 0)
+		return (false);
+	return (true);
+}
 
 bool	parse_plane(char **params, t_obj *obj)
 {
@@ -29,6 +38,8 @@ bool	parse_plane(char **params, t_obj *obj)
 			return (parse_error_ptr("Invalid plane normal", plane, NULL));
 		if (i == 3 && !parse_color(params[i], &plane->color))
 			return (parse_error_ptr("Invalid plane color", plane, NULL));
+		if (i == 4 && !parse_shininess(params[i], &plane->shininess))
+			return (parse_error_ptr("Invalid plane shininess value", plane, NULL));
 	}
 	plane->normal = vec_normalize(plane->normal);
 	obj->data = plane;
@@ -53,6 +64,8 @@ sphere, NULL));
 			return (parse_error_ptr("Invalid sphere diameter", sphere, NULL));
 		if (i == 3 && !parse_color(params[i], &sphere->color))
 			return (parse_error_ptr("Invalid sphere color", sphere, NULL));
+		if (i == 4 && !parse_shininess(params[i], &sphere->shininess))
+			return (parse_error_ptr("Invalid sphere shininess value", sphere, NULL));
 	}
 	sphere->radius = sphere->diameter / 2.0;
 	obj->data = sphere;
@@ -80,6 +93,8 @@ bool	parse_cylinder(char **params, t_obj *obj)
 			return (parse_error_ptr("Invalid cylinder height", cylinder, NULL));
 		if (i == 5 && !parse_color(params[i], &cylinder->color))
 			return (parse_error_ptr("Invalid cylinder color", cylinder, NULL));
+		if (i == 6 && !parse_shininess(params[i], &cylinder->shininess))
+			return (parse_error_ptr("Invalid cylinder shininess value", cylinder, NULL));
 	}
 	cylinder->normal = vec_normalize(cylinder->normal);
 	cylinder->radius = cylinder->diameter / 2.0;
