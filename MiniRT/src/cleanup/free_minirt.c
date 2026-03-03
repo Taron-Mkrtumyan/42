@@ -33,9 +33,9 @@ void	free_objects(t_obj *obj)
 	while (obj)
 	{
 		tmp = obj->next;
-        if (obj->data)
-            free(obj->data);
-        free(obj);
+		if (obj->data)
+			free(obj->data);
+		free(obj);
 		obj = tmp;
 	}
 }
@@ -67,5 +67,4 @@ void	free_minirt(t_minirt *rt)
 	if (rt->objects)
 		free_objects(rt->objects);
 	free(rt);
-	fflush(stdout);
 }
