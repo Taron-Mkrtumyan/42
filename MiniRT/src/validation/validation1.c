@@ -64,15 +64,12 @@ static char	*clear_line(char *line)
 
 static bool	read_file(t_minirt *rt, int fd)
 {
-	int		num;
 	bool	ret;
 	char	*line;
 
-	num = 0;
 	ret = true;
 	while (ret != false)
 	{
-		num++;
 		line = get_next_line(fd);
 		if (!line)
 			break ;
@@ -86,6 +83,8 @@ static bool	read_file(t_minirt *rt, int fd)
 		error_msg("Invalid file");
 		ret = false;
 	}
+	if (ret == false)
+		get_next_line(-2);
 	close(fd);
 	return (ret);
 }
