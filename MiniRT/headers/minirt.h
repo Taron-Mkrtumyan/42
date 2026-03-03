@@ -71,7 +71,7 @@ bool		render_scene(t_minirt *minirt);
 
 bool		parse_params(t_minirt *rt, char *line);
 bool		parse_vector(char *str, t_vec *vec);
-bool		parse_color(char *str, t_rgb *color);
+bool		parse_color(char *str, t_rgbd *color);
 bool		parse_double(char *str, double *num);
 bool		parse_shape(t_minirt *rt, char *line, t_shape type, int nb_params);
 bool		parse_light(t_minirt *rt, char *line);
@@ -95,13 +95,15 @@ void		free_arr(char *arr[]);
 char		*get_next_line(int fd);
 
 int			double_length(double num);
+int			str_to_int_color(char *str);
 bool		is_double(char *str);
 bool		is_uchar(char *str);
-int			str_to_int_color(char *str);
-void		print_minirt(t_minirt *rt);
 bool		is_valid_obj_name(char *line);
+void		print_minirt(t_minirt *rt);
+double		get_shininess(const t_obj *obj);
+t_rgbd		get_color(const t_obj *obj);
 
-t_vec		vec_normalize(t_vec v);
+t_vec		normalize(t_vec v);
 
 bool		error_msg(char *msg);
 

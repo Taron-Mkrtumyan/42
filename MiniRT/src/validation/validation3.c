@@ -42,7 +42,7 @@ bool	parse_plane(char **params, t_obj *obj)
 			return (parse_error_ptr("Invalid plane shininess value", \
 plane, NULL));
 	}
-	plane->normal = vec_normalize(plane->normal);
+	plane->normal = normalize(plane->normal);
 	obj->data = plane;
 	return (true);
 }
@@ -76,7 +76,7 @@ sphere, NULL));
 
 static void	init_cylinder(t_cylinder *cylinder)
 {
-	cylinder->normal = vec_normalize(cylinder->normal);
+	cylinder->normal = normalize(cylinder->normal);
 	cylinder->radius = cylinder->diameter / 2.0;
 }
 

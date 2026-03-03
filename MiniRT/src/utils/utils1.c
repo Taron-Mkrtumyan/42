@@ -48,7 +48,7 @@ bool	parse_vector(char *str, t_vec *vec)
 	return (ret);
 }
 
-bool	parse_color(char *str, t_rgb *color)
+bool	parse_color(char *str, t_rgbd *color)
 {
 	char	**rgb;
 	int		r;
@@ -65,9 +65,9 @@ bool	parse_color(char *str, t_rgb *color)
 	b = str_to_int_color(rgb[2]);
 	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
 		return (free_arr(rgb), false);
-	color->r = (unsigned char)r;
-	color->g = (unsigned char)g;
-	color->b = (unsigned char)b;
+	color->r = (double)r / 255;
+	color->g = (double)g / 255;
+	color->b = (double)b / 255;
 	free_arr(rgb);
 	return (true);
 }

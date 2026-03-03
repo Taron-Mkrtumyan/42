@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vec_normalize.c                                    :+:      :+:    :+:   */
+/*   normalize.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmkrtumy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "minirt.h"
 
-t_vec	vec_normalize(t_vec v)
+t_vec	normalize(t_vec v)
 {
 	double		len;
 

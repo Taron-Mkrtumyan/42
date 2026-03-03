@@ -47,7 +47,7 @@ bool	parse_camera(t_minirt *rt, char *line)
 	if (!parse_camera_params(params, rt->camera))
 		return (parse_error_ptr("Invalid camera parameters",
 				NULL, params));
-	rt->camera->orientation = vec_normalize(rt->camera->orientation);
+	rt->camera->orientation = normalize(rt->camera->orientation);
 	free_arr(params);
 	return (true);
 }
