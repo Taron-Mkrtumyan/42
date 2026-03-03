@@ -39,7 +39,8 @@ bool	parse_plane(char **params, t_obj *obj)
 		if (i == 3 && !parse_color(params[i], &plane->color))
 			return (parse_error_ptr("Invalid plane color", plane, NULL));
 		if (i == 4 && !parse_shininess(params[i], &plane->shininess))
-			return (parse_error_ptr("Invalid plane shininess value", plane, NULL));
+			return (parse_error_ptr("Invalid plane shininess value", \
+plane, NULL));
 	}
 	plane->normal = vec_normalize(plane->normal);
 	obj->data = plane;
@@ -65,11 +66,18 @@ sphere, NULL));
 		if (i == 3 && !parse_color(params[i], &sphere->color))
 			return (parse_error_ptr("Invalid sphere color", sphere, NULL));
 		if (i == 4 && !parse_shininess(params[i], &sphere->shininess))
-			return (parse_error_ptr("Invalid sphere shininess value", sphere, NULL));
+			return (parse_error_ptr("Invalid sphere shininess value", \
+sphere, NULL));
 	}
 	sphere->radius = sphere->diameter / 2.0;
 	obj->data = sphere;
 	return (true);
+}
+
+static void	init_cylinder(t_cylinder *cylinder)
+{
+	cylinder->normal = vec_normalize(cylinder->normal);
+	cylinder->radius = cylinder->diameter / 2.0;
 }
 
 bool	parse_cylinder(char **params, t_obj *obj)
@@ -94,10 +102,9 @@ bool	parse_cylinder(char **params, t_obj *obj)
 		if (i == 5 && !parse_color(params[i], &cylinder->color))
 			return (parse_error_ptr("Invalid cylinder color", cylinder, NULL));
 		if (i == 6 && !parse_shininess(params[i], &cylinder->shininess))
-			return (parse_error_ptr("Invalid cylinder shininess value", cylinder, NULL));
+			return (parse_error_ptr("Cylinder shininess !!", cylinder, NULL));
 	}
-	cylinder->normal = vec_normalize(cylinder->normal);
-	cylinder->radius = cylinder->diameter / 2.0;
+	init_cylinder(cylinder);
 	obj->data = cylinder;
 	return (true);
 }
