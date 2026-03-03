@@ -12,9 +12,9 @@
 
 #include "minirt.h"
 
-void	print_rgb(t_rgb c)
+void	print_rgbd(t_rgbd c)
 {
-	printf("RGB: (%u, %u, %u)\n", c.r, c.g, c.b);
+	printf("RGB: (%f, %f, %f)\n", c.r, c.g, c.b);
 }
 
 void	print_vec(char *name, t_vec v)
@@ -45,7 +45,7 @@ void	print_ambient(t_amb_light *amb)
 	}
 	printf("Ambient light:\n");
 	printf("  ratio: %.2f\n", amb->ratio);
-	print_rgb(amb->color);
+	print_rgbd(amb->color);
 }
 
 void	print_lights(t_light *light)
@@ -63,7 +63,7 @@ void	print_lights(t_light *light)
 		printf("Light #%d:\n", i++);
 		print_vec("  position", light->position);
 		printf("  brightness: %.2f\n", light->brightness);
-		print_rgb(light->color);
+		print_rgbd(light->color);
 		light = light->next;
 	}
 }
@@ -74,7 +74,7 @@ void	print_sphere(t_sphere *s)
 	print_vec("    center", s->center);
 	printf("    radius: %.2f\n", s->radius);
 	printf("    diameter: %.2f\n", s->diameter);
-	print_rgb(s->color);
+	print_rgbd(s->color);
 }
 
 void	print_plane(t_plane *p)
@@ -82,7 +82,7 @@ void	print_plane(t_plane *p)
 	printf("  Plane:\n");
 	print_vec("    center", p->center);
 	print_vec("    normal", p->normal);
-	print_rgb(p->color);
+	print_rgbd(p->color);
 }
 
 void	print_cylinder(t_cylinder *c)
@@ -93,7 +93,7 @@ void	print_cylinder(t_cylinder *c)
 	printf("    radius: %.2f\n", c->radius);
 	printf("    diameter: %.2f\n", c->diameter);
 	printf("    height: %.2f\n", c->height);
-	print_rgb(c->color);
+	print_rgbd(c->color);
 }
 
 void	print_objects(t_obj *obj)

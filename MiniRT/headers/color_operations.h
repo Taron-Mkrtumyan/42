@@ -15,15 +15,25 @@
 
 # include "structs.h"
 
-static	inline t_rgb	color_add(t_rgb c1, t_rgb c2)
+static inline t_rgbd	to_rgbd(t_rgb c)
 {
-	return ((t_rgb){c1.r + c2.r, c1.g + c2.g, c1.b + c2.b});
+	return ((t_rgbd){(double)c.r / 255, (double)c.g / 255, (double)c.b / 255});
 }
 
-static	inline t_rgb	color_multi(t_rgb c, double factor)
+static inline t_rgb	to_rgb(t_rgbd c)
 {
-	return ((t_rgb){(unsigned char)(c.r * factor), \
-(unsigned char)(c.g * factor), (unsigned char)(c.b * factor)});
+	return ((t_rgb){(unsigned char)(fmin(1, c.r) * 255), \
+(unsigned char)(fmin(1, c.g) * 255), (unsigned char)(fmin(1, c.b) * 255)});
+}
+
+static inline t_rgbd	color_add(t_rgbd c1, t_rgbd c2)
+{
+	return ((t_rgbd){c1.r + c2.r, c1.g + c2.g, c1.b + c2.b});
+}
+
+static inline t_rgbd	color_multi(t_rgbd c, double factor)
+{
+	return ((t_rgbd){c.r * factor, c.g * factor, c.b * factor});
 }
 
 #endif

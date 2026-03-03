@@ -14,29 +14,61 @@
 
 // I = (k_a*I_a) + (k_d * I_L * (v_N * v_L)) + (k_s * I_L * (v_R * v_V)^n_S)
 
-t_rgb	pixel_color(t_ray *ray, t_amb_light *amb, t_obj *obj, t_light *light)
+static inline t_vec	vec_neg(t_vec v)
 {
-	t_rgb	res;
-	t_rgb	ambient;
-	t_rgb	diffuse;
-	t_rgb	specular;
+	return ((t_vec){-v.x, -v.y, -v.z});
+}
 
-	(void)obj;
-	(void)ray;
-	(void)light;
-	ambient = color_multi(amb->color, amb->ratio);
-	diffuse = (t_rgb){0, 0, 0};
-	specular = (t_rgb){0, 0, 0};
+static inline t_vec	vec_reflect(t_vec L, t_vec N)
+{
+	return (vec_sub(vec_multi(N, 2.0 * vec_dot(L, N)), L));
+}
+
+static inline t_rgbd	color_product(t_rgbd a, t_rgbd b)
+{
+	return ((t_rgbd){a.r * b.r, a.g * b.g, a.b * b.b});
+}
+
+t_vec	get_surface_normal(t_obj *obj, t_vec hit_point)
+{
+	if (!obj || !obj->data)
+		return ((t_vec){0, 0, 0});
+	if (obj->shape == SPHERE)
+		return (normalize(vec_sub(hit_point, ((t_sphere *)obj->data)->center)));
+	if (obj->shape == CYLINDER)
+		return (normalize(vec_sub(hit_point, ((t_cylinder *)obj->data)->center))\
+);
+	if (obj->shape == PLANE)
+		return (normalize(((t_plane *)obj->data)->normal));
+	return ((t_vec){0, 0, 0});
+}
+
+t_rgb	pixel_color(t_minirt *rt, t_obj *obj, t_vec hit_point, t_vec ray)
+{
+	t_rgbd			res;
+	t_point_vecs	vecs;
+	t_lightings		lightings;
+	t_light			*light;
+
+	light = rt->lights;
+	vecs.view_dir = normalize(vec_neg(ray));
+	vecs.surface_normal = get_surface_normal(obj, hit_point);
+	res = color_multi(rt->amb_light->color, rt->amb_light->ratio);
+	lightings.diffuse = (t_rgbd){0.0, 0.0, 0.0};
+	lightings.specular = (t_rgbd){0.0, 0.0, 0.0};
 	while (light)
 	{
-// 		diffuse = color_add(diffuse, color_multi(color_multi(light->color, \
-// light->brightness), vec_dot(light->position, vec_norm(ray, obj))));
-// 		specular = color_add(specular, color_multi(color_multi(light->color, \
-// light->brightness), pow(vec_dot(light->position, vec_norm(ray, obj)), \
-// obj->shininess)));
+		vecs.light_dir = normalize(vec_sub(light->position, hit_point));
+		vecs.reflect_dir = vec_reflect(vecs.light_dir, vecs.surface_normal);
+		lightings.diffuse = color_add(lightings.diffuse, color_multi(\
+color_multi(color_product(light->color, get_color(obj)), light->brightness), \
+fmax(0, vec_dot(vecs.light_dir, vecs.surface_normal))));
+		lightings.specular = color_add(lightings.specular, color_multi(\
+color_multi(light->color, light->brightness), \
+pow(fmax(0, vec_dot(vecs.reflect_dir, vecs.view_dir)), get_shininess(obj))));
 		light = light->next;
 	}
-	res = color_add(ambient, diffuse);
-	res = color_add(res, specular);
-	return (res);
+	res = color_add(res, lightings.diffuse);
+	res = color_add(res, lightings.specular);
+	return (to_rgb(res));
 }

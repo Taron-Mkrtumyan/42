@@ -35,7 +35,8 @@ UTILS   := utils1.c \
            utils4.c \
            gnl.c \
            is_double.c \
-		   print_objs.c
+           getters.c \
+           print_objs.c
 
 VALID   := validation1.c \
            validation2.c \
