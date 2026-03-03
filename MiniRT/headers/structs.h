@@ -63,7 +63,6 @@ typedef struct s_obj
 {
 	t_shape			shape;
 	void			*data;
-	double			shininess;
 	struct s_obj	*next;
 }	t_obj;
 
@@ -77,6 +76,7 @@ typedef struct s_sphere
 {
 	double		radius;
 	double		diameter;
+	double		shininess;
 	t_vec		center;
 	t_rgb		color;
 }	t_sphere;
@@ -85,6 +85,7 @@ typedef struct s_cylinder
 {
 	double		radius;
 	double		diameter;
+	double		shininess;
 	double		height;
 	t_vec		center;
 	t_vec		normal;
@@ -93,9 +94,10 @@ typedef struct s_cylinder
 
 typedef struct s_plane
 {
-	t_vec	center;
-	t_vec	normal;
-	t_rgb	color;
+	double		shininess;
+	t_vec		center;
+	t_vec		normal;
+	t_rgb		color;
 }	t_plane;
 
 typedef struct s_window		t_window;
