@@ -6,7 +6,7 @@
 /*   By: gkankia <gkankia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 19:35:51 by tmkrtumy          #+#    #+#             */
-/*   Updated: 2026/01/19 17:45:10 by tmkrtumy         ###   ########.fr       */
+/*   Updated: 2026/03/03 16:25:55 by gkankia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define VEC_EPSILON 1e-14
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
+#  define BUFFER_SIZE 1
 # endif
 
 # define GREEN		0x00FF00

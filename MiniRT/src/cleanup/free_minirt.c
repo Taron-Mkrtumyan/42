@@ -63,10 +63,10 @@ void	free_minirt(t_minirt *rt)
 		free(rt->camera);
 		rt->camera = NULL;
 	}
-	if (rt->light)
+	if (rt->lights)
 	{
-		free_lights(rt->light);
-		rt->light = NULL;
+		free_lights(rt->lights);
+		rt->lights = NULL;
 	}
 	if (rt->amb_light)
 	{

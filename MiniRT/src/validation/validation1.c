@@ -40,7 +40,7 @@ bool	is_valid_file(t_minirt *rt)
 {
 	if (!rt->camera)
 		return (error_msg("No camera defined"), false);
-	if (!rt->light)
+	if (!rt->lights)
 		return (error_msg("No light defined"), false);
 	if (!rt->amb_light)
 		return (error_msg("No ambient light defined"), false);

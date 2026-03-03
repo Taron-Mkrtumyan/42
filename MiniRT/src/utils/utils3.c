@@ -34,7 +34,7 @@ t_light	*create_light(t_minirt *minirt)
 	new_light = ft_calloc(sizeof(t_light), 1);
 	if (!new_light)
 		return (NULL);
-	push_light(new_light, &minirt->light);
+	push_light(new_light, &minirt->lights);
 	return (new_light);
 }
 
