@@ -17,9 +17,9 @@ int	str_to_int_color(char *str)
 	int	c;
 
 	c = ft_atoi(str);
-	if (c < 0)
+	if (c <= 0)
 		return (0);
-	if (c > 255)
+	if (c >= 255)
 		return (255);
 	return (c);
 }
@@ -58,16 +58,16 @@ bool	parse_color(char *str, t_rgb *color)
 	rgb = ft_split(str, ',');
 	if (!rgb || ft_arrlen(rgb) != 3)
 		return (free_arr(rgb), false);
-	if (!is_ulong(rgb[0]) || !is_ulong(rgb[1]) || !is_ulong(rgb[2]))
+	if (!is_uchar(rgb[0]) || !is_uchar(rgb[1]) || !is_uchar(rgb[2]))
 		return (free_arr(rgb), false);
 	r = str_to_int_color(rgb[0]);
 	g = str_to_int_color(rgb[1]);
 	b = str_to_int_color(rgb[2]);
 	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
 		return (free_arr(rgb), false);
-	color->r = r;
-	color->g = g;
-	color->b = b;
+	color->r = (unsigned char)r;
+	color->g = (unsigned char)g;
+	color->b = (unsigned char)b;
 	free_arr(rgb);
 	return (true);
 }

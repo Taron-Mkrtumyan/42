@@ -12,23 +12,25 @@
 
 #include "minirt.h"
 
-bool	is_ulong(char *str)
+bool	is_uchar(char *str)
 {
-	unsigned long	res;
-	unsigned long	limit;
+	unsigned char	res;
+	unsigned char	limit;
 	int				i;
 
 	if (!str || !str[0])
 		return (false);
 	i = 0;
 	res = 0;
-	limit = ULONG_MAX / 10;
+	limit = UCHAR_MAX / 10;
+	if (str[i] == '-' || str[i] == '+')
+		i++;
 	while (str[i])
 	{
-		if (str[i] < '0' || str[i] > '9')
+		if (!ft_isdigit(str[i]))
 			return (false);
-		if (res > limit || (res == limit && (unsigned long)(str[i] - \
-'0') > ULONG_MAX % 10))
+		if (res > limit || (res == limit && (unsigned char)(str[i] - \
+'0') > UCHAR_MAX % 10))
 			return (false);
 		res = res * 10 + (str[i] - '0');
 		i++;

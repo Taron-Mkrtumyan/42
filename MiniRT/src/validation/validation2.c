@@ -6,7 +6,7 @@
 /*   By: gkankia <gkankia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 18:33:56 by tmkrtumy          #+#    #+#             */
-/*   Updated: 2026/02/27 17:55:33 by gkankia          ###   ########.fr       */
+/*   Updated: 2026/03/03 15:15:56 by gkankia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ bool	parse_camera(t_minirt *rt, char *line)
 		return (parse_error("Camera memory allocation failed", params));
 	if (!parse_camera_params(params, rt->camera))
 		return (parse_error_ptr("Invalid camera parameters",
-				rt->camera, params));
+				NULL, params));
 	rt->camera->orientation = vec_normalize(rt->camera->orientation);
 	free_arr(params);
 	return (true);
@@ -95,10 +95,10 @@ params));
 	{
 		if (i == 1 && !parse_double(params[i], &rt->amb_light->ratio))
 			return (parse_error_ptr("Invalid ambient ratio",
-					rt->amb_light, params));
+					NULL, params));
 		if (i == 2 && !parse_color(params[i], &rt->amb_light->color))
 			return (parse_error_ptr("Invalid ambient color",
-					rt->amb_light, params));
+					NULL, params));
 	}
 	free_arr(params);
 	return (true);
@@ -122,11 +122,11 @@ bool	parse_light(t_minirt *rt, char *line)
 	while (params[++i])
 	{
 		if (i == 1 && !parse_vector(params[i], &light->position))
-			return (parse_error_ptr("Invalid light position", light, params));
+			return (parse_error_ptr("Invalid light position", NULL, params));
 		if (i == 2 && !parse_double(params[i], &light->brightness))
-			return (parse_error_ptr("Invalid light brightness", light, params));
+			return (parse_error_ptr("Invalid light brightness", NULL, params));
 		if (i == 3 && !parse_color(params[i], &light->color))
-			return (parse_error_ptr("Invalid light color", light, params));
+			return (parse_error_ptr("Invalid light color", NULL, params));
 	}
 	free_arr(params);
 	return (true);

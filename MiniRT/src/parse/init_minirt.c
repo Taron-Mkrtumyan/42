@@ -15,9 +15,10 @@
 bool	init_minirt(t_minirt *minirt, char *filename)
 {
 	(void) filename;
-	minirt->window = malloc(sizeof(t_window));
+	minirt->window = ft_calloc(sizeof(t_window), 1);
 	if (!minirt->window)
 		return (false);
+	minirt->window->minirt = minirt;
 	//if (!init_scene(minirt, filename))
 	//	return (false);
 	init_window(minirt->window);

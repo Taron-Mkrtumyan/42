@@ -27,7 +27,6 @@ PARSE   := init_minirt.c \
            init_window.c
 
 CLEANUP := free_minirt.c \
-           free_window.c \
            free_arr.c
 
 UTILS   := utils1.c \

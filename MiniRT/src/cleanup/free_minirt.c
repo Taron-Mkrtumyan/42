@@ -3,31 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   free_minirt.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmkrtumy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gkankia <gkankia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 17:39:31 by tmkrtumy          #+#    #+#             */
-/*   Updated: 2026/01/19 17:48:01 by tmkrtumy         ###   ########.fr       */
+/*   Updated: 2026/03/03 15:07:15 by gkankia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-/*
-void	free_minirt(t_minirt *rt)
-{
-	if (!rt)
-		return ;
-	if (rt->window)
-		free_window(rt->window);
-	if (rt->camera)
-		free(rt->camera);
-	if (rt->lights)
-		free_lights(rt->lights);
-	if (rt->amb_light)
-		free(rt->amb_light);
-	if (rt->objects)
-		free_objects(rt->objects);
-	free(rt);
-}
 
 void	free_window(t_window *win)
 {
@@ -50,9 +33,9 @@ void	free_objects(t_obj *obj)
 	while (obj)
 	{
 		tmp = obj->next;
-        if (obj->data)
-            free(obj->data);
-        free(obj);
+		if (obj->data)
+			free(obj->data);
+		free(obj);
 		obj = tmp;
 	}
 }
@@ -68,9 +51,29 @@ void	free_lights(t_light *light)
 		light = tmp;
 	}
 }
-*/
-void	free_minirt(t_minirt *minirt)
+
+void	free_minirt(t_minirt *rt)
 {
-	free(minirt->window);
-	free(minirt);
+	if (!rt)
+		return ;
+	if (rt->window)
+		free_window(rt->window);
+	if (rt->camera)
+	{
+		free(rt->camera);
+		rt->camera = NULL;
+	}
+	if (rt->light)
+	{
+		free_lights(rt->light);
+		rt->light = NULL;
+	}
+	if (rt->amb_light)
+	{
+		free(rt->amb_light);
+		rt->amb_light = NULL;
+	}
+	if (rt->objects)
+		free_objects(rt->objects);
+	free(rt);
 }
