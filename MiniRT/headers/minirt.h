@@ -97,7 +97,7 @@ char		*get_next_line(int fd);
 
 int			double_length(double num);
 bool		is_double(char *str);
-bool		is_ulong(char *str);
+bool		is_uchar(char *str);
 int			str_to_int_color(char *str);
 void		print_minirt(t_minirt *rt);
 bool		is_valid_obj_name(char *line);

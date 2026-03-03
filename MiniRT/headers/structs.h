@@ -67,6 +67,12 @@ typedef struct s_obj
 	struct s_obj	*next;
 }	t_obj;
 
+typedef struct s_ray
+{
+	t_vec	origin;
+	t_vec	direction;
+}	t_ray;
+
 typedef struct s_sphere
 {
 	double		radius;

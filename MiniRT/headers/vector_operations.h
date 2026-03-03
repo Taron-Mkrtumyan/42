@@ -13,7 +13,7 @@
 #ifndef VECTOR_OPERATIONS_H
 # define VECTOR_OPERATIONS_H
 
-#include "structs.h"
+# include "structs.h"
 
 static inline t_vec	vec_add(t_vec v1, t_vec v2)
 {
