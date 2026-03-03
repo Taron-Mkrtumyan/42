@@ -23,7 +23,9 @@ bool	is_uchar(char *str)
 	i = 0;
 	res = 0;
 	limit = UCHAR_MAX / 10;
-	if (str[i] == '-' || str[i] == '+')
+	if (str[i] == '-')
+		return (false);
+	if (str[i] == '+')
 		i++;
 	while (str[i])
 	{
