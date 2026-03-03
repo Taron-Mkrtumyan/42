@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_minirt.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmkrtumy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gkankia <gkankia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 17:39:31 by tmkrtumy          #+#    #+#             */
-/*   Updated: 2026/01/19 17:48:01 by tmkrtumy         ###   ########.fr       */
+/*   Updated: 2026/03/03 15:07:15 by gkankia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,20 @@ void	free_minirt(t_minirt *rt)
 	if (rt->window)
 		free_window(rt->window);
 	if (rt->camera)
+	{
 		free(rt->camera);
+		rt->camera = NULL;
+	}
 	if (rt->light)
+	{
 		free_lights(rt->light);
+		rt->light = NULL;
+	}
 	if (rt->amb_light)
+	{
 		free(rt->amb_light);
+		rt->amb_light = NULL;
+	}
 	if (rt->objects)
 		free_objects(rt->objects);
 	free(rt);

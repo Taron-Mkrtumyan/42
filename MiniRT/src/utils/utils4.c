@@ -6,7 +6,7 @@
 /*   By: gkankia <gkankia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 19:34:36 by tmkrtumy          #+#    #+#             */
-/*   Updated: 2026/02/27 17:53:12 by gkankia          ###   ########.fr       */
+/*   Updated: 2026/03/03 15:09:07 by gkankia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ bool	parse_error_ptr(char *msg, void *ptr, char **params)
 {
 	error_msg(msg);
 	if (ptr)
+	{
 		free(ptr);
+		ptr = NULL;
+	}
 	if (params)
 		free_arr(params);
 	return (false);
