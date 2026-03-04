@@ -122,15 +122,25 @@ typedef struct s_plane
 	t_rgbd		color;
 }						t_plane;
 
+typedef struct s_viewport
+{
+	t_vec		normal;
+	t_vec		right;
+	t_vec		up;
+	double		width;
+	double		height;
+}						t_viewport;
+
 typedef struct s_window		t_window;
 
 typedef struct s_minirt
 {
-	t_window	*window;
-	t_camera	*camera;
-	t_light		*lights;
-	t_obj		*objects;
-	t_amb_light	*amb_light;
+	t_window		*window;
+	t_camera		*camera;
+	t_light			*lights;
+	t_obj			*objects;
+	t_amb_light		*amb_light;
+	t_viewport		*viewport;
 }							t_minirt;
 
 typedef struct s_window

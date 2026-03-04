@@ -53,7 +53,8 @@ SRCS := \
 	$(addprefix $(SRC_DIR)/cleanup/, $(CLEANUP)) \
 	$(addprefix $(SRC_DIR)/utils/, $(UTILS)) \
 	$(addprefix $(SRC_DIR)/validation/, $(VALID)) \
-	$(addprefix $(SRC_DIR)/math/, $(MATH))
+	$(addprefix $(SRC_DIR)/math/, $(MATH)) \
+	$(addprefix $(SRC_DIR)/render/, viewport.c)
 
 OBJS := $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 

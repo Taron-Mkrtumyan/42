@@ -16,7 +16,7 @@ bool	parse_shininess(char *str, double *shininess)
 {
 	if (!parse_double(str, shininess))
 		return (false);
-	if (shininess <= 0)
+	if (*shininess <= 0)
 		return (false);
 	return (true);
 }

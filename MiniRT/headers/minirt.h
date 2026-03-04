@@ -66,7 +66,7 @@ bool		is_valid_file(t_minirt *rt);
 
 void		init_window(t_window *w);
 bool		init_minirt(t_minirt *minirt, char *filename);
-bool		init_scene(t_minirt *minirt, char *filename);
+bool		init_scene(t_minirt *minirt);
 bool		render_scene(t_minirt *minirt);
 
 bool		parse_params(t_minirt *rt, char *line);
@@ -106,5 +106,8 @@ t_rgbd		get_color(const t_obj *obj);
 t_vec		normalize(t_vec v);
 
 bool		error_msg(char *msg);
+
+bool        init_viewport(t_minirt *rt);
+bool        init_scene(t_minirt *rt);
 
 #endif

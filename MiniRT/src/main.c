@@ -19,6 +19,10 @@ int	main(int ac, char **av)
 	minirt = ft_calloc(sizeof(t_minirt), 1);
 	if (!minirt)
 		return (error_msg("Failed to allocate memory for minirt"), 1);
+	minirt->window = ft_calloc(sizeof(t_window), 1);
+	if (!minirt->window)
+		return (false);
+	minirt->window->minirt = minirt;
 	if (!valid_args(minirt, av[1], ac))
 	{
 		free_minirt(minirt);

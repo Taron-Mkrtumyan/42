@@ -40,19 +40,29 @@ void	init_window(t_window *w)
 	w->mlx = mlx_init();
 	if (!w->mlx)
 		return (free(w));
-	w->win = mlx_new_window(w->mlx, SIZE, SIZE, "MiniRT");
+	if (!w->minirt->window->width || !w->minirt->window->height)
+	{
+		w->minirt->window->width = SIZE;
+		w->minirt->window->height = SIZE;
+	}
+	init_viewport(w->minirt);
+	w->win = mlx_new_window(w->mlx, w->minirt->window->width, \
+w->minirt->window->height, "MiniRT");
 	if (!w->win)
 		return (mlx_destroy_display(w->mlx), free(w->mlx));
-	mlx_key_hook(w->win, handle_key, &w->mlx);
-	w->img = mlx_new_image(w->mlx, SIZE, SIZE);
+	w->img = mlx_new_image(w->mlx, w->minirt->window->width, \
+w->minirt->window->height);
 	if (!w->img)
-		return (mlx_destroy_window(w->mlx, w->win), \
-mlx_destroy_display(w->mlx), free(w->mlx));
+		return (mlx_destroy_window(w->mlx, w->win),
+			mlx_destroy_display(w->mlx), free(w->mlx));
 	w->addr = mlx_get_data_addr(w->img, &w->bpp, &w->line_len, &w->endian);
 	events_init(w);
-	//render_fractal(w);
+	mlx_key_hook(w->win, handle_key, &w->mlx);
+	init_scene(w->minirt);
+	mlx_put_image_to_window(w->mlx, w->win, w->img, 0, 0);
 	mlx_loop(w->mlx);
 	mlx_destroy_image(w->mlx, w->img);
 	mlx_destroy_window(w->mlx, w->win);
-	return (mlx_destroy_display(w->mlx), free(w->mlx));
+	mlx_destroy_display(w->mlx);
+	free(w->mlx);
 }

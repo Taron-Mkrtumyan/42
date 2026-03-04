@@ -59,21 +59,14 @@ void	free_minirt(t_minirt *rt)
 	if (rt->window)
 		free_window(rt->window);
 	if (rt->camera)
-	{
 		free(rt->camera);
-		rt->camera = NULL;
-	}
 	if (rt->lights)
-	{
 		free_lights(rt->lights);
-		rt->lights = NULL;
-	}
 	if (rt->amb_light)
-	{
 		free(rt->amb_light);
-		rt->amb_light = NULL;
-	}
 	if (rt->objects)
 		free_objects(rt->objects);
+	if (rt->viewport)
+		free(rt->viewport);
 	free(rt);
 }

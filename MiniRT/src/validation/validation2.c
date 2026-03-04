@@ -66,9 +66,9 @@ bool	parse_resolution(t_minirt *rt, char *line)
 	while (params[++i])
 	{
 		if (i == 1 && !parse_double(params[i], &rt->window->width))
-			return (parse_error("Invalid width", params));
+			return (parse_error("Invalid width resolution", params));
 		if (i == 2 && !parse_double(params[i], &rt->window->height))
-			return (parse_error("Invalid height", params));
+			return (parse_error("Invalid height resolution", params));
 	}
 	free_arr(params);
 	return (true);
