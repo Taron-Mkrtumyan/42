@@ -25,29 +25,29 @@ MAIN    := main.c
 
 PARSE   := parse1.c \
            parse2.c \
-           parse3.c
+           parse3.c \
+		   parse4.c \
 
 CLEANUP := free_minirt.c \
-           free_arr.c
 
-UTILS   := utils1.c \
-           utils2.c \
-           utils3.c \
-           utils4.c \
-           gnl.c \
+UTILS   := create_push_light.c \
+           is_valid_obj_name.c \
+           str_to_int_color.c \
+           get_next_line.c \
+		   push_object.c \
            is_double.c \
+		   is_uchar.c \
            getters.c \
-           print_objs.c
+           errors.c \
+           print_objs.c \
 
 MATH    := vec_normalize.c \
-           pixel_color.c \
+           get_pixel_color.c \
 
 RENDER  := render_scene.c \
+		   init_window.c \
 		   viewport.c \
-		   init_window.c
 
-
-# Full paths (no wildcards used)
 SRCS := \
 	$(addprefix $(SRC_DIR)/, $(MAIN)) \
 	$(addprefix $(SRC_DIR)/parse/, $(PARSE)) \

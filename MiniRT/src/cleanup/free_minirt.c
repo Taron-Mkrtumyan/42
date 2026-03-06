@@ -12,6 +12,19 @@
 
 #include "minirt.h"
 
+void	free_arr(char *arr[])
+{
+	int	i;
+
+	i = 0;
+	if (arr)
+	{
+		while (arr[i])
+			free(arr[i++]);
+		free(arr);
+	}
+}
+
 void	free_window(t_window *win)
 {
 	if (!win)

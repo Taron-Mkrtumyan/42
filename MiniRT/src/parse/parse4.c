@@ -1,27 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils1.c                                           :+:      :+:    :+:   */
+/*   parse4.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmkrtumy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/19 18:34:40 by tmkrtumy          #+#    #+#             */
-/*   Updated: 2026/01/19 18:34:42 by tmkrtumy         ###   ########.fr       */
+/*   Created: 2026/03/06 18:59:53 by tmkrtumy          #+#    #+#             */
+/*   Updated: 2026/03/06 19:03:25 by tmkrtumy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	str_to_int_color(char *str)
+bool	parse_shape(t_minirt *rt, char *line, t_shape type, int nb_params)
 {
-	int	c;
+	t_obj	*obj;
+	char	**params;
 
-	c = ft_atoi(str);
-	if (c <= 0)
-		return (0);
-	if (c >= 255)
-		return (255);
-	return (c);
+	obj = ft_calloc(sizeof(t_obj), 1);
+	if (!obj)
+		return (error_msg("Shape memory allocation failed"), false);
+	obj->shape = type;
+	obj->next = NULL;
+	params = ft_split(line, ' ');
+	if (!params)
+		return (free(obj), error_msg("Shape split failed"), false);
+	if (ft_arrlen(params) < nb_params)
+		return (free(obj), parse_error("Few shape parameters: ", \
+params, rt->file_line), printf("%s\n", line), false);
+	if (type == PLANE && !parse_plane(params, obj, rt->file_line))
+		return (free(obj), free_arr(params), false);
+	if (type == SPHERE && !parse_sphere(params, obj, rt->file_line))
+		return (free(obj), free_arr(params), false);
+	if (type == CYLINDER && !parse_cylinder(params, obj, rt->file_line))
+		return (free(obj), free_arr(params), false);
+	push_object(obj, &rt->objects);
+	free_arr(params);
+	return (true);
 }
 
 bool	parse_vector(char *str, t_vec *vec)

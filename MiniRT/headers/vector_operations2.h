@@ -21,4 +21,14 @@ static inline t_vec	vec_cross(t_vec v1, t_vec v2)
 v1.x * v2.y - v1.y * v2.x});
 }
 
+static inline t_vec	vec_neg(t_vec v)
+{
+	return ((t_vec){-v.x, -v.y, -v.z});
+}
+
+static inline t_vec	vec_reflect(t_vec L, t_vec N)
+{
+	return (vec_sub(vec_multi(N, 2.0 * vec_dot(L, N)), L));
+}
+
 #endif

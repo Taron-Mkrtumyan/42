@@ -36,4 +36,9 @@ static inline t_rgbd	color_multi(t_rgbd c, double factor)
 	return ((t_rgbd){c.r * factor, c.g * factor, c.b * factor});
 }
 
+static inline t_rgbd	color_product(t_rgbd a, t_rgbd b)
+{
+	return ((t_rgbd){a.r * b.r, a.g * b.g, a.b * b.b});
+}
+
 #endif

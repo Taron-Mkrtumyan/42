@@ -123,7 +123,7 @@ bool	parse_light(t_minirt *rt, char *line)
 	if (!params)
 		return (error_msg("Light split allocation failed"), 1);
 	if (ft_arrlen(params) != 4)
-		return (parse_error("Invalid light parameters", \
+		return (parse_error("Wrong number of light parameters", \
 params, rt->file_line));
 	light = create_light(rt);
 	if (!light)

@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_arr.c                                         :+:      :+:    :+:   */
+/*   utils1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmkrtumy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/19 18:51:44 by tmkrtumy          #+#    #+#             */
-/*   Updated: 2026/01/19 18:52:04 by tmkrtumy         ###   ########.fr       */
+/*   Created: 2026/01/19 18:34:40 by tmkrtumy          #+#    #+#             */
+/*   Updated: 2026/01/19 18:34:42 by tmkrtumy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void	free_arr(char *arr[])
+int	str_to_int_color(char *str)
 {
-	int	i;
+	int	c;
 
-	i = 0;
-	if (arr)
-	{
-		while (arr[i])
-			free(arr[i++]);
-		free(arr);
-	}
+	c = ft_atoi(str);
+	if (c <= 0)
+		return (0);
+	if (c >= 255)
+		return (255);
+	return (c);
 }

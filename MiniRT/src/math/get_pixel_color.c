@@ -14,21 +14,6 @@
 
 // I = (k_a*I_a) + (k_d * I_L * (v_N * v_L)) + (k_s * I_L * (v_R * v_V)^n_S)
 
-static inline t_vec	vec_neg(t_vec v)
-{
-	return ((t_vec){-v.x, -v.y, -v.z});
-}
-
-static inline t_vec	vec_reflect(t_vec L, t_vec N)
-{
-	return (vec_sub(vec_multi(N, 2.0 * vec_dot(L, N)), L));
-}
-
-static inline t_rgbd	color_product(t_rgbd a, t_rgbd b)
-{
-	return ((t_rgbd){a.r * b.r, a.g * b.g, a.b * b.b});
-}
-
 t_vec	get_surface_normal(t_obj *obj, t_vec hit_point)
 {
 	if (!obj || !obj->data)

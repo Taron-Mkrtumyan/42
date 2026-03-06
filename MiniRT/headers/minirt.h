@@ -15,6 +15,7 @@
 
 # include "includes.h"
 # include "structs.h" 
+# include "color_escape_codes.h"
 # include "vector_operations1.h"
 # include "vector_operations2.h"
 # include "color_operations.h"
@@ -28,38 +29,8 @@
 # define VEC_EPSILON 1e-14
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
+#  define BUFFER_SIZE 1024
 # endif
-
-# define GREEN		"\033[32m"
-# define RED		"\033[31m"
-# define BOLDRED	"\033[1;31m"
-# define CYAN		"\033[36m"  
-# define BOLDCYAN	"\033[1;36m"
-# define RESET		"\033[0m"
-
-# define ERR_MALLOC			"Error\nMemory allocation failed\n"
-# define ERR_ARGS			"Error\nWrong number of arguments\n"
-# define ERR_MAP			"Error\nBad formatting of the map_file\n"
-# define ERR_READING		"Error\nCannot read the map_file\n"
-# define ERR_FD_OPEN		"Error\nCould not open the map_file\n"
-# define ERR_FD_CLOSE		"Error\nCould not close the map_file\n"
-# define ERR_IS_DIR			"Error\nThe file is a directory, not a map\n"
-# define ERR_MLX			"Error\nMLX initiation failed\n"
-# define ERR_WIN			"Error\nWindow initiation failed\n"
-# define ERR_IMG			"Error\nError on image initiation\n"
-
-# define SUCCES 0
-# define ERROR_FILE_OPEN 1
-
-# define ERROR_MALLOC_LINE 2
-# define ERROR_MALLOC_AMBIENT 3
-# define ERROR_MALLOC_CAMERA 4
-# define ERROR_MALLOC_CAMERA_ORIGIN 5
-# define ERROR_MALLOC_CAMERA_DIRECTION 6
-# define ERROR_MALLOC_LIGHT 7
-# define ERROR_MALLOC_LIGHT_ORIGIN 8
-# define ERROR_MALLOC_OBJECTS_LIST 9
 
 # define ERROR_MALLOC "Error\nMemory allocation failed\n"
 
@@ -103,12 +74,10 @@ bool		is_valid_obj_name(char *line);
 void		print_minirt(t_minirt *rt);
 double		get_shininess(const t_obj *obj);
 t_rgbd		get_color(const t_obj *obj);
-t_rgb		get_pixel_color(t_minirt *rt, t_obj *obj, t_vec \
-hit_point, t_vec ray);
+t_rgb		get_pixel_color(t_minirt *rt, t_obj *o, t_vec hit_point, t_vec ray);
 
 t_vec		normalize(t_vec v);
 
 bool		error_msg(char *msg);
-
 
 #endif
