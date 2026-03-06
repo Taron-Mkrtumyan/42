@@ -43,6 +43,8 @@ UTILS   := create_push_light.c \
 
 MATH    := vec_normalize.c \
            get_pixel_color.c \
+		   get_surface_normal.c \
+		   get_object_intersection.c \
 
 RENDER  := render_scene.c \
 		   init_window.c \

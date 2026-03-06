@@ -26,13 +26,11 @@
 # define NP_PLUS	65451
 # define NP_MINUS	65453
 
-# define VEC_EPSILON 1e-14
+# define EPSILON 1e-6
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1024
 # endif
-
-# define ERROR_MALLOC "Error\nMemory allocation failed\n"
 
 bool		valid_args(t_minirt *rt, char *path, int ac);
 bool		is_valid_file(t_minirt *rt);
@@ -74,7 +72,8 @@ bool		is_valid_obj_name(char *line);
 void		print_minirt(t_minirt *rt);
 double		get_shininess(const t_obj *obj);
 t_rgbd		get_color(const t_obj *obj);
-t_rgb		get_pixel_color(t_minirt *rt, t_obj *o, t_vec hit_point, t_vec ray);
+t_rgb		get_pixel_color(t_minirt *rt, t_obj_hit obj_hit, t_vec ray_dir);
+t_vec		get_surface_normal(t_obj *obj, t_vec hit_point);
 
 t_vec		normalize(t_vec v);
 

@@ -6,7 +6,7 @@
 /*   By: gkankia <gkankia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/01 16:23:29 by tmkrtumy          #+#    #+#             */
-/*   Updated: 2026/03/06 17:32:30 by gkankia          ###   ########.fr       */
+/*   Updated: 2026/03/06 20:35:27 by tmkrtumy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,13 @@ typedef struct s_ray
 	t_vec	direction;
 }						t_ray;
 
+typedef enum e_hit_surface
+{
+	HIT_SIDE,
+	HIT_TOP,
+	HIT_BOTTOM
+}			t_hit_surface;
+
 typedef struct s_point_vecs
 {
 	t_vec	light_dir;
@@ -105,13 +112,14 @@ typedef struct s_sphere
 
 typedef struct s_cylinder
 {
-	double		radius;
-	double		diameter;
-	double		shininess;
-	double		height;
-	t_vec		center;
-	t_vec		normal;
-	t_rgbd		color;
+	double			radius;
+	double			diameter;
+	double			shininess;
+	double			height;
+	t_vec			center;
+	t_vec			normal;
+	t_rgbd			color;
+	t_hit_surface	hit_surface;
 }						t_cylinder;
 
 typedef struct s_plane
@@ -130,6 +138,14 @@ typedef struct s_viewport
 	double		width;
 	double		height;
 }						t_viewport;
+
+typedef struct s_obj_hit
+{
+	t_vec		hit_point;
+	t_vec		normal;
+	double		t;
+	t_obj		*obj;
+}						t_obj_hit;
 
 typedef struct s_window		t_window;
 
