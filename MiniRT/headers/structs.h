@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmkrtumy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gkankia <gkankia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/01 16:23:29 by tmkrtumy          #+#    #+#             */
-/*   Updated: 2026/03/01 16:25:43 by tmkrtumy         ###   ########.fr       */
+/*   Updated: 2026/03/06 17:32:30 by gkankia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,7 @@ typedef struct s_minirt
 	t_obj			*objects;
 	t_amb_light		*amb_light;
 	t_viewport		*viewport;
+	int				file_line;
 }							t_minirt;
 
 typedef struct s_window

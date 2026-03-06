@@ -6,7 +6,7 @@
 /*   By: gkankia <gkankia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 18:33:19 by tmkrtumy          #+#    #+#             */
-/*   Updated: 2026/03/03 15:23:41 by gkankia          ###   ########.fr       */
+/*   Updated: 2026/03/06 17:45:20 by gkankia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ static bool	read_file(t_minirt *rt, int fd)
 	char	*line;
 
 	ret = true;
+	rt->file_line = 1;
 	while (ret != false)
 	{
 		line = get_next_line(fd);
@@ -77,6 +78,7 @@ static bool	read_file(t_minirt *rt, int fd)
 		if (!parse_params(rt, line))
 			ret = false;
 		free(line);
+		rt->file_line++;
 	}
 	if (ret && !is_valid_file(rt))
 	{

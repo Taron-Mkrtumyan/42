@@ -6,24 +6,26 @@
 /*   By: gkankia <gkankia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 19:34:36 by tmkrtumy          #+#    #+#             */
-/*   Updated: 2026/03/03 15:09:07 by gkankia          ###   ########.fr       */
+/*   Updated: 2026/03/06 17:43:59 by gkankia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-bool	parse_error(char *msg, char **params)
+bool	parse_error(char *msg, char **params, int file_line)
 {
 	if (msg)
 		error_msg(msg);
+	printf("line: %d\n", file_line);
 	if (params)
 		free_arr(params);
 	return (false);
 }
 
-bool	parse_error_ptr(char *msg, void *ptr, char **params)
+bool	parse_error_ptr(char *msg, void *ptr, char **params, int file_line)
 {
 	error_msg(msg);
+	printf("line: %d\n", file_line);
 	if (ptr)
 	{
 		free(ptr);
@@ -57,12 +59,12 @@ bool	parse_shape(t_minirt *rt, char *line, t_shape type, int nb_params)
 		return (free(obj), error_msg("Shape split failed"), false);
 	if (ft_arrlen(params) < nb_params)
 		return (free(obj), parse_error("Wrong number of shape parameters: ", \
-params), printf("%s\n", line), false);
-	if (type == PLANE && !parse_plane(params, obj))
+params, rt->file_line), printf("%s\n", line), false);
+	if (type == PLANE && !parse_plane(params, obj, rt->file_line))
 		return (free(obj), free_arr(params), false);
-	if (type == SPHERE && !parse_sphere(params, obj))
+	if (type == SPHERE && !parse_sphere(params, obj, rt->file_line))
 		return (free(obj), free_arr(params), false);
-	if (type == CYLINDER && !parse_cylinder(params, obj))
+	if (type == CYLINDER && !parse_cylinder(params, obj, rt->file_line))
 		return (free(obj), free_arr(params), false);
 	push_object(obj, &rt->objects);
 	free_arr(params);

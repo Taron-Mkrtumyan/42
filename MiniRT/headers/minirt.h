@@ -6,7 +6,7 @@
 /*   By: gkankia <gkankia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 19:35:51 by tmkrtumy          #+#    #+#             */
-/*   Updated: 2026/03/03 16:25:55 by gkankia          ###   ########.fr       */
+/*   Updated: 2026/03/06 17:44:19 by gkankia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,11 @@ bool		parse_light(t_minirt *rt, char *line);
 bool		parse_ambient(t_minirt *rt, char *line);
 bool		parse_resolution(t_minirt *rt, char *line);
 bool		parse_camera(t_minirt *rt, char *line);
-bool		parse_plane(char **params, t_obj *obj);
-bool		parse_sphere(char **params, t_obj *obj);
-bool		parse_cylinder(char **params, t_obj *obj);
-bool		parse_error_ptr(char *msg, void *ptr, char **params);
-bool		parse_error(char *msg, char **params);
+bool		parse_plane(char **params, t_obj *obj, int file_line);
+bool		parse_sphere(char **params, t_obj *obj, int file_line);
+bool		parse_cylinder(char **params, t_obj *obj, int file_line);
+bool		parse_error_ptr(char *msg, void *ptr, char **params, int file_line);
+bool		parse_error(char *msg, char **params, int file_line);
 
 void		push_object(t_obj *obj, t_obj **objs);
 void		push_light(t_light *new_light, t_light **lights);
