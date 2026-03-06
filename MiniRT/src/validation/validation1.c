@@ -6,7 +6,7 @@
 /*   By: gkankia <gkankia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 18:33:19 by tmkrtumy          #+#    #+#             */
-/*   Updated: 2026/03/06 17:45:20 by gkankia          ###   ########.fr       */
+/*   Updated: 2026/03/06 17:53:14 by gkankia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ bool	parse_params(t_minirt *rt, char *line)
 		return (true);
 	if (!is_valid_obj_name(line))
 		return (error_msg("Invalid object name: "), \
-printf("%s\n", line), false);
+printf("%s\nline: %d\n", line, rt->file_line), false);
 	if (ft_strncmp(line, "R", 1) == 0)
 		return (parse_resolution(rt, line));
 	if (ft_strncmp(line, "A", 1) == 0)
