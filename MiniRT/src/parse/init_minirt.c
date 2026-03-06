@@ -21,9 +21,9 @@ void	put_pixel(t_window *win, int x, int y, t_rgb color)
 		return ;
 	pixel = win->addr + y * win->line_len + x * (win->bpp / 8);
 	i = 0;
-	pixel[i++] = (char)(color.r & 0xFF);
-	pixel[i++] = (char)(color.g & 0xFF);
 	pixel[i++] = (char)(color.b & 0xFF);
+	pixel[i++] = (char)(color.g & 0xFF);
+	pixel[i++] = (char)(color.r & 0xFF);
 	if (win->bpp == 32)
 		pixel[i] = 0;
 }
@@ -64,6 +64,7 @@ bool	init_scene(t_minirt *rt)
 	int		y;
 	t_ray	ray;
 	t_vec	top_left;
+	t_rgb	color;
 
 	top_left = get_viewport_top_left(rt);
 	x = 0;
@@ -74,7 +75,8 @@ bool	init_scene(t_minirt *rt)
 		while (x < rt->window->width)
 		{
 			ray = get_ray(rt, x, y, top_left);
-			put_pixel(rt->window, x, y, (t_rgb){255, 255, 255});
+			color = (t_rgb){255, 0, 0};
+			put_pixel(rt->window, x, y, color);
 			x++;
 		}
 		x = 0;

@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VECTOR_OPERATIONS_H
-# define VECTOR_OPERATIONS_H
+#ifndef VECTOR_OPERATIONS1_H
+# define VECTOR_OPERATIONS1_H
 
 # include "structs.h"
 

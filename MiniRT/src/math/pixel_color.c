@@ -43,7 +43,7 @@ t_vec	get_surface_normal(t_obj *obj, t_vec hit_point)
 	return ((t_vec){0, 0, 0});
 }
 
-t_rgb	pixel_color(t_minirt *rt, t_obj *obj, t_vec hit_point, t_vec ray)
+t_rgb	get_pixel_color(t_minirt *rt, t_obj *obj, t_vec hit_point, t_vec ray)
 {
 	t_rgbd			res;
 	t_point_vecs	vecs;

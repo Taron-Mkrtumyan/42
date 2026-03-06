@@ -1,16 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   viewport.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tmkrtumy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/06 16:48:35 by tmkrtumy          #+#    #+#             */
+/*   Updated: 2026/03/06 16:52:47 by tmkrtumy         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
-t_vec	vec_cross(t_vec v1, t_vec v2)
-{
-	t_vec	res;
-
-	res.x = v1.y * v2.z - v1.z * v2.y;
-	res.y = v1.z * v2.x - v1.x * v2.z;
-	res.z = v1.x * v2.y - v1.y * v2.x;
-	return (res);
-}
-
-double	get_ratio(int width, int height)
+static double	get_ratio(int width, int height)
 {
 	if (height == 0)
 		return (1.0);

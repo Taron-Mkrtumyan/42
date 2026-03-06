@@ -15,12 +15,12 @@
 
 # include "includes.h"
 # include "structs.h" 
-# include "vector_operations.h"
+# include "vector_operations1.h"
+# include "vector_operations2.h"
 # include "color_operations.h"
 
-# define SIZE		1000
-# define QUALITY	0
-# define SMOOTH		0.2
+# define HEIGHT		1080
+# define WIDTH		1920
 
 # define NP_PLUS	65451
 # define NP_MINUS	65453
@@ -102,12 +102,15 @@ bool		is_valid_obj_name(char *line);
 void		print_minirt(t_minirt *rt);
 double		get_shininess(const t_obj *obj);
 t_rgbd		get_color(const t_obj *obj);
+t_rgb		get_pixel_color(t_minirt *rt, t_obj *obj, t_vec \
+hit_point, t_vec ray);
+
 
 t_vec		normalize(t_vec v);
 
 bool		error_msg(char *msg);
 
-bool        init_viewport(t_minirt *rt);
-bool        init_scene(t_minirt *rt);
+bool		init_viewport(t_minirt *rt);
+bool		init_scene(t_minirt *rt);
 
 #endif

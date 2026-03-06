@@ -22,7 +22,6 @@ static int	handle_key(int keycode, t_window *w)
 {
 	if (keycode == XK_Escape)
 		handle_close(w);
-	//render_scene(w);
 	return (0);
 }
 
@@ -31,7 +30,6 @@ static int	handle_key(int keycode, t_window *w)
 static void	events_init(t_window *w)
 {
 	mlx_key_hook(w->win, handle_key, w);
-	//mlx_hook(w->win, ButtonPress, ButtonPressMask, handle_mouse, w);
 	mlx_hook(w->win, DestroyNotify, StructureNotifyMask, handle_close, w);
 }
 
@@ -40,11 +38,6 @@ void	init_window(t_window *w)
 	w->mlx = mlx_init();
 	if (!w->mlx)
 		return (free(w));
-	if (!w->minirt->window->width || !w->minirt->window->height)
-	{
-		w->minirt->window->width = SIZE;
-		w->minirt->window->height = SIZE;
-	}
 	init_viewport(w->minirt);
 	w->win = mlx_new_window(w->mlx, w->minirt->window->width, \
 w->minirt->window->height, "MiniRT");

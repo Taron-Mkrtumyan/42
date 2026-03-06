@@ -23,12 +23,13 @@ int	main(int ac, char **av)
 	if (!minirt->window)
 		return (false);
 	minirt->window->minirt = minirt;
+	minirt->window->width = WIDTH;
+	minirt->window->height = HEIGHT;
 	if (!valid_args(minirt, av[1], ac))
 	{
 		free_minirt(minirt);
 		return (1);
 	}
-	// print_minirt(minirt);
 	if (!init_minirt(minirt, av[1]))
 	{
 		free_minirt(minirt);
@@ -38,4 +39,5 @@ int	main(int ac, char **av)
 	return (0);
 }
 
+// print_minirt(minirt);
 //printf("%f\n", DBL_MAX);
