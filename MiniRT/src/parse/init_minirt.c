@@ -89,7 +89,5 @@ bool	init_minirt(t_minirt *minirt, char *filename)
 {
 	(void) filename;
 	init_window(minirt->window);
-	//if (!render_scene(minirt))
-	//	return (false);
 	return (true);
 }

@@ -105,7 +105,6 @@ t_rgbd		get_color(const t_obj *obj);
 t_rgb		get_pixel_color(t_minirt *rt, t_obj *obj, t_vec \
 hit_point, t_vec ray);
 
-
 t_vec		normalize(t_vec v);
 
 bool		error_msg(char *msg);
