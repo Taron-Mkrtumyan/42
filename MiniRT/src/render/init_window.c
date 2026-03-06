@@ -51,7 +51,7 @@ w->minirt->window->height);
 	w->addr = mlx_get_data_addr(w->img, &w->bpp, &w->line_len, &w->endian);
 	events_init(w);
 	mlx_key_hook(w->win, handle_key, &w->mlx);
-	init_scene(w->minirt);
+	render_scene(w->minirt);
 	mlx_put_image_to_window(w->mlx, w->win, w->img, 0, 0);
 	mlx_loop(w->mlx);
 	mlx_destroy_image(w->mlx, w->img);

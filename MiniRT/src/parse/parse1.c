@@ -18,7 +18,7 @@ bool	parse_params(t_minirt *rt, char *line)
 		return (true);
 	if (!is_valid_obj_name(line))
 		return (error_msg("Invalid object name: "), \
-printf("%s\nline: %d\n", line, rt->file_line), false);
+printf("%s\n"BOLDCYAN"line: %d\n"RESET, line, rt->file_line), false);
 	if (ft_strncmp(line, "R", 1) == 0)
 		return (parse_resolution(rt, line));
 	if (ft_strncmp(line, "A", 1) == 0)

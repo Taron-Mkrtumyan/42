@@ -30,11 +30,7 @@ int	main(int ac, char **av)
 		free_minirt(minirt);
 		return (1);
 	}
-	if (!init_minirt(minirt, av[1]))
-	{
-		free_minirt(minirt);
-		return (2);
-	}
+	init_window(minirt->window);
 	free_minirt(minirt);
 	return (0);
 }

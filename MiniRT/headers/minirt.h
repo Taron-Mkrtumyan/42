@@ -19,8 +19,8 @@
 # include "vector_operations2.h"
 # include "color_operations.h"
 
-# define HEIGHT		1080
 # define WIDTH		1920
+# define HEIGHT		1080
 
 # define NP_PLUS	65451
 # define NP_MINUS	65453
@@ -31,10 +31,12 @@
 #  define BUFFER_SIZE 1
 # endif
 
-# define GREEN		0x00FF00
-# define BLUE		0x0000FF
-# define RED		0xFF0000
-# define RESET		0xFFFFFF
+# define GREEN		"\033[32m"
+# define RED		"\033[31m"
+# define BOLDRED	"\033[1;31m"
+# define CYAN		"\033[36m"  
+# define BOLDCYAN	"\033[1;36m"
+# define RESET		"\033[0m"
 
 # define ERR_MALLOC			"Error\nMemory allocation failed\n"
 # define ERR_ARGS			"Error\nWrong number of arguments\n"
@@ -65,8 +67,7 @@ bool		valid_args(t_minirt *rt, char *path, int ac);
 bool		is_valid_file(t_minirt *rt);
 
 void		init_window(t_window *w);
-bool		init_minirt(t_minirt *minirt, char *filename);
-bool		init_scene(t_minirt *minirt);
+bool		init_viewport(t_minirt *rt);
 bool		render_scene(t_minirt *minirt);
 
 bool		parse_params(t_minirt *rt, char *line);
@@ -109,7 +110,5 @@ t_vec		normalize(t_vec v);
 
 bool		error_msg(char *msg);
 
-bool		init_viewport(t_minirt *rt);
-bool		init_scene(t_minirt *rt);
 
 #endif

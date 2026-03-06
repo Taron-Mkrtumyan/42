@@ -23,8 +23,9 @@ RM          := rm -f
 
 MAIN    := main.c
 
-PARSE   := init_minirt.c \
-           init_window.c
+PARSE   := parse1.c \
+           parse2.c \
+           parse3.c
 
 CLEANUP := free_minirt.c \
            free_arr.c
@@ -38,12 +39,12 @@ UTILS   := utils1.c \
            getters.c \
            print_objs.c
 
-VALID   := validation1.c \
-           validation2.c \
-           validation3.c
-
 MATH    := vec_normalize.c \
            pixel_color.c \
+
+RENDER  := render_scene.c \
+		   viewport.c \
+		   init_window.c
 
 
 # Full paths (no wildcards used)
@@ -52,9 +53,8 @@ SRCS := \
 	$(addprefix $(SRC_DIR)/parse/, $(PARSE)) \
 	$(addprefix $(SRC_DIR)/cleanup/, $(CLEANUP)) \
 	$(addprefix $(SRC_DIR)/utils/, $(UTILS)) \
-	$(addprefix $(SRC_DIR)/validation/, $(VALID)) \
 	$(addprefix $(SRC_DIR)/math/, $(MATH)) \
-	$(addprefix $(SRC_DIR)/render/, viewport.c)
+	$(addprefix $(SRC_DIR)/render/, $(RENDER))
 
 OBJS := $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 

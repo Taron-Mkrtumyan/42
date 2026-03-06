@@ -58,7 +58,7 @@ rt->viewport->height * v));
 	return (ray);
 }
 
-bool	init_scene(t_minirt *rt)
+bool	render_scene(t_minirt *rt)
 {
 	int		x;
 	int		y;
@@ -82,12 +82,5 @@ bool	init_scene(t_minirt *rt)
 		x = 0;
 		y++;
 	}
-	return (true);
-}
-
-bool	init_minirt(t_minirt *minirt, char *filename)
-{
-	(void) filename;
-	init_window(minirt->window);
 	return (true);
 }

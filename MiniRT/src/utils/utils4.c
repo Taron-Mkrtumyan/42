@@ -16,7 +16,7 @@ bool	parse_error(char *msg, char **params, int file_line)
 {
 	if (msg)
 		error_msg(msg);
-	printf("line: %d\n", file_line);
+	printf(CYAN"line: %d\n"RESET, file_line);
 	if (params)
 		free_arr(params);
 	return (false);
@@ -25,7 +25,7 @@ bool	parse_error(char *msg, char **params, int file_line)
 bool	parse_error_ptr(char *msg, void *ptr, char **params, int file_line)
 {
 	error_msg(msg);
-	printf("line: %d\n", file_line);
+	printf(CYAN"line: %d\n"RESET, file_line);
 	if (ptr)
 	{
 		free(ptr);
@@ -38,7 +38,7 @@ bool	parse_error_ptr(char *msg, void *ptr, char **params, int file_line)
 
 bool	error_msg(char *msg)
 {
-	ft_putstr_fd("\033[1;31mError\n\033[0m", 2);
+	ft_putstr_fd(BOLDRED"Error\n"RESET, 2);
 	ft_putstr_fd(msg, 2);
 	ft_putstr_fd("\n", 2);
 	return (false);
