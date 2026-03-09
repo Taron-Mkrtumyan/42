@@ -23,6 +23,8 @@
 # define WIDTH		1920
 # define HEIGHT		1080
 
+# define SHININESS	100
+
 # define NP_PLUS	65451
 # define NP_MINUS	65453
 
