@@ -76,7 +76,8 @@ typedef enum e_hit_surface
 {
 	HIT_SIDE,
 	HIT_TOP,
-	HIT_BOTTOM
+	HIT_BOTTOM,
+	NO_HIT
 }			t_hit_surface;
 
 typedef struct s_point_vecs

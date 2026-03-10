@@ -30,7 +30,7 @@ bool	init_viewport(t_minirt *rt)
 		return (false);
 	fov_rad = (rt->camera->fov * M_PI) / 180.0;
 	aspect = get_ratio(rt->window->width, rt->window->height);
-	rt->viewport->height = 2.0 * tan(fov_rad / 2.0);
+	rt->viewport->height = 2 * tan(fov_rad / 2);
 	rt->viewport->width = rt->viewport->height * aspect;
 	rt->viewport->normal = normalize(rt->camera->orientation);
 	if (fabs(rt->viewport->normal.y) > 0.999)

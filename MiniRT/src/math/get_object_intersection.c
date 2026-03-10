@@ -12,12 +12,51 @@
 
 #include "minirt.h"
 
+static bool	cylinder_solve(double a, double b, double c, t_obj_hit *hit)
+{
+	double	discriminant;
+	double	t1;
+	double	t2;
+
+	discriminant = b * b - 4 * a * c;
+	if (discriminant < 0)
+		return (false);
+	t1 = (-b - sqrt(discriminant)) / (2 * a);
+	t2 = (-b + sqrt(discriminant)) / (2 * a);
+	if (t1 < EPSILON)
+	{
+		if (t2 < EPSILON)
+			return (false);
+		hit->t = t2;
+	}
+	else
+		hit->t = t1;
+	return (true);
+}
+
 static bool	does_intersect_cylinder(t_ray ray, t_cylinder *cyl, t_obj_hit *hit)
 {
-	(void)ray;
-	(void)cyl;
-	(void)hit;
-	return (false);
+	double	a;
+	double	b;
+	double	c;
+	double	tmp;
+	t_vec	oc;
+
+	tmp = vec_dot(ray.direction, cyl->normal);
+	a = vec_dot(ray.direction, ray.direction) - tmp * tmp;
+	if (fabs(a) < EPSILON)
+		return (false);
+	oc = vec_sub(ray.origin, cyl->center);
+	b = -2 * tmp;
+	tmp = vec_dot(oc, cyl->normal);
+	b = b * tmp + 2 * vec_dot(ray.direction, oc);
+	c = vec_dot(oc, oc) - cyl->radius * cyl->radius - tmp * tmp;
+	if (!cylinder_solve(a, b, c, hit))
+		return (false);
+	hit->hit_point = vec_add(ray.origin, vec_multi(ray.direction, hit->t));
+	if (get_hit_surface(cyl, hit->hit_point) == NO_HIT)
+		return (false);
+	return (true);
 }
 
 static bool	does_intersect_sphere(t_ray ray, t_sphere *sphere, t_obj_hit *hit)
@@ -48,20 +87,17 @@ static bool	does_intersect_sphere(t_ray ray, t_sphere *sphere, t_obj_hit *hit)
 
 static bool	does_intersect_plane(t_ray ray, t_plane *plane, t_obj_hit *hit)
 {
-	t_vec	x;
 	double	d;
 	double	t;
 
 	d = vec_dot(ray.direction, plane->normal);
 	if (fabs(d) < EPSILON)
 		return (false);
-	x = vec_sub(ray.origin, plane->center);
-	t = -vec_dot(x, plane->normal) / d;
-	if (t < 0)
+	t = -vec_dot(vec_sub(ray.origin, plane->center), plane->normal) / d;
+	if (t < EPSILON)
 		return (false);
 	hit->t = t;
 	hit->hit_point = vec_add(ray.origin, vec_multi(ray.direction, hit->t));
-	hit->normal = plane->normal;
 	return (true);
 }
 
@@ -88,28 +124,4 @@ bool	does_intersect(t_ray ray, t_obj *obj, t_obj_hit *hit)
 	if (hit->obj)
 		hit->normal = get_surface_normal(hit->obj, hit->hit_point);
 	return (hit->obj != NULL);
-}
-
-t_obj_hit	get_obj_hit(t_ray ray, t_obj *objs)
-{
-	t_obj_hit	res;
-	t_obj		*obj;
-	double		distance;
-
-	obj = objs;
-	res.obj = NULL;
-	distance = 0;
-	while (obj)
-	{
-		if (does_intersect(ray, obj, &res))
-		{
-			if (distance < vec_len(vec_sub(res.hit_point, ray.origin)))
-			{
-				distance = vec_len(vec_sub(res.hit_point, ray.origin));
-				res.obj = obj;
-			}
-		}
-		obj = obj->next;
-	}
-	return (res);
 }

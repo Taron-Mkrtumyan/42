@@ -75,7 +75,7 @@ sphere, NULL, fl));
 			return (parse_error_ptr("Invalid sphere shininess value", \
 sphere, NULL, fl));
 	}
-	sphere->radius = sphere->diameter / 2.0;
+	sphere->radius = sphere->diameter / 2;
 	obj->data = sphere;
 	return (true);
 }
@@ -83,7 +83,7 @@ sphere, NULL, fl));
 static void	init_cylinder(t_cylinder *cylinder)
 {
 	cylinder->normal = normalize(cylinder->normal);
-	cylinder->radius = cylinder->diameter / 2.0;
+	cylinder->radius = cylinder->diameter / 2;
 }
 
 bool	parse_cylinder(char **params, t_obj *obj, int fl)
