@@ -30,6 +30,7 @@ bool	parse_plane(char **params, t_obj *obj, int fl)
 	plane = ft_calloc(sizeof(t_plane), 1);
 	if (!plane)
 		return (parse_error_ptr("Memory allocation failed", plane, NULL, fl));
+	plane->shininess = 10;
 	while (params && params[++i])
 	{
 		if (i == 1 && !parse_vector(params[i], &plane->center))
@@ -60,6 +61,7 @@ bool	parse_sphere(char **params, t_obj *obj, int fl)
 	if (!sphere)
 		return (parse_error_ptr("Sphere memory allocation failed", \
 sphere, NULL, fl));
+	sphere->shininess = 10;
 	while (params && params[++i])
 	{
 		if (i == 1 && !parse_vector(params[i], &sphere->center))
@@ -80,10 +82,11 @@ sphere, NULL, fl));
 	return (true);
 }
 
-static void	init_cylinder(t_cylinder *cylinder)
+static void	init_cylinder(t_cylinder *cylinder, t_obj *obj)
 {
 	cylinder->normal = normalize(cylinder->normal);
 	cylinder->radius = cylinder->diameter / 2;
+	obj->data = cylinder;
 }
 
 bool	parse_cylinder(char **params, t_obj *obj, int fl)
@@ -96,6 +99,7 @@ bool	parse_cylinder(char **params, t_obj *obj, int fl)
 	if (!cylinder)
 		return (parse_error_ptr("Memory allocation failed", \
 cylinder, NULL, fl));
+	cylinder->shininess = 10;
 	while (params && params[++i])
 	{
 		if (i == 1 && !parse_vector(params[i], &cylinder->center))
@@ -114,10 +118,9 @@ cylinder, NULL, fl));
 			return (parse_error_ptr("Invalid cylinder color", \
 cylinder, NULL, fl));
 		if (i == 6 && !parse_shininess(params[i], &cylinder->shininess))
-			return (parse_error_ptr("Cylinder shininess !!", \
+			return (parse_error_ptr("Invalid cylinder shininess", \
 cylinder, NULL, fl));
 	}
-	init_cylinder(cylinder);
-	obj->data = cylinder;
+	init_cylinder(cylinder, obj);
 	return (true);
 }

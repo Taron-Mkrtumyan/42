@@ -20,6 +20,7 @@ t_rgb	get_pixel_color(t_minirt *rt, t_obj_hit obj_hit, t_vec ray_dir)
 	t_point_vecs	vecs;
 	t_lightings		lightings;
 	t_light			*light;
+	t_obj_hit		tmp;
 
 	if (!obj_hit.obj)
 		return ((t_rgb){0, 0, 0});
@@ -32,13 +33,18 @@ t_rgb	get_pixel_color(t_minirt *rt, t_obj_hit obj_hit, t_vec ray_dir)
 	{
 		vecs.light_dir = normalize(vec_sub(light->position, obj_hit.hit_point));
 		vecs.reflect_dir = vec_reflect(vecs.light_dir, obj_hit.normal);
-		lightings.diffuse = color_add(lightings.diffuse, color_multi(\
+		if (!(does_intersect((t_ray){vec_add(obj_hit.hit_point, \
+vec_multi(obj_hit.normal, EPSILON)), vecs.light_dir}, rt->objects, &tmp) && \
+tmp.t < vec_len(vec_sub(light->position, obj_hit.hit_point))))
+		{
+			lightings.diffuse = color_add(lightings.diffuse, color_multi(\
 color_multi(color_product(light->color, get_color(obj_hit.obj)), \
 light->brightness), fmax(0, vec_dot(vecs.light_dir, obj_hit.normal))));
-		lightings.specular = color_add(lightings.specular, color_multi(\
+			lightings.specular = color_add(lightings.specular, color_multi(\
 color_multi(light->color, light->brightness), \
 pow(fmax(0, vec_dot(vecs.reflect_dir, vecs.view_dir)), \
 get_shininess(obj_hit.obj))));
+		}
 		light = light->next;
 	}
 	res = color_add(res, lightings.diffuse);
