@@ -60,27 +60,26 @@ rt->viewport->height * v));
 
 bool	render_scene(t_minirt *rt)
 {
-	int		x;
-	int		y;
-	t_ray	ray;
-	t_vec	top_left;
-	t_rgb	color;
+	t_point		p;
+	t_ray		ray;
+	t_vec		top_left;
+	t_rgb		color;
+	t_obj_hit	hit;
 
 	top_left = get_viewport_top_left(rt);
-	x = 0;
-	y = 0;
-	(void)ray;
-	while (y < rt->window->height)
+	p.y = 0;
+	while (p.y < rt->window->height)
 	{
-		while (x < rt->window->width)
+		p.x = 0;
+		while (p.x < rt->window->width)
 		{
-			ray = get_ray(rt, x, y, top_left);
-			color = (t_rgb){255, 0, 0};
-			put_pixel(rt->window, x, y, color);
-			x++;
+			ray = get_ray(rt, p.x, p.y, top_left);
+			hit = get_obj_hit(ray, rt->objects);
+			color = get_pixel_color(rt, hit, ray.direction);
+			put_pixel(rt->window, p.x, p.y, color);
+			p.x++;
 		}
-		x = 0;
-		y++;
+		p.y++;
 	}
 	return (true);
 }

@@ -15,6 +15,12 @@
 
 # include "includes.h"
 
+typedef struct s_point
+{
+	int	x;
+	int	y;
+}				t_point;
+
 typedef struct s_vector
 {
 	double	x;
@@ -144,8 +150,8 @@ typedef struct s_obj_hit
 {
 	t_vec		hit_point;
 	t_vec		normal;
-	double		t;
 	t_obj		*obj;
+	double		t;
 }						t_obj_hit;
 
 typedef struct s_window		t_window;

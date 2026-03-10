@@ -21,6 +21,8 @@ t_rgb	get_pixel_color(t_minirt *rt, t_obj_hit obj_hit, t_vec ray_dir)
 	t_lightings		lightings;
 	t_light			*light;
 
+	if (!obj_hit.obj)
+		return ((t_rgb){0, 0, 0});
 	light = rt->lights;
 	vecs.view_dir = normalize(vec_neg(ray_dir));
 	res = color_multi(rt->amb_light->color, rt->amb_light->ratio);

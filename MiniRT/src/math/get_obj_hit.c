@@ -15,20 +15,21 @@
 t_obj_hit	get_obj_hit(t_ray ray, t_obj *objs)
 {
 	t_obj_hit	res;
+	t_obj_hit	tmp;
 	t_obj		*obj;
 	double		distance;
 
 	obj = objs;
 	res.obj = NULL;
-	distance = 0;
+	distance = INFINITY;
 	while (obj)
 	{
-		if (does_intersect(ray, obj, &res))
+		if (does_intersect(ray, obj, &tmp))
 		{
-			if (distance < vec_len(vec_sub(res.hit_point, ray.origin)))
+			if (tmp.t + EPSILON < distance)
 			{
-				distance = vec_len(vec_sub(res.hit_point, ray.origin));
-				res.obj = obj;
+				distance = tmp.t;
+				res = tmp;
 			}
 		}
 		obj = obj->next;
