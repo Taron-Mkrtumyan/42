@@ -16,7 +16,7 @@ Moreover, we will be able to ***show off*** nice-looking pictures to ***justify*
 2. Stay in the same directory
 3. Type `make`
 4. Type `./miniRT <path to the *.rt file>`
-5. Open your mouth and enjoy the scene .-.
+5. Еnjoy the scene .-.
 
 ## Resaurces
 

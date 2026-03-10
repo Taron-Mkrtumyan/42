@@ -33,7 +33,7 @@ t_hit_surface	get_hit_surface(t_cylinder *cylinder, t_vec hit_point)
 	return (HIT_SIDE);
 }
 
-static inline t_vec	get_cylinder_normal(t_cylinder *cylinder, t_vec hit_point)
+t_vec	get_cylinder_normal(t_cylinder *cylinder, t_vec hit_point)
 {
 	t_vec			v;
 	t_hit_surface	hit_surface;
