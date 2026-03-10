@@ -19,7 +19,7 @@ static bool	cylinder_solve(double a, double b, double c, t_obj_hit *hit)
 	double	t2;
 
 	discriminant = b * b - 4 * a * c;
-	if (discriminant < 0)
+	if (discriminant < EPSILON)
 		return (false);
 	t1 = (-b - sqrt(discriminant)) / (2 * a);
 	t2 = (-b + sqrt(discriminant)) / (2 * a);
@@ -34,6 +34,26 @@ static bool	cylinder_solve(double a, double b, double c, t_obj_hit *hit)
 	return (true);
 }
 
+static bool intersect_cap(t_ray ray, t_vec center, double r, \
+t_vec normal, double *t)
+{
+	double	denom;
+	double	tt;
+	t_vec	p;
+
+	denom = vec_dot(ray.direction, normal);
+	if (fabs(denom) < EPSILON)
+		return (false);
+	tt = vec_dot(vec_sub(center, ray.origin), normal) / denom;
+	if (tt < EPSILON)
+		return (false);
+	p = vec_add(ray.origin, vec_multi(ray.direction, tt));
+	if (vec_len(vec_sub(p, center)) > r)
+		return (false);
+	*t = tt;
+	return (true);
+}
+/*
 bool	does_intersect_cylinder(t_ray ray, t_cylinder *cyl, t_obj_hit *hit)
 {
 	t_quadratic_eq	qe;
@@ -54,5 +74,38 @@ bool	does_intersect_cylinder(t_ray ray, t_cylinder *cyl, t_obj_hit *hit)
 	hit->hit_point = vec_add(ray.origin, vec_multi(ray.direction, hit->t));
 	if (get_hit_surface(cyl, hit->hit_point) == NO_HIT)
 		return (false);
+	return (true);
+}*/
+
+bool	does_intersect_cylinder(t_ray ray, t_cylinder *cyl, t_obj_hit *hit)
+{
+	t_quadratic_eq	qe;
+	double			tmp;
+	double			cap_t;
+	t_vec			oc;
+
+	hit->t = INFINITY;
+	tmp = vec_dot(ray.direction, cyl->normal);
+	oc = vec_sub(ray.origin, cyl->center);
+	qe.a = vec_dot(ray.direction, ray.direction) - tmp * tmp;
+	qe.b = 2 * (vec_dot(ray.direction, oc) - tmp * vec_dot(oc, cyl->normal));
+	qe.c = vec_dot(oc, oc) - pow(vec_dot(oc, cyl->normal), 2) - \
+cyl->radius * cyl->radius;
+	if (fabs(qe.a) > EPSILON && cylinder_solve(qe.a, qe.b, qe.c, hit))
+	{
+		hit->hit_point = vec_add(ray.origin, vec_multi(ray.direction, hit->t));
+		if (get_hit_surface(cyl, hit->hit_point) == NO_HIT)
+			hit->t = INFINITY;
+	}
+	if (intersect_cap(ray, cyl->top_center, cyl->radius, cyl->normal, &cap_t))
+		if (cap_t < hit->t)
+			hit->t = cap_t;
+	if (intersect_cap(ray, cyl->bottom_center, cyl->radius, \
+vec_neg(cyl->normal), &cap_t))
+		if (cap_t < hit->t)
+			hit->t = cap_t;
+	if (hit->t == INFINITY)
+		return (false);
+	hit->hit_point = vec_add(ray.origin, vec_multi(ray.direction, hit->t));
 	return (true);
 }

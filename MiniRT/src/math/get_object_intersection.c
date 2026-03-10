@@ -22,7 +22,7 @@ static bool	does_intersect_sphere(t_ray ray, t_sphere *sphere, t_obj_hit *hit)
 	qe.b = 2 * vec_dot(ray.direction, oc);
 	qe.c = vec_dot(oc, oc) - sphere->radius * sphere->radius;
 	qe.discriminant = qe.b * qe.b - 4 * qe.c;
-	if (qe.discriminant < 0)
+	if (qe.discriminant < EPSILON)
 		return (false);
 	t = (-qe.b - sqrt(qe.discriminant)) / 2;
 	if (t < EPSILON)
