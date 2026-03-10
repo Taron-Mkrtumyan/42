@@ -46,6 +46,7 @@ MATH    := vec_normalize.c \
 		   get_surface_normal.c \
 		   get_object_intersection.c \
 		   get_obj_hit.c \
+		   does_intersect_cylinder.c \
 
 RENDER  := render_scene.c \
 		   init_window.c \

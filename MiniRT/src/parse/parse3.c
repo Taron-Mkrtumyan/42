@@ -86,6 +86,11 @@ static void	init_cylinder(t_cylinder *cylinder, t_obj *obj)
 {
 	cylinder->normal = normalize(cylinder->normal);
 	cylinder->radius = cylinder->diameter / 2;
+	cylinder->half = cylinder->height / 2;
+	cylinder->top_center = vec_add(cylinder->center, \
+vec_multi(cylinder->normal, cylinder->half));
+	cylinder->bottom_center = vec_sub(cylinder->center, \
+vec_multi(cylinder->normal, cylinder->half));
 	obj->data = cylinder;
 }
 

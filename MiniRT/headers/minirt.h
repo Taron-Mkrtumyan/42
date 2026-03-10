@@ -81,6 +81,8 @@ t_vec			get_surface_normal(t_obj *obj, t_vec hit_point);
 t_obj_hit		get_obj_hit(t_ray ray, t_obj *objs);
 t_hit_surface	get_hit_surface(t_cylinder *cylinder, t_vec hit_point);
 bool			does_intersect(t_ray ray, t_obj *obj, t_obj_hit *hit);
+bool			does_intersect_cylinder(t_ray ray, t_cylinder *cyl, \
+t_obj_hit *hit);
 
 t_vec			normalize(t_vec v);
 bool			error_msg(char *msg);

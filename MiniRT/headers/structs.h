@@ -21,6 +21,14 @@ typedef struct s_point
 	int	y;
 }				t_point;
 
+typedef struct s_quadratic_eq
+{
+	double	a;
+	double	b;
+	double	c;
+	double	discriminant;
+}				t_quadratic_eq;
+
 typedef struct s_vector
 {
 	double	x;
@@ -123,6 +131,9 @@ typedef struct s_cylinder
 	double			diameter;
 	double			shininess;
 	double			height;
+	double			half;
+	t_vec			top_center;
+	t_vec			bottom_center;
 	t_vec			center;
 	t_vec			normal;
 	t_rgbd			color;
