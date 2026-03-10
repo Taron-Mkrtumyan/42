@@ -28,7 +28,7 @@
 # define NP_PLUS	65451
 # define NP_MINUS	65453
 
-# define EPSILON 1e-3
+# define EPSILON 1e-6
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1024
