@@ -34,7 +34,8 @@ t_vec	get_viewport_top_left(t_minirt *rt)
 	t_vec	horizontal;
 	t_vec	vertical;
 
-	center = vec_add(rt->camera->position, vec_multi(rt->camera->orientation, 0.5));
+	center = vec_add(rt->camera->position, \
+vec_multi(rt->camera->orientation, 0.5));
 	horizontal = vec_multi(rt->viewport->right, rt->viewport->width);
 	vertical = vec_multi(rt->viewport->up, rt->viewport->height);
 	return (vec_sub(vec_add(center, vec_multi(vertical, \

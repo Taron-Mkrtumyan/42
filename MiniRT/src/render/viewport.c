@@ -38,6 +38,7 @@ bool	init_viewport(t_minirt *rt)
 	else
 		world_up = (t_vec){0, 1, 0};
 	rt->viewport->right = normalize(vec_cross(world_up, rt->viewport->normal));
-	rt->viewport->up = normalize(vec_cross(rt->viewport->normal, rt->viewport->right));
+	rt->viewport->up = normalize(vec_cross(rt->viewport->normal, \
+rt->viewport->right));
 	return (true);
 }

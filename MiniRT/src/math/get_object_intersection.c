@@ -73,6 +73,7 @@ bool	does_intersect(t_ray ray, t_obj *obj, t_obj_hit *hit)
 			hit->obj = obj;
 	}
 	if (hit->obj)
-		hit->normal = get_surface_normal(hit->obj, hit->hit_point);
+		hit->normal = get_surface_normal(hit->obj, hit->hit_point, \
+ray.direction);
 	return (hit->obj != NULL);
 }

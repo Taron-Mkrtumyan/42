@@ -34,7 +34,7 @@ static bool	cylinder_solve(double a, double b, double c, t_obj_hit *hit)
 	return (true);
 }
 
-static bool intersect_cap(t_ray ray, t_vec center, double r, \
+static bool	intersect_cap(t_ray ray, t_vec center, double r, \
 t_vec normal, double *t)
 {
 	double	denom;

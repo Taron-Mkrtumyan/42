@@ -23,7 +23,7 @@
 # define WIDTH		1920
 # define HEIGHT		1080
 
-# define SHININESS	100
+# define SHININESS	32
 
 # define NP_PLUS	65451
 # define NP_MINUS	65453
@@ -77,7 +77,7 @@ void			print_minirt(t_minirt *rt);
 double			get_shininess(const t_obj *obj);
 t_rgbd			get_color(const t_obj *obj);
 t_rgb			get_pixel_color(t_minirt *rt, t_obj_hit obj_hit, t_vec ray_dir);
-t_vec			get_surface_normal(t_obj *obj, t_vec hit_point);
+t_vec			get_surface_normal(t_obj *obj, t_vec hit_point, t_vec ray_dir);
 t_obj_hit		get_obj_hit(t_ray ray, t_obj *objs);
 t_hit_surface	get_hit_surface(t_cylinder *cylinder, t_vec hit_point);
 bool			does_intersect(t_ray ray, t_obj *obj, t_obj_hit *hit);

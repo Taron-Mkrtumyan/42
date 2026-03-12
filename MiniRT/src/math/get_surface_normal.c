@@ -48,7 +48,7 @@ t_vec	get_cylinder_normal(t_cylinder *cylinder, t_vec hit_point)
 vec_dot(v, cylinder->normal)))));
 }
 
-t_vec	get_surface_normal(t_obj *obj, t_vec hit_point)
+t_vec	get_surface_normal(t_obj *obj, t_vec hit_point, t_vec ray_dir)
 {
 	if (!obj || !obj->data)
 		return ((t_vec){0, 0, 0});
@@ -57,6 +57,10 @@ t_vec	get_surface_normal(t_obj *obj, t_vec hit_point)
 	if (obj->shape == CYLINDER)
 		return (get_cylinder_normal((t_cylinder *)obj->data, hit_point));
 	if (obj->shape == PLANE)
-		return (normalize(((t_plane *)obj->data)->normal));
+	{
+		if (vec_dot(ray_dir, ((t_plane *)obj->data)->normal) >= 0)
+			((t_plane *)obj->data)->normal = vec_neg(((t_plane *)obj->data)->normal);
+		return (((t_plane *)obj->data)->normal);
+	}
 	return ((t_vec){0, 0, 0});
 }
