@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   viewport.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmkrtumy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gkankia <gkankia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 16:48:35 by tmkrtumy          #+#    #+#             */
-/*   Updated: 2026/03/06 16:52:47 by tmkrtumy         ###   ########.fr       */
+/*   Updated: 2026/03/12 18:01:18 by gkankia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,7 @@ bool	init_viewport(t_minirt *rt)
 		world_up = (t_vec){0, 0, 1};
 	else
 		world_up = (t_vec){0, 1, 0};
-	rt->viewport->right = normalize(vec_cross(rt->viewport->normal, world_up));
-	rt->viewport->up = normalize(vec_cross(rt->viewport->right, \
-rt->viewport->normal));
+	rt->viewport->right = normalize(vec_cross(world_up, rt->viewport->normal));
+	rt->viewport->up = normalize(vec_cross(rt->viewport->normal, rt->viewport->right));
 	return (true);
 }

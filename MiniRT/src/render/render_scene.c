@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_minirt.c                                      :+:      :+:    :+:   */
+/*   render_scene.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkankia <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: gkankia <gkankia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 19:03:12 by gkankia           #+#    #+#             */
-/*   Updated: 2026/01/19 18:56:00 by tmkrtumy         ###   ########.fr       */
+/*   Updated: 2026/03/12 18:02:15 by gkankia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_vec	get_viewport_top_left(t_minirt *rt)
 	t_vec	horizontal;
 	t_vec	vertical;
 
-	center = vec_add(rt->camera->position, rt->viewport->normal);
+	center = vec_add(rt->camera->position, vec_multi(rt->camera->orientation, 0.5));
 	horizontal = vec_multi(rt->viewport->right, rt->viewport->width);
 	vertical = vec_multi(rt->viewport->up, rt->viewport->height);
 	return (vec_sub(vec_add(center, vec_multi(vertical, \
