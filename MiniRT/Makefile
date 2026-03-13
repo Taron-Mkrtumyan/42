@@ -23,35 +23,41 @@ RM          := rm -f
 
 MAIN    := main.c
 
-PARSE   := init_minirt.c \
-           init_window.c
+PARSE   := parse1.c \
+           parse2.c \
+           parse3.c \
+		   parse4.c \
 
 CLEANUP := free_minirt.c \
-           free_window.c \
-           free_arr.c
 
-UTILS   := utils1.c \
-           utils2.c \
-           utils3.c \
-           utils4.c \
-           gnl.c \
+UTILS   := create_push_light.c \
+           is_valid_obj_name.c \
+           str_to_int_color.c \
+           get_next_line.c \
+		   push_object.c \
            is_double.c \
-		   print_objs.c
-
-VALID   := validation1.c \
-           validation2.c \
-           validation3.c
+		   is_uchar.c \
+           getters.c \
+           errors.c \
 
 MATH    := vec_normalize.c \
-           pixel_color.c \
+           get_pixel_color.c \
+		   get_surface_normal.c \
+		   get_object_intersection.c \
+		   get_obj_hit.c \
+		   does_intersect_cylinder.c \
+
+RENDER  := render_scene.c \
+		   init_window.c \
+		   viewport.c \
 
 SRCS := \
 	$(addprefix $(SRC_DIR)/, $(MAIN)) \
 	$(addprefix $(SRC_DIR)/parse/, $(PARSE)) \
 	$(addprefix $(SRC_DIR)/cleanup/, $(CLEANUP)) \
 	$(addprefix $(SRC_DIR)/utils/, $(UTILS)) \
-	$(addprefix $(SRC_DIR)/validation/, $(VALID)) \
-	$(addprefix $(SRC_DIR)/math/, $(MATH))
+	$(addprefix $(SRC_DIR)/math/, $(MATH)) \
+	$(addprefix $(SRC_DIR)/render/, $(RENDER))
 
 OBJS := $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
@@ -67,25 +73,25 @@ all: $(NAME)
 
 $(NAME): $(MLX_LIB) $(LIBFT_LIB) $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT_LIB) $(MLX_FLAGS) -o $(NAME)
-	@echo "$(GREEN)✔ miniRT compiled$(RESET)"
+	@printf "$(GREEN)✔ miniRT compiled$(RESET)\n"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
-	@echo "$(BLUE)Compiling$(RESET) $<"
+	@printf "$(BLUE)Compiling$(RESET) $<\n"
 
 $(LIBFT_LIB):
 	@$(MAKE) -C $(LIBFT_DIR) --silent
 
 $(MLX_LIB):
 	@$(MAKE) -C $(MLX_DIR) --silent
-	@echo "$(GREEN)✔ minilibx compiled$(RESET)"
+	@printf "$(GREEN)✔ minilibx compiled$(RESET)\n"
 
 
 clean:
 	@$(MAKE) clean -C $(LIBFT_DIR) --silent
 	@$(RM) -r $(OBJ_DIR)
-	@echo "$(GREEN)✔ miniRT cleaned$(RESET)"
+	@printf "$(GREEN)✔ miniRT cleaned$(RESET)\n"
 
 fclean: clean
 	@$(MAKE) fclean -C $(LIBFT_DIR) --silent

@@ -16,7 +16,7 @@ Moreover, we will be able to ***show off*** nice-looking pictures to ***justify*
 2. Stay in the same directory
 3. Type `make`
 4. Type `./miniRT <path to the *.rt file>`
-5. Open your mouth and enjoy the scene .-.
+5. Еnjoy the scene .-.
 
 ## Resaurces
 
@@ -38,8 +38,22 @@ __AI usage:__
 * discover weaknesses of functions
 
 ## Additional info
-Our code is working with **at least 1 camera provided**  
-We also implemented multiple light sources and specular reflection  
-You can also add resolution in .rt file `(R 1920 1080)`
+* Our code is working with **at least 1 camera provided**  
+* We also implemented multiple light sources and specular reflection  
+* You can also add resolution in .rt file `(R 1920 1080)`
+* We added _shininess_ parameter to every object to get full Phong reflection model. It is a floating point constant, which represents how much does the material __shine__. 
+
+<div align="center">
+
+| Material Type              | Shininess value |
+| :------------------------: |:---------------:|
+| Chalk                      | 2-10            |
+| Plastic / Copper           | 12.8 - 51.2     |
+| Polished Wood / Chromium   | 70 - 130        |
+| Metal                      | 150 - 300       | 
+| Mirror-like                | 300 +           | 
+
+</div>
+
 
 [//]: # (Add ./images directory with images and place in markdown file later)
