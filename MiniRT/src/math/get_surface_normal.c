@@ -24,7 +24,7 @@ t_hit_surface	get_hit_surface(t_cylinder *cylinder, t_vec hit_point)
 
 	diff = vec_sub(hit_point, cylinder->center);
 	m = vec_dot(diff, cylinder->normal);
-	if (m < -cylinder->half || m > cylinder->half)
+	if (m < -cylinder->half - EPSILON || m > cylinder->half + EPSILON)
 		return (NO_HIT);
 	if (m >= cylinder->half - EPSILON)
 		return (HIT_TOP);
