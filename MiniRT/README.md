@@ -40,8 +40,9 @@ __AI usage:__
 ## Additional info
 * Our code is working with **at least 1 camera provided**  
 * We also implemented multiple light sources and specular reflection  
-* You can also add resolution in .rt file `(R 1920 1080)`
+* You can change camera distance in header
 * We added _shininess_ parameter to every object to get full Phong reflection model. It is a floating point constant, which represents how much does the material __shine__. 
+* You can also add resolution in .rt file `(R 1920 1080)`
 
 <div align="center">
 
