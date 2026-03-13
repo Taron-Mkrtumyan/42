@@ -24,6 +24,7 @@
 # define HEIGHT		1080
 
 # define SHININESS	42
+# define CAM_DIST	0.84
 
 # define EPSILON 1e-6
 
