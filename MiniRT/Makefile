@@ -39,7 +39,6 @@ UTILS   := create_push_light.c \
 		   is_uchar.c \
            getters.c \
            errors.c \
-           print_objs.c \
 
 MATH    := vec_normalize.c \
            get_pixel_color.c \

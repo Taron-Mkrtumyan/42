@@ -25,9 +25,6 @@
 
 # define SHININESS	42
 
-# define NP_PLUS	65451
-# define NP_MINUS	65453
-
 # define EPSILON 1e-6
 
 # ifndef BUFFER_SIZE
@@ -73,7 +70,6 @@ int				str_to_int_color(char *str);
 bool			is_double(char *str);
 bool			is_uchar(char *str);
 bool			is_valid_obj_name(char *line);
-void			print_minirt(t_minirt *rt);
 double			get_shininess(const t_obj *obj);
 t_rgbd			get_color(const t_obj *obj);
 t_rgb			get_pixel_color(t_minirt *rt, t_obj_hit obj_hit, t_vec ray_dir);

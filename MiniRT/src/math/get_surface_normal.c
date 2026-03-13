@@ -59,7 +59,8 @@ t_vec	get_surface_normal(t_obj *obj, t_vec hit_point, t_vec ray_dir)
 	if (obj->shape == PLANE)
 	{
 		if (vec_dot(ray_dir, ((t_plane *)obj->data)->normal) >= 0)
-			((t_plane *)obj->data)->normal = vec_neg(((t_plane *)obj->data)->normal);
+			((t_plane *)obj->data)->normal = vec_neg(((t_plane *)\
+obj->data)->normal);
 		return (((t_plane *)obj->data)->normal);
 	}
 	return ((t_vec){0, 0, 0});

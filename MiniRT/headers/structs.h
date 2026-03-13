@@ -94,14 +94,6 @@ typedef enum e_hit_surface
 	NO_HIT
 }			t_hit_surface;
 
-typedef struct s_point_vecs
-{
-	t_vec	light_dir;
-	t_vec	view_dir;
-	t_vec	reflect_dir;
-	t_vec	surface_normal;
-}						t_point_vecs;
-
 typedef struct s_lightings
 {
 	t_rgbd	ambient;
@@ -132,6 +124,7 @@ typedef struct s_cylinder
 	double			shininess;
 	double			height;
 	double			half;
+	double			cap_t;
 	t_vec			top_center;
 	t_vec			bottom_center;
 	t_vec			center;
