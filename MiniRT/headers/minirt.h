@@ -22,9 +22,11 @@
 
 # define WIDTH		1920
 # define HEIGHT		1080
+# define MAX_WIDTH	3840
+# define MAX_HEIGHT	2160
 
 # define SHININESS	42
-# define CAM_DIST	0.84
+# define CAM_DIST	0.7
 
 # define EPSILON 1e-6
 

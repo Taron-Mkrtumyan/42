@@ -100,6 +100,6 @@ fclean: clean
 re: fclean all
 
 v: $(NAME)
-	$(VLGRND) $(VFLAGS) ./$(NAME) test_scene.rt
+	$(VLGRND) $(VFLAGS) ./$(NAME) scenes/atom.rt
 
 .PHONY: all clean fclean re v

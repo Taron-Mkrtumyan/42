@@ -51,6 +51,8 @@ w->minirt->window->height);
 	w->addr = mlx_get_data_addr(w->img, &w->bpp, &w->line_len, &w->endian);
 	events_init(w);
 	mlx_key_hook(w->win, handle_key, &w->mlx);
+	mlx_string_put(w->mlx, w->win, w->width / 2 - 25.0, w->height / 2, \
+0xFFFFFF, "Loading ...");
 	render_scene(w->minirt);
 	mlx_put_image_to_window(w->mlx, w->win, w->img, 0, 0);
 	mlx_loop(w->mlx);

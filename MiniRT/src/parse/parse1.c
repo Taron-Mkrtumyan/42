@@ -97,7 +97,7 @@ bool	valid_args(t_minirt *rt, char *path, int ac)
 	int	len;
 
 	if (ac != 2)
-		return (error_msg("Wrong number of arguments"), false);
+		return (error_msg("Usage: ./miniRT scenes/test.rt"), false);
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
 		return (error_msg("Failed to open file"), false);
