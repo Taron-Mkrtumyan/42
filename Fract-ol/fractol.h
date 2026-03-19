@@ -6,7 +6,7 @@
 /*   By: tmkrtumy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 19:11:19 by tmkrtumy          #+#    #+#             */
-/*   Updated: 2025/05/21 21:40:27 by tmkrtumy         ###   ########.fr       */
+/*   Updated: 2026/03/19 20:56:46 by tmkrtumy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@
 # include <X11/keysym.h>
 # include "minilibx-linux/mlx.h"
 
-# define SIZE		2000
-# define QUALITY	0
+# define SIZE		800
+# define QUALITY	10
 # define SMOOTH		0.2
 
 # define NP_PLUS	65451
