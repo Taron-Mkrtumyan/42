@@ -15,7 +15,7 @@ VLGRND      := valgrind
 VFLAGS      := --leak-check=full --show-leak-kinds=all --track-origins=yes
 
 CC          := cc
-CFLAGS      := -Wall -Wextra -Werror -g3
+CFLAGS      := -Wall -Wextra -Werror
 INCLUDES    := -I./$(HEADER_DIR) -I./$(LIBFT_DIR) -I./$(MLX_DIR)
 RM          := rm -f
 
