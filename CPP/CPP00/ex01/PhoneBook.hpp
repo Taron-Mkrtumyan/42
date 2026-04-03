@@ -9,8 +9,8 @@ class PhoneBook
 private:
 	Contact _contact_arr[MAX_CONTACT];
 	int		_counter;
-	bool	_is_valid_name(std::string str);
-	bool	_is_valid_number(std::string str);
+	bool	_is_valid_name(const std::string& str);
+	bool	_is_valid_number(const std::string& str);
 	void	_display_phonebook(void) const;
 
 public:

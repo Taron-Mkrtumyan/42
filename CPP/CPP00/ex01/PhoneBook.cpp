@@ -15,7 +15,7 @@ PhoneBook::~PhoneBook(void)
 	return;
 }
 
-bool	PhoneBook::_is_valid_name(std::string str)
+bool	PhoneBook::_is_valid_name(const std::string& str)
 {
 	if (str.empty())
 		return (false);
@@ -27,7 +27,7 @@ bool	PhoneBook::_is_valid_name(std::string str)
 	return (true);
 }
 
-bool	PhoneBook::_is_valid_number(std::string str)
+bool	PhoneBook::_is_valid_number(const std::string& str)
 {
 	if (str.empty())
 		return (false);

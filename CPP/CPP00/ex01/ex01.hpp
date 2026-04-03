@@ -3,7 +3,7 @@
 
 # include "color_escape_codes.h"
 
-# define MAX_CONTACT 8
+# define MAX_CONTACT 1
 # define LENGTH_LIMIT 10
 # define INFO_MASSAGE BCYAN "\nUsage:\n" BYELLOW "\
 ADD	" RESET BRIGHT_CYAN ":	add a new contact\n" BYELLOW "\
