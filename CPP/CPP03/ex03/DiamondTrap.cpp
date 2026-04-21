@@ -30,6 +30,13 @@ void DiamondTrap::whoAmI()
 	return ;
 }
 
+void DiamondTrap::attack(std::string const & target)
+{
+	ScavTrap::attack(target);
+
+	return ;
+}
+
 DiamondTrap & DiamondTrap::operator=(DiamondTrap const & other)
 {
 	std::cout << "DiamondTrap copy assignment operator called!" << std::endl;
@@ -41,6 +48,7 @@ DiamondTrap & DiamondTrap::operator=(DiamondTrap const & other)
 		this->_energy = other._energy;
 		this->_damage = other._damage;
 	}
+
 	return (*this);
 }
 
@@ -59,5 +67,6 @@ std::ostream & operator<<(std::ostream & out, DiamondTrap const & instance)
 	out << "Health:\t" << instance.getHealth() << std::endl;
 	out << "Energy:\t" << instance.getEnergy() << std::endl;
 	out << "Damage:\t" << instance.getDamage() << std::endl;
+
 	return (out);
 }
