@@ -3,6 +3,8 @@
 
 #include <string>
 
+class Form;
+
 class Bureaucrat
 {
 	private:
@@ -10,8 +12,8 @@ class Bureaucrat
 		int					_grade;
 
 	public:
-		class	GradeTooHighException {}; 
-		class	GradeTooLowException {};
+		class GradeTooHighException {};
+		class GradeTooLowException {};
 
 	public:
 		Bureaucrat();
@@ -27,6 +29,7 @@ class Bureaucrat
 	public:
 		void 					incrementGrade();
 		void 					decrementGrade();
+		void					signForm(Form & form);
 };
 
 std::ostream & operator<<(std::ostream & out, Bureaucrat const & instance);

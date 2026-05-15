@@ -13,16 +13,16 @@ int main()
 
 		brat.incrementGrade();
 		brat.incrementGrade();
-		brat.incrementGrade();
+		//brat.incrementGrade();
 		std::cout << brat << std::endl;
 	}
 	catch(Bureaucrat::GradeTooLowException)
 	{
-		std::cout << "Grade above 150 detected !!" << std::endl;
+		std::cout << "Grade below 150 detected !!" << std::endl;
 	}
 	catch(Bureaucrat::GradeTooHighException)
 	{
-		std::cout << "Grade below 1 detected !!" << std::endl;
+		std::cout << "Grade above 1 detected !!" << std::endl;
 	}
 	return (0);
 }

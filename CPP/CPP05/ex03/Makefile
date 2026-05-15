@@ -3,8 +3,21 @@ NAME  := a.out
 FLAGS := -Wall -Wextra -Werror -std=c++98
 CC    := c++
 
-SRCS  := main.cpp Animal.cpp Dog.cpp Cat.cpp WrongAnimal.cpp WrongCat.cpp
-HDRS  := Animal.hpp Dog.hpp Cat.hpp WrongAnimal.hpp WrongCat.hpp
+SRCS  := main.cpp \
+		Bureaucrat.cpp \
+		AForm.cpp \
+		ShrubberyCreationForm.cpp \
+		RobotomyRequestForm.cpp \
+		PresidentialPardonForm.cpp \
+		Intern.cpp
+
+HDRS  := Bureaucrat.hpp \
+		AForm.hpp \
+		ShrubberyCreationForm.hpp \
+		RobotomyRequestForm.hpp \
+		PresidentialPardonForm.hpp \
+		Intern.hpp
+
 OBJS  := $(SRCS:.cpp=.o)
 
 all : $(NAME)
@@ -20,7 +33,7 @@ clean :
 
 fclean : clean
 	rm -f $(NAME)
-
+	
 re : fclean all
 
-.PHONY = all clean fclean re
+.PHONY : all clean fclean re

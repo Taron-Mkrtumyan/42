@@ -1,4 +1,6 @@
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
+
 #include <iostream>
 
 Bureaucrat::Bureaucrat() : _name("undefined"), _grade(150) { return ; }
@@ -40,6 +42,21 @@ void	Bureaucrat::decrementGrade()
 	if (this->_grade == 150)
 		throw GradeTooLowException();
 	_grade ++;
+	return ;
+}
+
+void	Bureaucrat::signForm(Form & form)
+{
+	try
+	{
+		form.beSigned(*this);
+	}
+	catch(Form::GradeTooLowException)
+	{
+		std::cout	<< this->_name << " couldn't sign " << form.getName() 
+					<< " because their grade was not high enough !!" << std::endl;
+	}
+
 	return ;
 }
 
