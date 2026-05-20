@@ -3,6 +3,9 @@
 
 #include <iostream>
 
+const char * Bureaucrat::GradeTooHighException::what() const throw() { return ("Bureaucrat grade above 1 detected !!"); }
+const char * Bureaucrat::GradeTooLowException::what() const throw() { return ("Bureaucrat grade below 150 detected !!"); }
+
 Bureaucrat::Bureaucrat() : _name("undefined"), _grade(150) { return ; }
 
 Bureaucrat::Bureaucrat(std::string const & name, int grade) : _name(name), _grade(grade)

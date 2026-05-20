@@ -52,6 +52,8 @@ int 				Form::getGradeToExecute() const { return (this->_grade_to_execute); }
 
 void	Form::beSigned(Bureaucrat const & instance)
 {
+	if (this->_is_signed == true)
+		throw(Form::FormAlreadySignedException());
 	if (instance.getGrade() > Form::getGradeToSign())
 		throw(Form::GradeTooLowException());
 

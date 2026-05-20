@@ -14,25 +14,15 @@ int main()
 		AForm* rrf;
 		rrf = someRandomIntern.makeForm("presidential pardon", "Bender");
 
-		Bureaucrat brat("Elon Musk", 1);
+		Bureaucrat brat("Elon Musk", 10);
 		brat.signForm(*rrf);
 		brat.executeForm(*rrf);
 
 		delete rrf;
 	}
-
-	catch(Intern::UnknownFormException const & e)
-	{
-		std::cout << e.what() << std::endl;
-	}
-	catch(Bureaucrat::GradeTooLowException)
-	{
-		std::cout << "Bureaucrat grade below 150 detected !!" << std::endl;
-	}
-	catch(Bureaucrat::GradeTooHighException)
-	{
-		std::cout << "Invalid Bureaucrat grade !!" << std::endl;
-	}
+	catch(Intern::UnknownFormException		const & e) { std::cout << "Gotchya!\t" << e.what() << std::endl; }
+	catch(Bureaucrat::GradeTooLowException	const & e) { std::cout << "Gotchya!\t" << e.what() << std::endl; }
+	catch(Bureaucrat::GradeTooHighException	const & e) { std::cout << "Gotchya!\t" << e.what() << std::endl; }
 
 	return (0);
 }
