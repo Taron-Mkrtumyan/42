@@ -7,8 +7,8 @@ class ScalarConverter
 {
 	public:
 		ScalarConverter();
-		ScalarConverter(ScalarConverter const & src);
-		ScalarConverter & operator=(ScalarConverter const & rhs); 
+		ScalarConverter(ScalarConverter const & other);
+		ScalarConverter & operator=(ScalarConverter const & other); 
 		virtual ~ScalarConverter() = 0;									//prevent instantiation
 
 		static void convert(std::string const & literal);
