@@ -7,7 +7,9 @@
 
 Base * generate(void)
 {
-	int random = rand() % 3;
+	std::srand(static_cast<unsigned int>(time(NULL)));
+
+	int random = std::rand() % 3;
 
 	if (random == 0)
 		return new A();
@@ -17,7 +19,7 @@ Base * generate(void)
 		return new C();
 }
 
-void identify(Base* p)
+void identify(Base * p)
 {
 	if (dynamic_cast<A*>(p))
 		std::cout << "A" << std::endl;
@@ -36,30 +38,30 @@ void identify(Base & p)
 		(void) dynamic_cast<A&>(p);
 		std::cout << "A" << std::endl;
 	}
-	catch (std::bad_cast&) {}
+	catch (std::exception &) {}
 
 	try
 	{
 		(void) dynamic_cast<B&>(p);
 		std::cout << "B" << std::endl;
 	}
-	catch (std::bad_cast&) {}
+	catch (std::exception &) {}
 
 	try
 	{
 		(void) dynamic_cast<C&>(p);
 		std::cout << "C" << std::endl;
 	}
-	catch (std::bad_cast&) {}
+	catch (std::exception &) {}
 }
 
 int main() {
 
     Base * p = generate();
 
-	std::cout << "Identifying by pointer: ";
+	std::cout << "Identifying by pointer:\t";
     identify(p);
-	std::cout << "Identifying by reference: ";
+	std::cout << "Identifying by reference:\t";
     identify(*p);
 
     delete ( p );

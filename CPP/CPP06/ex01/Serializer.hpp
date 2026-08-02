@@ -1,11 +1,11 @@
 #ifndef SERIALIZER_HPP
 #define SERIALIZER_HPP
 
-#include <cstdint>
+#include <stdint.h>
 
 struct Data
 {
-    unsigned int value;
+    unsigned int    value;
 };
 
 class Serializer
@@ -16,8 +16,8 @@ class Serializer
 		Serializer & operator=(Serializer const & other); 
         virtual ~Serializer() = 0;
 
-        static uintptr_t    serialize   (Data*      ptr);
-        static Data*        deserialize (uintptr_t  raw);
+        static uintptr_t    serialize   (Data *     ptr);
+        static Data *       deserialize (uintptr_t  raw);
 };
 
 #endif

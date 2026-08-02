@@ -9,7 +9,7 @@ class ScalarConverter
 		ScalarConverter();
 		ScalarConverter(ScalarConverter const & other);
 		ScalarConverter & operator=(ScalarConverter const & other); 
-		virtual ~ScalarConverter() = 0;									//prevent instantiation
+		virtual ~ScalarConverter() = 0;
 
 		static void convert(std::string const & literal);
 };
