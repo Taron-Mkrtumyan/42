@@ -1,14 +1,13 @@
 #include <iostream>
 #include <string>
 #include "MutantStack.hpp"
+#include <list>
 
 int main()
 {
     try
     {
-        std::cout << "===== Subject test =====" << std::endl;
-
-        MutantStack<int> mstack;
+        MutantStack< int > mstack;
         mstack.push(5);
         mstack.push(17);
 
@@ -21,7 +20,7 @@ int main()
         mstack.push(3);
         mstack.push(5);
         mstack.push(737);
-        
+
         mstack.push(0);
 
         MutantStack<int>::iterator it = mstack.begin();
@@ -36,8 +35,10 @@ int main()
             ++it;
         }
 
+        std::stack<int> s(mstack);
+
     }
-    catch (const std::exception &e)
+    catch (std::exception const & e)
     {
         std::cerr << BOLD_CRIMSON << "Error: " << e.what() << RESET << std::endl;
     }

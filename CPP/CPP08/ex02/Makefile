@@ -4,7 +4,7 @@ FLAGS := -Wall -Wextra -Werror -std=c++98
 CC    := c++
 
 SRCS  := main.cpp 
-HDRS  := MutantStack.hpp MutantStack.tpp
+HDRS  := MutantStack.hpp
 OBJS  := $(SRCS:.cpp=.o)
 
 all : $(NAME)
