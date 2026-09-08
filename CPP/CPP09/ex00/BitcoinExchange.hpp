@@ -6,7 +6,8 @@
 # include <unistd.h>
 # include <sstream>
 # include <map>
-
+# include <stdexcept>
+# include <string>
 
 
 class BitcoinExchange

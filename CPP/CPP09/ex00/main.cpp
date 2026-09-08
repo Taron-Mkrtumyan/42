@@ -10,12 +10,12 @@ int main(int ac, char **av)
 {
 	if (ac != 2)
 	{
-		std::cout << std::endl;
+		std::cerr << std::endl;
 
 		printErrorMessage(WRONG_ARGUMENTS_MESSAGE,	std::cerr);
 		printErrorMessage(HELP_MESSAGE,				std::cerr);
 
-		std::cout << std::endl;
+		std::cerr << std::endl;
 		return (1);
 	}
 	if  (std::string(av[1]) == "help")
