@@ -10,8 +10,10 @@
 # include <cstdlib>
 # include <vector>
 # include <deque>
+# include <set>
 # include <utility>
 # include <sys/time.h>
+# include <algorithm>
 
 
 class PmergeMe
@@ -21,12 +23,18 @@ class PmergeMe
         int                 _ac;
         std::vector <int>   _vector;
         std::deque  <int>   _deque;
-        long long           _timeTaken;
+        long long           _timeTakenVector;
+        long long           _timeTakenDeque;
+        std::set <int>      _seen;
 
-        void	display_unsorted_numbers();
-        void	display_sorted_numbers();
-        void	display_time();
-        void    display();
+        void _mergeInsertionSort(std::vector <int>& numbers);
+        void _mergeInsertionSort(std::deque  <int>& numbers);
+
+        void	_display_unsorted_numbers();
+        void	_display_sorted_numbers();
+        void	_display_vector_time();
+        void	_display_deque_time();
+        void    _display();
 
     public:
         PmergeMe(int ac, char **av);

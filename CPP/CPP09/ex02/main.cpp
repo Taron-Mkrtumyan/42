@@ -63,9 +63,11 @@ static bool	are_valid_arguments	(int ac, char **av)
 {
 	for (int i = 1; i < ac; ++i)
 	{
+		if (av[i][0] == '\0')
+			return (false);
 		for (int j = 0; av[i][j]; ++j)
 		{
-			if (!std::isdigit(av[i][j]) || av[i][j] == '0')
+			if (!std::isdigit(av[i][j]) || (av[i][j] == '0' && j == 0))
 				return (false);
 		}
 	}
